@@ -79,6 +79,7 @@ fun DashboardScreenContent(
     openActivityLog: () -> Unit,
     onLogoutClick: () -> Unit
 ) {
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -90,6 +91,7 @@ fun DashboardScreenContent(
             .padding(0.dp, 32.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Top bar: Profile icons & Logout
         Row(
@@ -97,19 +99,19 @@ fun DashboardScreenContent(
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Top
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.account),
                 contentDescription = "Profile",
-                modifier = Modifier.size(32.dp),
+                modifier = Modifier.size(50.dp),
                 tint = Color.Black
             )
             Icon(
                 painter = painterResource(id = R.drawable.ic_logout),
                 contentDescription = "Logout",
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(30.dp)
                     .clickable { onLogoutClick() },
                 tint = Color.Black
             )
@@ -122,9 +124,9 @@ fun DashboardScreenContent(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "Hello, $fullName",
+                text = "Hello, $fullName!",
                 fontWeight = FontWeight.Bold,
-                fontSize = 18.sp,
+                fontSize = 20.sp,
                 modifier = Modifier.padding(start = 16.dp, top = 8.dp)
             )
         }
@@ -199,7 +201,7 @@ fun DashboardScreenContent(
             ) {
                 Text(
                     text = "Lessons",
-                    fontSize = 18.sp,
+                    fontSize = 20.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold
                 )
@@ -281,7 +283,7 @@ fun DashboardScreenContent(
         }
 
         // Memory Hints Section
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(30.dp))
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
                 modifier = Modifier
@@ -292,7 +294,7 @@ fun DashboardScreenContent(
             ) {
                 Text(
                     text = "Memory Hints",
-                    fontSize = 18.sp,
+                    fontSize = 20.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold
                 )
@@ -327,16 +329,6 @@ fun DashboardScreenContent(
 
         }
 
-        Spacer(Modifier.height(50.dp))
-
-        IconButton(
-            onClick = onLogoutClick,
-            modifier = Modifier
-                .padding(15.dp)
-                .size(56.dp)
-                .align(Alignment.CenterHorizontally)
-        ) {
-        }
 
     }
 }
@@ -440,7 +432,7 @@ fun OptionIcon(
 fun TangoGOPreview() {
     TangoGOTheme {
         DashboardScreenContent(
-            fullName = "Nurin!",
+            fullName = "Nurin",
             openLessonHiragana = { },
             openLessonKatakana = { },
             openActivityLog = { },

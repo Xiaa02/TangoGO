@@ -74,7 +74,7 @@ fun WelcomeScreenContent(
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "CEFR A1 Level",
-                        fontSize = 20.sp,
+                        fontSize = 18.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = colorResource(R.color.black)
                     )

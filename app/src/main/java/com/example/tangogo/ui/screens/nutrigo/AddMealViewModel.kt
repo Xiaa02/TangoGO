@@ -1,4 +1,4 @@
-package com.example.tangogo.ui.screens.nutrigo
+package com.example.trackfit.ui.screens.nutrigo
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -7,6 +7,9 @@ import com.example.tangogo.model.Meal
 import com.example.tangogo.model.service.LogService
 import com.example.tangogo.model.service.StorageService
 import com.example.tangogo.ui.screens.TangoGOViewModel
+import com.example.tangogo.ui.screens.nutrigo.AddMealUiState
+import com.example.tangogo.ui.screens.nutrigo.toAddMealUiState
+import com.example.tangogo.ui.screens.nutrigo.toMeal
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -60,3 +63,4 @@ class AddMealViewModel @Inject constructor(
         private const val MEAL_ID = "mealId"
     }
 }
+

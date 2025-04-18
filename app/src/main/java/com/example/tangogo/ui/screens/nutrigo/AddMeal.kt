@@ -1,4 +1,4 @@
-package com.example.tangogo.ui.screens.nutrigo
+package com.example.trackfit.ui.screens.nutrigo
 
 import android.annotation.SuppressLint
 import androidx.annotation.StringRes
@@ -54,6 +54,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.toSize
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.tangogo.R
+import com.example.tangogo.ui.screens.nutrigo.AddMealUiState
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)

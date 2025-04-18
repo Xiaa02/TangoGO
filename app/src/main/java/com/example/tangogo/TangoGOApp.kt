@@ -1,6 +1,5 @@
 package com.example.tangogo
 
-import KatakanaScreen
 import android.content.Intent
 import android.content.res.Resources
 import android.net.Uri
@@ -26,15 +25,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tangogo.common.snackbar.SnackbarManager
 import com.example.tangogo.ui.screens.activitylog.ActivitiesScreen
-import com.example.tangogo.ui.screens.activitylog.AddActivityScreen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaScreen
+import com.example.tangogo.ui.screens.lessonKatakana.KatakanaScreen
 import com.example.tangogo.ui.screens.dashboard.DashboardScreen
 import com.example.tangogo.ui.screens.login.LoginScreen
-import com.example.tangogo.ui.screens.nutrigo.AddMealScreen
-import com.example.tangogo.ui.screens.nutrigo.NutriGoScreen
 import com.example.tangogo.ui.screens.register.RegisterScreen
-import com.example.tangogo.ui.screens.stepcounter.StepCounterScreen
-import com.example.tangogo.ui.screens.waterintake.WaterIntakeScreen
 import com.example.tangogo.ui.screens.welcome.WelcomeScreen
 import com.example.tangogo.ui.theme.TangoGOTheme
 import com.example.tangogo.utils.Routes
@@ -108,7 +103,8 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
 
     composable(Routes.LESSON_HIRAGANA) {
         HiraganaScreen(
-            navigateBack = { appState.popUp() }
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) }
         )
     }
 
@@ -124,9 +120,9 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     }
 
     composable(Routes.STEP_COUNTER) {
-        StepCounterScreen(
+        /*StepCounterScreen(
             navigateBack = { appState.popUp() }
-        )
+        ) */
     }
 
     composable(Routes.ACTIVITY_LOG) {
@@ -137,28 +133,28 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     }
 
     composable(Routes.ADD_ACTIVITY) {
-        AddActivityScreen(
-            navigateBack = { appState.popUp() }
-        )
+//        AddActivityScreen(
+//            navigateBack = { appState.popUp() }
+//        )
     }
 
     composable(Routes.WATER_INTAKE) {
-        WaterIntakeScreen(
-            navigateBack = { appState.popUp() }
-        )
+//        WaterIntakeScreen(
+//            navigateBack = { appState.popUp() }
+//        )
     }
 
     composable(Routes.NUTRI_GO) {
-        NutriGoScreen(
-            navigateBack = { appState.popUp() },
-            openScreen = { route -> appState.navigate(route) }
-        )
+//        NutriGoScreen(
+//            navigateBack = { appState.popUp() },
+//            openScreen = { route -> appState.navigate(route) }
+//        )
     }
 
     composable(Routes.ADD_MEAL) {
-        AddMealScreen(
-            navigateBack = { appState.popUp() }
-        )
+//        AddMealScreen(
+//            navigateBack = { appState.popUp() }
+//        )
     }
 
 }

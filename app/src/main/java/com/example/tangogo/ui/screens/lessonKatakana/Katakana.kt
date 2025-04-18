@@ -1,3 +1,5 @@
+package com.example.tangogo.ui.screens.lessonKatakana
+
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle

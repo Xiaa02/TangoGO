@@ -83,7 +83,7 @@ dependencies {
     implementation("com.google.dagger:dagger:2.51.1")
     ksp("com.google.dagger:dagger-compiler:2.51.1")
     */
-
+    implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
