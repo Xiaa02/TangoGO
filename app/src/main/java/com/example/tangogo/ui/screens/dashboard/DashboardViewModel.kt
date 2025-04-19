@@ -22,10 +22,12 @@ class DashboardViewModel @Inject constructor(
         openScreen(Routes.LESSON_KATAKANA)
     }
 
-    fun openDailyWaterIntake(openScreen: (String) -> Unit) {
-        openScreen(Routes.WATER_INTAKE)
+    fun openHiraganaChart(openScreen: (String) -> Unit) {
+        openScreen(Routes.HIRAGANA_CHART)
     }
-
+    fun openDailyWaterIntake(openScreen: (String) -> Unit) {
+        openScreen(Routes.DAILY_WATER_INTAKE)
+    }
     fun openStepCounter(openScreen: (String) -> Unit) {
         openScreen(Routes.STEP_COUNTER)
     }

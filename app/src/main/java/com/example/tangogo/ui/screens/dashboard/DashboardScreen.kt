@@ -60,6 +60,7 @@ fun DashboardScreen(
         fullName = fullName,
         openLessonHiragana = { viewModel.openHiragana(openScreen) },
         openLessonKatakana = { viewModel.openKatakana(openScreen) },
+        openHiraganaChart = { viewModel.openHiraganaChart(openScreen) },
         openDailyWaterIntake = { viewModel.openDailyWaterIntake(openScreen) },
         openStepCounter = { viewModel.openStepCounter(openScreen) },
         openNutriGo = { viewModel.openNutriGo(openScreen) },
@@ -73,6 +74,7 @@ fun DashboardScreenContent(
     fullName: String = "User",
     openLessonHiragana: () -> Unit,
     openLessonKatakana: () -> Unit,
+    openHiraganaChart: () -> Unit,
     openDailyWaterIntake: () -> Unit,
     openStepCounter: () -> Unit,
     openNutriGo: () -> Unit,
@@ -104,14 +106,14 @@ fun DashboardScreenContent(
             Icon(
                 painter = painterResource(id = R.drawable.account),
                 contentDescription = "Profile",
-                modifier = Modifier.size(50.dp),
+                modifier = Modifier.size(40.dp),
                 tint = Color.Black
             )
             Icon(
                 painter = painterResource(id = R.drawable.ic_logout),
                 contentDescription = "Logout",
                 modifier = Modifier
-                    .size(30.dp)
+                    .size(25.dp)
                     .clickable { onLogoutClick() },
                 tint = Color.Black
             )
@@ -126,7 +128,7 @@ fun DashboardScreenContent(
             Text(
                 text = "Hello, $fullName!",
                 fontWeight = FontWeight.Bold,
-                fontSize = 20.sp,
+                fontSize = 18.sp,
                 modifier = Modifier.padding(start = 16.dp, top = 8.dp)
             )
         }
@@ -201,7 +203,7 @@ fun DashboardScreenContent(
             ) {
                 Text(
                     text = "Lessons",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold
                 )
@@ -294,7 +296,7 @@ fun DashboardScreenContent(
             ) {
                 Text(
                     text = "Memory Hints",
-                    fontSize = 20.sp,
+                    fontSize = 18.sp,
                     color = Color.Black,
                     fontWeight = FontWeight.Bold
                 )
@@ -308,11 +310,13 @@ fun DashboardScreenContent(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 MemoryHintCard(
-                    titleKanji     = "ひらがな",
-                    subtitle       = "Hiragana",
-                    size           = 140.dp,
-                    backgroundColor = Color(0xFFFFD3D3)
+                    titleKanji      = "ひらがな",
+                    subtitle        = "Hiragana",
+                    size            = 140.dp,
+                    backgroundColor = Color(0xFFFFD3D3),
+                    onClick         = openHiraganaChart
                 )
+
                 MemoryHintCard(
                     titleKanji     = "カタカナ",
                     subtitle       = "Katakana",
@@ -374,9 +378,10 @@ fun LessonCard(
 @Composable
 fun MemoryHintCard(
     titleKanji: String,
-    subtitle: String,
-    size: Dp,
+    subtitle:   String,
+    size:       Dp,
     backgroundColor: Color,
+    onClick:    () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -384,6 +389,7 @@ fun MemoryHintCard(
             .clip(RoundedCornerShape(8.dp))
             .shadow(elevation = 6.dp, shape = RoundedCornerShape(8.dp))
             .background(backgroundColor)
+            .clickable { onClick() }
     ) {
         Column(
             modifier = Modifier.align(Alignment.Center),
@@ -392,18 +398,17 @@ fun MemoryHintCard(
             Text(
                 text = titleKanji,
                 fontSize = 20.sp,
-                color = Color.Black,
                 fontWeight = FontWeight.Bold
             )
             Spacer(modifier = Modifier.height(6.dp))
             Text(
                 text = subtitle,
-                fontSize = 14.sp,
-                color = Color.Black
+                fontSize = 14.sp
             )
         }
     }
 }
+
 
 
 @Composable
@@ -435,6 +440,7 @@ fun TangoGOPreview() {
             fullName = "Nurin",
             openLessonHiragana = { },
             openLessonKatakana = { },
+            openHiraganaChart = { },
             openActivityLog = { },
             openDailyWaterIntake = { },
             openNutriGo = { },

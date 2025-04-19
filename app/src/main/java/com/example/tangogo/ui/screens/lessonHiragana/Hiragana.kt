@@ -24,13 +24,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tangogo.R
-import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HiraganaScreen(
     navigateBack: () -> Unit,
-    navigateToDashboard: () -> Unit
+    navigateToDashboard: () -> Unit,
+    navigateToNext: () -> Unit
 ) {
     val correctAnswer = listOf("あ", "さ")
     val options = listOf("あ", "お", "さ", "き")
@@ -50,7 +50,7 @@ fun HiraganaScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "ひらがな - Hiragana",
+                            text = "ひらがな",
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -83,27 +83,36 @@ fun HiraganaScreen(
                 .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "",
+                text = "Vocabulary",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Normal,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
-                textAlign = TextAlign.Start
-            )
-
-            Text(
-                text = "Tap the matching pairs",
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 20.dp, top = 8.dp, bottom = 8.dp),
                 textAlign = TextAlign.Start
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Text(
+                text = "ひらがなを えらびましょう",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, top = 8.dp, bottom = 8.dp),
+                textAlign = TextAlign.Start
+            )
+            
+            Text(
+                text = "Choose the correct hiragana",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Normal,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, top = 2.dp, bottom = 8.dp),
+                textAlign = TextAlign.Start
+            )
 
             Box(
                 modifier = Modifier
@@ -128,7 +137,7 @@ fun HiraganaScreen(
                             modifier = Modifier
                                 .size(28.dp)
                                 .clickable {
-                                    playAudio(context, R.raw.asa_audio)
+                                    playAudio(context, R.raw.asa)
                                 }
                         )
                     }
@@ -205,7 +214,7 @@ fun HiraganaScreen(
                         playAudio(context, R.raw.ding) // ✅ play sound immediately
                         showCorrectPopup = true
                     } else {
-                        playAudio(context, R.raw.error) // ❌ play sound immediately
+                        playAudio(context, R.raw.incorrect) // ❌ play sound immediately
                         showWrongPopup = true
                     }
                 },
@@ -216,7 +225,7 @@ fun HiraganaScreen(
                 shape = RoundedCornerShape(20.dp),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 25.dp)
+                    .padding(horizontal = 30.dp)
                     .height(50.dp)
             ) {
                 Text("Check", fontWeight = FontWeight.Bold)
@@ -238,16 +247,23 @@ fun HiraganaScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "✅ Nicely done!",
+                    text = "✅ Good job!",
                     color = Color(0xFF4CAF50),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold
                 )
+                Spacer(Modifier.height(12.dp))
+                Text("Explanation:", color = Color.Black, fontSize = 16.sp)
+                Spacer(Modifier.height(4.dp))
+                Text("あさ - asa", color = Color.Black, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("あ = a", color = Color.Gray, fontSize = 16.sp)
+                Text("さ = sa", color = Color.Gray, fontSize = 16.sp)
                 Spacer(Modifier.height(20.dp))
                 Button(
                     onClick = {
                         showCorrectPopup = false
                         selectedAnswers = emptyList()
+                        navigateToNext()
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
                     shape = RoundedCornerShape(15.dp),
@@ -318,6 +334,7 @@ fun playAudio(context: Context, resId: Int) {
 fun HiraganaScreenPreview() {
     HiraganaScreen(
         navigateBack = {},
-        navigateToDashboard = {}
+        navigateToDashboard = {},
+        navigateToNext = {}
     )
 }
