@@ -13,7 +13,7 @@ object Routes {
     const val A_HIRAGANA_MNEMONIC = "a_hiragana_mnemonic"
     const val A_HIRAGANA_STROKE = "a_hiragana_draw"
     const val A_HIRAGANA_WRITE = "a_hiragana_write"
-    const val STEP_COUNTER = "step_counter"
+    const val KATAKANA_CHART = "katakana_chart"
     const val ACTIVITY_LOG = "activity_log"
     const val WATER_INTAKE = "water_intake"
     const val NUTRI_GO = "nutri_go"

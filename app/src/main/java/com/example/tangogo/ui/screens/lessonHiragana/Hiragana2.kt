@@ -150,7 +150,7 @@ fun Hiragana2Screen(
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.yoru_img),
-                            contentDescription = "Night",
+                            contentDescription = "Evening/Night",
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.fillMaxSize()
                         )
@@ -162,7 +162,7 @@ fun Hiragana2Screen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     ) {
-                        Text("night", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                        Text("evening/night", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                         Text("yoru", fontSize = 16.sp)
                     }
                 }

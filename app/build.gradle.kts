@@ -83,6 +83,12 @@ dependencies {
     implementation("com.google.dagger:dagger:2.51.1")
     ksp("com.google.dagger:dagger-compiler:2.51.1")
     */
+
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //Material3
     implementation("androidx.compose.material3:material3:1.2.1")
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.core:core-ktx:1.12.0")
@@ -101,6 +107,9 @@ dependencies {
     implementation("com.google.accompanist:accompanist-permissions:0.30.1")
     implementation("com.google.dagger:hilt-android:2.47")
     ksp("com.google.dagger:hilt-compiler:2.47")
+    implementation ("androidx.activity:activity-compose:1.7.2")
+    implementation ("androidx.core:core-ktx:1.10.1")
+
 
     // Coil for image loading
     implementation("io.coil-kt:coil-compose:2.2.2")

@@ -25,20 +25,10 @@ class DashboardViewModel @Inject constructor(
     fun openHiraganaChart(openScreen: (String) -> Unit) {
         openScreen(Routes.HIRAGANA_CHART)
     }
-    fun openDailyWaterIntake(openScreen: (String) -> Unit) {
-        openScreen(Routes.DAILY_WATER_INTAKE)
-    }
-    fun openStepCounter(openScreen: (String) -> Unit) {
-        openScreen(Routes.STEP_COUNTER)
+    fun openKatakanaChart(openScreen: (String) -> Unit) {
+        openScreen(Routes.KATAKANA_CHART)
     }
 
-    fun openNutriGo(openScreen: (String) -> Unit) {
-        openScreen(Routes.NUTRI_GO)
-    }
-
-    fun openActivityLog(openScreen: (String) -> Unit) {
-        openScreen(Routes.ACTIVITY_LOG)
-    }
 
     fun onLogoutClick(clearAndNavigate: (String) -> Unit) {
         launchCatching {

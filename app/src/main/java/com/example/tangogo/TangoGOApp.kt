@@ -24,7 +24,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tangogo.common.snackbar.SnackbarManager
-import com.example.tangogo.ui.screens.activitylog.ActivitiesScreen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaScreen
 import com.example.tangogo.ui.screens.lessonKatakana.KatakanaScreen
 import com.example.tangogo.ui.screens.dashboard.DashboardScreen
@@ -186,38 +185,6 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
             onStrokeClick         = { appState.navController.navigate(Routes.A_HIRAGANA_STROKE) },
             onWriteClick        = { appState.navController.navigate(Routes.A_HIRAGANA_WRITE) }
         )
-    }
-
-    composable(Routes.ACTIVITY_LOG) {
-        ActivitiesScreen(
-            navigateBack = { appState.popUp() },
-            openScreen = { route -> appState.navigate(route) }
-        )
-    }
-
-    composable(Routes.ADD_ACTIVITY) {
-//        AddActivityScreen(
-//            navigateBack = { appState.popUp() }
-//        )
-    }
-
-    composable(Routes.WATER_INTAKE) {
-//        WaterIntakeScreen(
-//            navigateBack = { appState.popUp() }
-//        )
-    }
-
-    composable(Routes.NUTRI_GO) {
-//        NutriGoScreen(
-//            navigateBack = { appState.popUp() },
-//            openScreen = { route -> appState.navigate(route) }
-//        )
-    }
-
-    composable(Routes.ADD_MEAL) {
-//        AddMealScreen(
-//            navigateBack = { appState.popUp() }
-//        )
     }
 
 }
