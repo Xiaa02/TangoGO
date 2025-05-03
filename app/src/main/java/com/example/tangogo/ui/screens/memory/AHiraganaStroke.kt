@@ -2,7 +2,7 @@ package com.example.tangogo.ui.screens.memory
 
 import android.content.Context
 import android.media.MediaPlayer
-import android.net.Uri
+import androidx.core.net.toUri
 import android.widget.VideoView
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
@@ -31,6 +31,7 @@ import com.example.tangogo.R
 fun AHiraganaStrokeScreen(
     navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
+    navigateToHiraganaChart: () -> Unit,
     onMnemonicClick: () -> Unit,
     onStrokeClick: () -> Unit,
     onWriteClick: () -> Unit
@@ -56,10 +57,10 @@ fun AHiraganaStrokeScreen(
                     titleContentColor = Color.Black
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { navigateBack() }) {
+                    IconButton(onClick = { navigateToHiraganaChart() }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_back),
-                            contentDescription = "Back"
+                            contentDescription = "Chart"
                         )
                     }
                 },
@@ -110,13 +111,13 @@ fun AHiraganaStrokeScreen(
             Box(
                 modifier = Modifier
                     .size(300.dp)
-                    .background(Color(0xFFF3ECF2), RoundedCornerShape(16.dp)),
+                    .background(Color(0xFFFAF6FA), RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 AndroidView(
                     factory = { ctx ->
                         VideoView(ctx).apply {
-                            setVideoURI(Uri.parse("android.resource://${ctx.packageName}/${R.raw.a_hiragana}"))
+                            setVideoURI("android.resource://${ctx.packageName}/${R.raw.a_hiragana}".toUri())
                             setOnPreparedListener { it.isLooping = true }
                             start()
                         }
@@ -203,6 +204,7 @@ fun AHiraganaStrokeScreenPreview() {
     AHiraganaStrokeScreen(
         navigateBack = {},
         navigateToDashboard = {},
+        navigateToHiraganaChart = {},
         onMnemonicClick = {},
         onStrokeClick = {},
         onWriteClick = {}

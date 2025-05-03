@@ -30,6 +30,7 @@ import com.example.tangogo.R
 fun AHiraganaMnemonicScreen(
     navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
+    navigateToHiraganaChart: () -> Unit,
     onMnemonicClick: () -> Unit,
     onStrokeClick: () -> Unit,
     onWriteClick: () -> Unit,
@@ -55,10 +56,10 @@ fun AHiraganaMnemonicScreen(
                     titleContentColor = Color.Black
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { navigateBack() }) {
+                    IconButton(onClick = { navigateToHiraganaChart() }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_back),
-                            contentDescription = "Back"
+                            contentDescription = "Chart"
                         )
                     }
                 },
@@ -113,7 +114,7 @@ fun AHiraganaMnemonicScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.a_hiragana),
+                    painter = painterResource(id = R.drawable.a_hiragana_memory),
                     contentDescription = "Hiragana A",
                     modifier = Modifier.fillMaxSize().padding(20.dp),
                     contentScale = ContentScale.Fit
@@ -127,14 +128,13 @@ fun AHiraganaMnemonicScreen(
                         .padding(8.dp)
                         .size(28.dp)
                         .clickable {
-                            playSound(context, R.raw.a) // your audio file
+                            playSound(context, R.raw.a)
                         }
                 )
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Custom Button With Icon
             @Composable
             fun ButtonWithIcon(text: String, icon: Painter, onClick: () -> Unit) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -197,6 +197,7 @@ fun AHiraganaMnemonicPreview() {
     AHiraganaMnemonicScreen(
         navigateBack = {},
         navigateToDashboard = {},
+        navigateToHiraganaChart = {},
         onMnemonicClick = {},
         onStrokeClick = {},
         onWriteClick = {}

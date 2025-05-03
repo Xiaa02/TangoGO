@@ -29,6 +29,7 @@ import com.example.tangogo.R
 fun AHiraganaMemoryScreen(
     navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
+    navigateToHiraganaChart: () -> Unit,
     onMnemonicClick: () -> Unit,
     onStrokeClick: () -> Unit,
     onWriteClick: () -> Unit
@@ -54,10 +55,10 @@ fun AHiraganaMemoryScreen(
                     titleContentColor = Color.Black
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { navigateBack() }) {
+                    IconButton(onClick = { navigateToHiraganaChart() }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_back),
-                            contentDescription = "Back"
+                            contentDescription = "Chart"
                         )
                     }
                 },
@@ -111,7 +112,7 @@ fun AHiraganaMemoryScreen(
                     .background(Color.White, RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Text("あ", fontSize = 200.sp, fontWeight = FontWeight.Bold)
+                Text("あ", fontSize = 200.sp, fontWeight = FontWeight.Normal)
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.VolumeUp,
                     contentDescription = "Play Sound",
@@ -191,6 +192,7 @@ fun AHiraganaMemoryScreenPreview() {
     AHiraganaMemoryScreen(
         navigateBack = {},
         navigateToDashboard = {},
+        navigateToHiraganaChart = {},
         onMnemonicClick = {},
         onStrokeClick = {},
         onWriteClick = {}
