@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -36,7 +35,7 @@ import com.example.tangogo.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AHiraganaWriteScreen(
+fun IHiraganaWriteScreen(
     navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
     navigateToHiraganaChart: () -> Unit,
@@ -108,7 +107,7 @@ fun AHiraganaWriteScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "あ - a",
+                text = "い – i",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 20.dp)
@@ -174,7 +173,7 @@ fun AHiraganaWriteScreen(
                             textSize     = h * 0.8f
                             textAlign    = android.graphics.Paint.Align.CENTER
                         }
-                        canvas.nativeCanvas.drawText("あ", cx, cy + paint.textSize / 3f, paint)
+                        canvas.nativeCanvas.drawText("い", cx, cy + paint.textSize / 3f, paint)
                     }
 
                     // user strokes
@@ -201,7 +200,7 @@ fun AHiraganaWriteScreen(
                         .align(Alignment.TopEnd)
                         .padding(8.dp)
                         .size(28.dp)
-                        .clickable { playSound4(context, R.raw.a) }
+                        .clickable { playSound8(context, R.raw.i) }
                 )
 
                 Icon(
@@ -218,7 +217,7 @@ fun AHiraganaWriteScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(Modifier.height(24.dp))
 
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,
@@ -248,43 +247,20 @@ fun AHiraganaWriteScreen(
     BackHandler(onBack = navigateBack)
 }
 
-fun playSound4(context: Context, resId: Int) {
-    val player = MediaPlayer.create(context, resId)
-    player.setOnCompletionListener { it.release() }
-    player.start()
-}
 
-@Composable
-fun ButtonWithIcon(text: String, icon: Painter, onClick: () -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(
-            modifier = Modifier
-                .size(64.dp)
-                .background(Color.White, RoundedCornerShape(16.dp))
-                .clickable { onClick() },
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                painter = icon,
-                contentDescription = text,
-                modifier = Modifier.size(32.dp),
-                tint = Color.Black
-            )
-        }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(text, fontSize = 12.sp, color = Color.Black)
+private fun playSound8(context: Context, resId: Int) {
+    MediaPlayer.create(context, resId).apply {
+        setOnCompletionListener { it.release() }
+        start()
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun AHiraganaWriteScreenPreview() {
-    AHiraganaWriteScreen(
+fun IHiraganaWriteScreenPreview() {
+    IHiraganaWriteScreen(
         navigateBack = {},
         navigateToDashboard = {},
-        navigateToHiraganaChart = {},
-        onMnemonicClick = {},
-        onStrokeClick = {},
-        onWriteClick = {}
+        navigateToHiraganaChart = {}
     )
 }

@@ -29,7 +29,8 @@ import com.example.tangogo.R
 @Composable
 fun HiraganaQ2Screen(
     navigateBack: () -> Unit,
-    navigateToDashboard: () -> Unit
+    navigateToDashboard: () -> Unit,
+    navigateToNext: () -> Unit
 ) {
     val correctAnswer = listOf("よ", "る")
     val options = listOf("き", "よ", "る", "あ")
@@ -263,6 +264,7 @@ fun HiraganaQ2Screen(
                     onClick = {
                         showCorrectPopup = false
                         selectedAnswers = emptyList()
+                        navigateToNext()
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
                     shape = RoundedCornerShape(15.dp),
@@ -333,6 +335,7 @@ fun playAudio2(context: Context, resId: Int) {
 fun HiraganaQ2ScreenPreview() {
     HiraganaQ2Screen(
         navigateBack = {},
-        navigateToDashboard = {}
+        navigateToDashboard = {},
+        navigateToNext = {}
     )
 }

@@ -29,6 +29,10 @@ import com.example.tangogo.ui.screens.lessonKatakana.KatakanaScreen
 import com.example.tangogo.ui.screens.dashboard.DashboardScreen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaQ2Screen
 import com.example.tangogo.ui.screens.login.LoginScreen
+import com.example.tangogo.ui.screens.lessonHiragana.Hiragana101Screen
+import com.example.tangogo.ui.screens.lessonHiragana.HiraganaL1Screen
+import com.example.tangogo.ui.screens.lessonHiragana.HiraganaL2Screen
+import com.example.tangogo.ui.screens.lessonHiragana.HiraganaSpeakScreen
 import com.example.tangogo.ui.screens.memory.AHiraganaMemoryScreen
 import com.example.tangogo.ui.screens.memory.AHiraganaMnemonicScreen
 import com.example.tangogo.ui.screens.memory.AHiraganaStrokeScreen
@@ -110,16 +114,47 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
         )
     }
 
-    composable(Routes.LESSON_HIRAGANA) {
-        HiraganaQ1Screen(
+    composable(Routes.LESSON_HIRAGANA101) {
+        Hiragana101Screen(
             navigateBack = { appState.popUp() },
             navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
-            navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANA2) }
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAL1) }
         )
     }
 
-    composable(Routes.LESSON_HIRAGANA2) {
+    composable(Routes.LESSON_HIRAGANAL1) {
+        HiraganaL1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAL2) }
+        )
+    }
+    composable(Routes.LESSON_HIRAGANAL2) {
+        HiraganaL2Screen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAQ1) }
+        )
+    }
+
+    composable(Routes.LESSON_HIRAGANAQ1) {
+        HiraganaQ1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAQ2) }
+        )
+    }
+
+    composable(Routes.LESSON_HIRAGANAQ2) {
         HiraganaQ2Screen(
+            navigateBack = { appState.navController.popBackStack() },
+            navigateToDashboard = { appState.navController.navigate(Routes.DASHBOARD) },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANASpeak) }
+        )
+    }
+
+    composable(Routes.LESSON_HIRAGANASpeak) {
+        HiraganaSpeakScreen(
             navigateBack = { appState.navController.popBackStack() },
             navigateToDashboard = { appState.navController.navigate(Routes.DASHBOARD) }
         )

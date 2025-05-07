@@ -15,7 +15,7 @@ class DashboardViewModel @Inject constructor(
     val currentUser = accountService.currentUser
 
     fun openHiragana(openScreen: (String) -> Unit) {
-        openScreen(Routes.LESSON_HIRAGANA)
+        openScreen(Routes.LESSON_HIRAGANA101)
     }
 
     fun openKatakana(openScreen: (String) -> Unit) {
