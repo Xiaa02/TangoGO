@@ -1,19 +1,19 @@
 package com.example.tangogo.ui.screens.login
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
+import androidx.compose.material3.ButtonDefaults.buttonColors
+//import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.LinkAnnotation
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextLinkStyles
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withLink
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,107 +47,119 @@ fun LoginScreenContent(
     onLoginClick: () -> Unit,
     onNotRegistered: () -> Unit,
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+    val accent = Color(0xFF8583CC)
 
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = Modifier.height(50.dp))
-
-        Text(
-            text = "Hey there,",
-            style = MaterialTheme.typography.bodyLarge.copy(
-                fontSize = 16.sp,
-            ),
+    val waveShape = GenericShape { size, _ ->
+        moveTo(0f, size.height * 0.85f)
+        cubicTo(
+            size.width * 0.25f, size.height * 0.55f,
+            size.width * 0.35f, size.height,
+            size.width,         size.height * 1.00f
         )
-        Text(
-            text = "Welcome Back",
-            style = MaterialTheme.typography.bodyLarge.copy(
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold
-            ),
-            modifier = Modifier.padding(8.dp)
-        )
+        lineTo(size.width, 0f)
+        lineTo(0f, 0f)
+        close()
+    }
 
-        EmailField(
-            value = uiState.email,
-            onNewValue = onEmailChange,
-            modifier = Modifier
+
+    Box(modifier = modifier.fillMaxSize()) {
+
+        Box(
+            Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .height(300.dp)
+                .background(accent, shape = waveShape)
         )
 
-        PasswordField(
-            value = uiState.password,
-            onNewValue = onPasswordChange,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        )
-
-        Spacer(modifier = Modifier.weight(1f))
-
-        Button(
-            onClick = { onLoginClick() },
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF8583CC),
-                contentColor = Color.White
-            ),
-            shape = RoundedCornerShape(50),
-            modifier = Modifier
-                .fillMaxWidth(0.9f)
-                .height(56.dp)
-                .shadow(
-                    elevation = 10.dp,
-                    shape = RoundedCornerShape(50),
-                    clip = false
-                )
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(Modifier.height(100.dp))
+
             Text(
-                text = "Login",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
+                text = "Log in",
+                fontSize = 32.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                modifier = Modifier
+                    .align(Alignment.Start)
+                    .padding(start = 2.dp, top = 170.dp, bottom = 8.dp)
             )
-        }
+            Spacer(Modifier.height(1.dp))
+            Box(
+                Modifier
+                    .align(Alignment.Start)
+                    .offset(x = 12.dp)
+                    .width(60.dp)
+                    .height(3.dp)
+                    .background(accent)
+            )
+            Spacer(Modifier.height(10.dp))
 
-        Spacer(modifier = Modifier.height(10.dp))
+            EmailField(
+                value = uiState.email,
+                onNewValue = onEmailChange,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 20.dp, bottom = 15.dp)
 
-        Text(
-            buildAnnotatedString {
-                append("Don't have an account yet? ")
-                withLink(
-                    LinkAnnotation.Url(
-                        url = "",
-                        styles = TextLinkStyles(
-                            style = SpanStyle(color = Color.Blue),
-                            hoveredStyle = SpanStyle(color = Color.Red)
-                        ),
-                        linkInteractionListener = { onNotRegistered() }
-                    )
-                ) { append("Register") }
+            )
+
+            PasswordField(
+                value = uiState.password,
+                onNewValue = onPasswordChange,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
+            )
+
+
+            Spacer(Modifier.height(150.dp))
+
+            Button(
+                onClick = onLoginClick,
+                colors = buttonColors(
+                    containerColor = accent,
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(30.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                    .shadow(8.dp, RoundedCornerShape(30.dp))
+            ) {
+                Text("Login", fontWeight = FontWeight.Bold, fontSize = 16.sp)
             }
-        )
-        Spacer(modifier = Modifier.height(25.dp))
+
+            Spacer(Modifier.height(16.dp))
+
+            Row {
+                Text("Don't have an account? ")
+                Text(
+                    "Sign up",
+                    color = accent,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.clickable(onClick = onNotRegistered)
+                )
+            }
+        }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    val uiState = LoginUiState(
-        email = "email@test.com"
-    )
-
+    val uiState = LoginUiState(email = "", password = "")
     TangoGOTheme {
         LoginScreenContent(
             uiState = uiState,
-            onEmailChange = { },
-            onPasswordChange = { },
-            onLoginClick = { },
-            onNotRegistered = { }
+            onEmailChange = {},
+            onPasswordChange = {},
+            onLoginClick = {},
+            onNotRegistered = {}
         )
     }
 }

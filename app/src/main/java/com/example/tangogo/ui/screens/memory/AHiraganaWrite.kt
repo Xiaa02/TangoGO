@@ -38,6 +38,7 @@ import android.graphics.RectF
 fun AHiraganaWriteScreen(
     navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
+    navigateToHiraganaChart: () -> Unit,
     onMnemonicClick: () -> Unit = {},
     onStrokeClick: () -> Unit = {},
     onWriteClick: () -> Unit = {}
@@ -49,10 +50,10 @@ fun AHiraganaWriteScreen(
     var currentPath by remember { mutableStateOf(Path()) }
 
     val strokeImages = listOf(
-        R.drawable.stroke_0,
-        R.drawable.stroke_1,
-        R.drawable.stroke_2,
-        R.drawable.stroke_3
+        R.drawable.a_stroke_0,
+        R.drawable.a_stroke_1,
+        R.drawable.a_stroke_2,
+        R.drawable.a_stroke_3
     )
 
     val correctZones = listOf(
@@ -78,10 +79,10 @@ fun AHiraganaWriteScreen(
                     titleContentColor = Color.Black
                 ),
                 navigationIcon = {
-                    IconButton(onClick = { navigateBack() }) {
+                    IconButton(onClick = { navigateToHiraganaChart () }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_back),
-                            contentDescription = "Back"
+                            contentDescription = "Chart"
                         )
                     }
                 },
@@ -173,8 +174,8 @@ fun AHiraganaWriteScreen(
                         )
                     }
                 ) {
-                    paths.forEach { drawPath(it, color = Color.Black.copy(alpha = 0.8f), style = Stroke(width = 8f)) }
-                    drawPath(currentPath, color = Color.Red.copy(alpha = 0.8f), style = Stroke(width = 8f))
+                    paths.forEach { drawPath(it, color = Color.Black.copy(alpha = 0.8f), style = Stroke(width = 50f)) }
+                    drawPath(currentPath, color = Color.Red.copy(alpha = 0.8f), style = Stroke(width = 50f))
                 }
 
                 Icon(
@@ -276,6 +277,7 @@ fun AHiraganaWriteScreenPreview() {
     AHiraganaWriteScreen(
         navigateBack = {},
         navigateToDashboard = {},
+        navigateToHiraganaChart = {},
         onMnemonicClick = {},
         onStrokeClick = {},
         onWriteClick = {}

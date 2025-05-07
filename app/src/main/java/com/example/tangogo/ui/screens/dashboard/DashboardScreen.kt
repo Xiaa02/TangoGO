@@ -61,10 +61,7 @@ fun DashboardScreen(
         openLessonHiragana = { viewModel.openHiragana(openScreen) },
         openLessonKatakana = { viewModel.openKatakana(openScreen) },
         openHiraganaChart = { viewModel.openHiraganaChart(openScreen) },
-        openDailyWaterIntake = { viewModel.openDailyWaterIntake(openScreen) },
-        openStepCounter = { viewModel.openStepCounter(openScreen) },
-        openNutriGo = { viewModel.openNutriGo(openScreen) },
-        openActivityLog = { viewModel.openActivityLog(openScreen) },
+        openKatakanaChart = { viewModel.openHiraganaChart(openScreen)},
         onLogoutClick = { viewModel.onLogoutClick(clearAndNavigate) }
     )
 }
@@ -75,10 +72,7 @@ fun DashboardScreenContent(
     openLessonHiragana: () -> Unit,
     openLessonKatakana: () -> Unit,
     openHiraganaChart: () -> Unit,
-    openDailyWaterIntake: () -> Unit,
-    openStepCounter: () -> Unit,
-    openNutriGo: () -> Unit,
-    openActivityLog: () -> Unit,
+    openKatakanaChart: () -> Unit,
     onLogoutClick: () -> Unit
 ) {
 
@@ -441,10 +435,7 @@ fun TangoGOPreview() {
             openLessonHiragana = { },
             openLessonKatakana = { },
             openHiraganaChart = { },
-            openActivityLog = { },
-            openDailyWaterIntake = { },
-            openNutriGo = { },
-            openStepCounter = { },
+            openKatakanaChart = { },
             onLogoutClick = { }
         )
     }

@@ -68,7 +68,7 @@ class RegisterViewModel @Inject constructor(
 
         launchCatching {
             accountService.register(firstName, lastName, email, password)
-            openAndPopUp(Routes.BMI_WELCOME, Routes.REGISTER)
+            //openAndPopUp(Routes.BMI_WELCOME, Routes.REGISTER)
         }
     }
 

@@ -1,0 +1,60 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Cat Body -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M30,20
+                          Q20,30 20,60
+                          Q20,90 50,90
+                          Q80,90 80,60
+                          Q80,30 70,20 Z" />
+
+    <!-- Left Ear -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M30,20 L35,5 L40,20 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M32,19 L35,10 L38,19 Z" />
+
+    <!-- Right Ear -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M60,20 L65,5 L70,20 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M62,19 L65,10 L68,19 Z" />
+
+    <!-- Left Eye Outer -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,40 A5,5 0 1,1 37.9,40 Z" />
+
+    <!-- Right Eye Outer -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M58,40 A5,5 0 1,1 57.9,40 Z" />
+
+    <!-- Left Pupil -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M38,40 A2,2 0 1,1 37.9,40 Z" />
+
+    <!-- Right Pupil -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M58,40 A2,2 0 1,1 57.9,40 Z" />
+
+
+    <!-- Nose and Mouth (Stylized) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="0.6"
+        android:strokeLineCap="round"
+        android:fillColor="#000000"
+        android:pathData="M49,50 Q50,51 51,50 M50,51 Q50,52 49,52 M50,51 Q50,52 51,52" />
+</vector>
