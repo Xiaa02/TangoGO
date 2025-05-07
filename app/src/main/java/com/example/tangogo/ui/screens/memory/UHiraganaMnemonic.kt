@@ -3,6 +3,7 @@ package com.example.tangogo.ui.screens.memory
 import android.content.Context
 import android.media.MediaPlayer
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,24 +16,24 @@ import androidx.compose.ui.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
 import com.example.tangogo.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AHiraganaMemoryScreen(
+fun UHiraganaMnemonicScreen(
     navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
     navigateToHiraganaChart: () -> Unit,
     onMnemonicClick: () -> Unit,
     onStrokeClick: () -> Unit,
-    onWriteClick: () -> Unit
+    onWriteClick: () -> Unit,
 ) {
     val backgroundColor = Color(0xFFFFC6CC)
     val buttonColor = Color(0xFFFFFFFF)
@@ -97,7 +98,7 @@ fun AHiraganaMemoryScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "あ - a",
+                text = "う - u",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 20.dp)
@@ -105,14 +106,20 @@ fun AHiraganaMemoryScreen(
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Hiragana Box with sound icon
+            // Hiragana Mnemonic
             Box(
                 modifier = Modifier
                     .size(300.dp)
                     .background(Color.White, RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Text("あ", fontSize = 200.sp, fontWeight = FontWeight.Normal)
+                Image(
+                    painter = painterResource(id = R.drawable.u_hiragana_memory),
+                    contentDescription = "Hiragana U",
+                    modifier = Modifier.fillMaxSize().padding(20.dp),
+                    contentScale = ContentScale.Fit
+                )
+
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.VolumeUp,
                     contentDescription = "Play Sound",
@@ -121,15 +128,13 @@ fun AHiraganaMemoryScreen(
                         .padding(8.dp)
                         .size(28.dp)
                         .clickable {
-                            playSound(context, R.raw.a)
+                            playSound(context, R.raw.u)
                         }
                 )
             }
 
-
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Custom Button With Icon
             @Composable
             fun ButtonWithIcon(text: String, icon: Painter, onClick: () -> Unit) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -180,16 +185,11 @@ fun AHiraganaMemoryScreen(
     BackHandler(onBack = navigateBack)
 }
 
-fun playSound(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
-}
 
 @Preview(showBackground = true)
 @Composable
-fun AHiraganaMemoryScreenPreview() {
-    AHiraganaMemoryScreen(
+fun UHiraganaMnemonicPreview() {
+    UHiraganaMnemonicScreen(
         navigateBack = {},
         navigateToDashboard = {},
         navigateToHiraganaChart = {},

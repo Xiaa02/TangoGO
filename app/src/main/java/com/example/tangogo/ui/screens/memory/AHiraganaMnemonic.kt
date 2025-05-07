@@ -185,12 +185,6 @@ fun AHiraganaMnemonicScreen(
     BackHandler(onBack = navigateBack)
 }
 
-fun playSound2(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
-}
-
 @Preview(showBackground = true)
 @Composable
 fun AHiraganaMnemonicPreview() {

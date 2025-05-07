@@ -26,7 +26,7 @@ import com.example.tangogo.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AHiraganaMemoryScreen(
+fun UHiraganaMemoryScreen(
     navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
     navigateToHiraganaChart: () -> Unit,
@@ -97,7 +97,7 @@ fun AHiraganaMemoryScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "あ - a",
+                text = "う - u",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 20.dp)
@@ -112,7 +112,7 @@ fun AHiraganaMemoryScreen(
                     .background(Color.White, RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Text("あ", fontSize = 200.sp, fontWeight = FontWeight.Normal)
+                Text("う", fontSize = 200.sp, fontWeight = FontWeight.Normal)
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.VolumeUp,
                     contentDescription = "Play Sound",
@@ -121,7 +121,7 @@ fun AHiraganaMemoryScreen(
                         .padding(8.dp)
                         .size(28.dp)
                         .clickable {
-                            playSound(context, R.raw.a)
+                            playSound(context, R.raw.u)
                         }
                 )
             }
@@ -129,7 +129,6 @@ fun AHiraganaMemoryScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Custom Button With Icon
             @Composable
             fun ButtonWithIcon(text: String, icon: Painter, onClick: () -> Unit) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -180,16 +179,10 @@ fun AHiraganaMemoryScreen(
     BackHandler(onBack = navigateBack)
 }
 
-fun playSound(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
-}
-
 @Preview(showBackground = true)
 @Composable
-fun AHiraganaMemoryScreenPreview() {
-    AHiraganaMemoryScreen(
+fun UHiraganaMemoryScreenPreview() {
+    UHiraganaMemoryScreen(
         navigateBack = {},
         navigateToDashboard = {},
         navigateToHiraganaChart = {},

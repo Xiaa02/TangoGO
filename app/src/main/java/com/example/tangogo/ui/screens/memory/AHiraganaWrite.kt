@@ -201,7 +201,7 @@ fun AHiraganaWriteScreen(
                         .align(Alignment.TopEnd)
                         .padding(8.dp)
                         .size(28.dp)
-                        .clickable { playSound4(context, R.raw.a) }
+                        .clickable { playSound(context, R.raw.a) }
                 )
 
                 Icon(
@@ -248,11 +248,6 @@ fun AHiraganaWriteScreen(
     BackHandler(onBack = navigateBack)
 }
 
-fun playSound4(context: Context, resId: Int) {
-    val player = MediaPlayer.create(context, resId)
-    player.setOnCompletionListener { it.release() }
-    player.start()
-}
 
 @Composable
 fun ButtonWithIcon(text: String, icon: Painter, onClick: () -> Unit) {

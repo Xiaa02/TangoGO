@@ -35,7 +35,7 @@ import com.example.tangogo.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun IHiraganaWriteScreen(
+fun EHiraganaWriteScreen(
     navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
     navigateToHiraganaChart: () -> Unit,
@@ -107,7 +107,7 @@ fun IHiraganaWriteScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "い – i",
+                text = "え - e",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 20.dp)
@@ -173,7 +173,7 @@ fun IHiraganaWriteScreen(
                             textSize     = h * 0.8f
                             textAlign    = android.graphics.Paint.Align.CENTER
                         }
-                        canvas.nativeCanvas.drawText("い", cx, cy + paint.textSize / 3f, paint)
+                        canvas.nativeCanvas.drawText("え", cx, cy + paint.textSize / 3f, paint)
                     }
 
                     // user strokes
@@ -194,13 +194,13 @@ fun IHiraganaWriteScreen(
 
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                    contentDescription = "Play “い”",
+                    contentDescription = "Play “え”",
                     tint = Color.Unspecified,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(8.dp)
                         .size(28.dp)
-                        .clickable { playSound(context, R.raw.i) }
+                        .clickable { playSound(context, R.raw.e) }
                 )
 
                 Icon(
@@ -247,11 +247,10 @@ fun IHiraganaWriteScreen(
     BackHandler(onBack = navigateBack)
 }
 
-
 @Preview(showBackground = true)
 @Composable
-fun IHiraganaWriteScreenPreview() {
-    IHiraganaWriteScreen(
+fun EHiraganaWriteScreenPreview() {
+    EHiraganaWriteScreen(
         navigateBack = {},
         navigateToDashboard = {},
         navigateToHiraganaChart = {}

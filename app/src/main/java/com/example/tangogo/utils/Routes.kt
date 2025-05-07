@@ -22,6 +22,18 @@ object Routes {
     const val I_HIRAGANA_MNEMONIC = "i_hiragana_mnemonic"
     const val I_HIRAGANA_STROKE = "i_hiragana_draw"
     const val I_HIRAGANA_WRITE = "i_hiragana_write"
+    const val U_HIRAGANA_MEMORY = "u_hiragana_memory"
+    const val U_HIRAGANA_MNEMONIC = "u_hiragana_mnemonic"
+    const val U_HIRAGANA_STROKE = "u_hiragana_draw"
+    const val U_HIRAGANA_WRITE = "u_hiragana_write"
+    const val E_HIRAGANA_MEMORY = "e_hiragana_memory"
+    const val E_HIRAGANA_MNEMONIC = "e_hiragana_mnemonic"
+    const val E_HIRAGANA_STROKE = "e_hiragana_draw"
+    const val E_HIRAGANA_WRITE = "e_hiragana_write"
+    const val O_HIRAGANA_MEMORY = "o_hiragana_memory"
+    const val O_HIRAGANA_MNEMONIC = "o_hiragana_mnemonic"
+    const val O_HIRAGANA_STROKE = "o_hiragana_draw"
+    const val O_HIRAGANA_WRITE = "o_hiragana_write"
 
     const val KATAKANA_CHART = "katakana_chart"
 }

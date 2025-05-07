@@ -99,7 +99,7 @@ fun IHiraganaStrokeScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "い - i",
+                text = "う - u",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 20.dp)
@@ -135,7 +135,7 @@ fun IHiraganaStrokeScreen(
                         .padding(8.dp)
                         .size(28.dp)
                         .clickable {
-                            playSound7(context, R.raw.i)
+                            playSound(context, R.raw.i)
                         }
                 )
             }
@@ -190,12 +190,6 @@ fun IHiraganaStrokeScreen(
     }
 
     BackHandler(onBack = navigateBack)
-}
-
-fun playSound7(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
 }
 
 @Preview(showBackground = true)

@@ -128,7 +128,7 @@ fun IHiraganaMnemonicScreen(
                         .padding(8.dp)
                         .size(28.dp)
                         .clickable {
-                            playSound6(context, R.raw.i)
+                            playSound(context, R.raw.i)
                         }
                 )
             }
@@ -183,12 +183,6 @@ fun IHiraganaMnemonicScreen(
     }
 
     BackHandler(onBack = navigateBack)
-}
-
-fun playSound6(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
 }
 
 @Preview(showBackground = true)

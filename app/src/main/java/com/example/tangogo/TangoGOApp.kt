@@ -41,7 +41,19 @@ import com.example.tangogo.ui.screens.memory.HiraganaChartScreen
 import com.example.tangogo.ui.screens.memory.IHiraganaMemoryScreen
 import com.example.tangogo.ui.screens.memory.IHiraganaMnemonicScreen
 import com.example.tangogo.ui.screens.memory.IHiraganaStrokeScreen
-//import com.example.tangogo.ui.screens.memory.IHiraganaWriteScreen
+import com.example.tangogo.ui.screens.memory.IHiraganaWriteScreen
+import com.example.tangogo.ui.screens.memory.UHiraganaMemoryScreen
+import com.example.tangogo.ui.screens.memory.UHiraganaMnemonicScreen
+import com.example.tangogo.ui.screens.memory.UHiraganaStrokeScreen
+import com.example.tangogo.ui.screens.memory.UHiraganaWriteScreen
+import com.example.tangogo.ui.screens.memory.EHiraganaMemoryScreen
+import com.example.tangogo.ui.screens.memory.EHiraganaMnemonicScreen
+import com.example.tangogo.ui.screens.memory.EHiraganaStrokeScreen
+import com.example.tangogo.ui.screens.memory.EHiraganaWriteScreen
+import com.example.tangogo.ui.screens.memory.OHiraganaMemoryScreen
+import com.example.tangogo.ui.screens.memory.OHiraganaMnemonicScreen
+import com.example.tangogo.ui.screens.memory.OHiraganaStrokeScreen
+import com.example.tangogo.ui.screens.memory.OHiraganaWriteScreen
 import com.example.tangogo.ui.screens.register.RegisterScreen
 import com.example.tangogo.ui.screens.welcome.WelcomeScreen
 import com.example.tangogo.ui.theme.TangoGOTheme
@@ -182,6 +194,15 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
                 if (char == "い") {
                     appState.navController.navigate(Routes.I_HIRAGANA_MEMORY)
                 }
+                if (char == "う") {
+                    appState.navController.navigate(Routes.U_HIRAGANA_MEMORY)
+                }
+                if (char == "え") {
+                    appState.navController.navigate(Routes.E_HIRAGANA_MEMORY)
+                }
+                if (char == "お") {
+                    appState.navController.navigate(Routes.O_HIRAGANA_MEMORY)
+                }
             }
         )
     }
@@ -266,15 +287,147 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
         )
     }
 
-//    composable(Routes.I_HIRAGANA_WRITE) {
-//        IHiraganaWriteScreen(
-//            navigateBack        = { appState.popUp() },
-//            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
-//            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
-//            onMnemonicClick     = { appState.navController.navigate(Routes.I_HIRAGANA_MNEMONIC) },
-//            onStrokeClick         = { appState.navController.navigate(Routes.I_HIRAGANA_STROKE) },
-//            onWriteClick        = { appState.navController.navigate(Routes.I_HIRAGANA_WRITE) }
-//        )
-//    }
+    composable(Routes.I_HIRAGANA_WRITE) {
+        IHiraganaWriteScreen(
+            navigateBack        = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick     = { appState.navController.navigate(Routes.I_HIRAGANA_MNEMONIC) },
+            onStrokeClick         = { appState.navController.navigate(Routes.I_HIRAGANA_STROKE) },
+            onWriteClick        = { appState.navController.navigate(Routes.I_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.U_HIRAGANA_MEMORY) {
+        UHiraganaMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick     = { appState.navController.navigate(Routes.U_HIRAGANA_MNEMONIC) },
+            onStrokeClick         = { appState.navController.navigate(Routes.U_HIRAGANA_STROKE) },
+            onWriteClick        = { appState.navController.navigate(Routes.U_HIRAGANA_WRITE)}
+        )
+    }
+
+    composable(Routes.U_HIRAGANA_MNEMONIC) {
+        UHiraganaMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.U_HIRAGANA_MEMORY) },  // if want buttons here, otherwise omit
+            onStrokeClick = { appState.navController.navigate(Routes.U_HIRAGANA_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.U_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.U_HIRAGANA_STROKE) {
+        UHiraganaStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.U_HIRAGANA_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.U_HIRAGANA_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.U_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.U_HIRAGANA_WRITE) {
+        UHiraganaWriteScreen(
+            navigateBack        = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick     = { appState.navController.navigate(Routes.U_HIRAGANA_MNEMONIC) },
+            onStrokeClick         = { appState.navController.navigate(Routes.U_HIRAGANA_STROKE) },
+            onWriteClick        = { appState.navController.navigate(Routes.U_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.E_HIRAGANA_MEMORY) {
+        EHiraganaMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick     = { appState.navController.navigate(Routes.E_HIRAGANA_MNEMONIC) },
+            onStrokeClick         = { appState.navController.navigate(Routes.E_HIRAGANA_STROKE) },
+            onWriteClick        = { appState.navController.navigate(Routes.E_HIRAGANA_WRITE)}
+        )
+    }
+
+    composable(Routes.E_HIRAGANA_MNEMONIC) {
+        EHiraganaMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.E_HIRAGANA_MEMORY) },  // if want buttons here, otherwise omit
+            onStrokeClick = { appState.navController.navigate(Routes.E_HIRAGANA_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.E_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.E_HIRAGANA_STROKE) {
+        EHiraganaStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.E_HIRAGANA_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.E_HIRAGANA_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.E_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.E_HIRAGANA_WRITE) {
+        EHiraganaWriteScreen(
+            navigateBack        = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick     = { appState.navController.navigate(Routes.E_HIRAGANA_MNEMONIC) },
+            onStrokeClick         = { appState.navController.navigate(Routes.E_HIRAGANA_STROKE) },
+            onWriteClick        = { appState.navController.navigate(Routes.E_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.O_HIRAGANA_MEMORY) {
+        OHiraganaMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick     = { appState.navController.navigate(Routes.O_HIRAGANA_MNEMONIC) },
+            onStrokeClick         = { appState.navController.navigate(Routes.O_HIRAGANA_STROKE) },
+            onWriteClick        = { appState.navController.navigate(Routes.O_HIRAGANA_WRITE)}
+        )
+    }
+
+    composable(Routes.O_HIRAGANA_MNEMONIC) {
+        OHiraganaMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.O_HIRAGANA_MEMORY) },  // if want buttons here, otherwise omit
+            onStrokeClick = { appState.navController.navigate(Routes.O_HIRAGANA_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.O_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.O_HIRAGANA_STROKE) {
+        OHiraganaStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.O_HIRAGANA_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.O_HIRAGANA_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.O_HIRAGANA_WRITE) }
+        )
+    }
+
+    composable(Routes.O_HIRAGANA_WRITE) {
+        OHiraganaWriteScreen(
+            navigateBack        = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToHiraganaChart = { appState.navigate(Routes.HIRAGANA_CHART) },
+            onMnemonicClick     = { appState.navController.navigate(Routes.O_HIRAGANA_MNEMONIC) },
+            onStrokeClick         = { appState.navController.navigate(Routes.O_HIRAGANA_STROKE) },
+            onWriteClick        = { appState.navController.navigate(Routes.O_HIRAGANA_WRITE) }
+        )
+    }
 
 }

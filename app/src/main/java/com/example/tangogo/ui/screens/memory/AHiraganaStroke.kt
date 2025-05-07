@@ -135,7 +135,7 @@ fun AHiraganaStrokeScreen(
                         .padding(8.dp)
                         .size(28.dp)
                         .clickable {
-                            playSound3(context, R.raw.a)
+                            playSound(context, R.raw.a)
                         }
                 )
             }
@@ -192,11 +192,6 @@ fun AHiraganaStrokeScreen(
     BackHandler(onBack = navigateBack)
 }
 
-fun playSound3(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
-}
 
 @Preview(showBackground = true)
 @Composable
