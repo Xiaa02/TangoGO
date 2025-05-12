@@ -41,14 +41,15 @@ data class VocabCard(val word: String, val audioRes: Int, val imageRes: Int)
 @Composable
 fun HiraganaSpeakScreen(
     navigateBack: () -> Unit,
-    navigateToDashboard: () -> Unit
+    navigateToDashboard: () -> Unit,
+    navigateToNext: () -> Unit
 ) {
     val context = LocalContext.current
     val isInPreview = LocalInspectionMode.current
 
     val vocabList = listOf(
         VocabCard("こんにちは", R.raw.konnichiwa, R.drawable.konnichiwa_img),
-        VocabCard("よる", R.raw.yoru, R.drawable.yoru_img),
+        VocabCard("ありがとう", R.raw.arigatou, R.drawable.arigatou_img),
         VocabCard("おはよう", R.raw.ohayou, R.drawable.ohayou_img)
     )
 
@@ -72,14 +73,19 @@ fun HiraganaSpeakScreen(
             permissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
         }
     }
-    // Auto next
+
+    // Auto next logic (moving to the next card when the answer is correct)
     LaunchedEffect(isCorrect) {
         if (isCorrect) {
             delay(2000)
+            // Ensure the index doesn't go out of bounds
             if (currentIndex < vocabList.lastIndex) {
                 currentIndex++
                 spokenText = ""
                 isCorrect = false
+            } else {
+                // Optionally, you can add a "Lesson Complete" state here
+                Log.d("Lesson", "You have completed all vocab cards.")
             }
         }
     }
@@ -268,33 +274,60 @@ fun startSpeechToText(
 ) {
     val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
         putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-        putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ja-JP")
+        putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ja-JP") // Japanese language for your use case
     }
 
-    val recognizer = SpeechRecognizer.createSpeechRecognizer(context)
-    recognizer.setRecognitionListener(object : RecognitionListener {
-        override fun onResults(results: Bundle) {
-            val matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
-            onResult(matches?.firstOrNull() ?: "")
-            onEnd()
-        }
+    // Check if speech recognition is available on the device
+    if (SpeechRecognizer.isRecognitionAvailable(context)) {
+        val recognizer = SpeechRecognizer.createSpeechRecognizer(context)
 
-        override fun onError(error: Int) {
-            Log.e("SpeechRecognizer", "Error: $error")
-            onResult("")
-            onEnd()
-        }
+        // Log when speech recognition is triggered
+        Log.d("SpeechRecognizer", "Starting speech recognition...")
 
-        override fun onEndOfSpeech() = onEnd()
-        override fun onReadyForSpeech(params: Bundle?) {}
-        override fun onBeginningOfSpeech() {}
-        override fun onRmsChanged(rmsdB: Float) {}
-        override fun onBufferReceived(buffer: ByteArray?) {}
-        override fun onPartialResults(partialResults: Bundle?) {}
-        override fun onEvent(eventType: Int, params: Bundle?) {}
-    })
+        recognizer.setRecognitionListener(object : RecognitionListener {
+            override fun onResults(results: Bundle) {
+                val matches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION)
+                if (matches != null && matches.isNotEmpty()) {
+                    Log.d("SpeechRecognizer", "Results: ${matches.first()}")
+                    onResult(matches.first())
+                } else {
+                    Log.d("SpeechRecognizer", "No speech results.")
+                    onResult("")
+                }
+                onEnd()
+            }
 
-    recognizer.startListening(intent)
+            override fun onError(error: Int) {
+                Log.e("SpeechRecognizer", "Error: $error")
+                onResult("") // Reset result
+                onEnd() // End listening
+            }
+
+            override fun onEndOfSpeech() {
+                Log.d("SpeechRecognizer", "End of speech detected")
+                onEnd() // End listening
+            }
+
+            // Optional: You can handle other methods based on your needs
+            override fun onReadyForSpeech(params: Bundle?) {
+                Log.d("SpeechRecognizer", "Ready for speech...")
+            }
+
+            override fun onBeginningOfSpeech() {
+                Log.d("SpeechRecognizer", "Speech started...")
+            }
+
+            override fun onRmsChanged(rmsdB: Float) {}
+            override fun onBufferReceived(buffer: ByteArray?) {}
+            override fun onPartialResults(partialResults: Bundle?) {}
+            override fun onEvent(eventType: Int, params: Bundle?) {}
+        })
+
+        recognizer.startListening(intent)
+    } else {
+        Log.e("SpeechRecognizer", "Speech recognition not available on this device.")
+        // Optional: Show a message to the user if recognition is not available
+    }
 }
 
 @Preview(showBackground = true)
@@ -302,5 +335,8 @@ fun startSpeechToText(
 fun HiraganaSpeakScreenPreview() {
     HiraganaSpeakScreen(
         navigateBack = {},
-        navigateToDashboard = {})
+        navigateToDashboard = {},
+        navigateToNext = {}
+    )
+
 }

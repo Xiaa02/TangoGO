@@ -13,12 +13,21 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="HiraganaSpeakScreenPreview">
+      <SelectionState runConfigName="SaHiraganaWriteScreenPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="IHiraganaWriteScreenPreview">
+      <SelectionState runConfigName="SeHiraganaWriteScreenPreview">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-05-07T11:45:54.544354200Z">
+      </SelectionState>
+      <SelectionState runConfigName="SuHiraganaWriteScreenPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="UHiraganaWriteScreenPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="TaHiraganaMemoryScreenPreview">
+        <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-05-10T20:28:42.262484900Z">
           <Target type="DEFAULT_BOOT">
             <handle>
               <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\richn\.android\avd\Pixel_8a.avd" />

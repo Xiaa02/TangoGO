@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Add this permission for recording audio -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- Add this permission for internet access, in case you need it for other features -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application

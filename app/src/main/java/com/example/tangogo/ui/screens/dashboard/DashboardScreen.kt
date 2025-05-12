@@ -1,7 +1,5 @@
 package com.example.tangogo.ui.screens.dashboard
 
-//import android.R
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -18,12 +16,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -61,7 +56,7 @@ fun DashboardScreen(
         openLessonHiragana = { viewModel.openHiragana(openScreen) },
         openLessonKatakana = { viewModel.openKatakana(openScreen) },
         openHiraganaChart = { viewModel.openHiraganaChart(openScreen) },
-        openKatakanaChart = { viewModel.openHiraganaChart(openScreen)},
+        openKatakanaChart = { viewModel.openKatakanaChart(openScreen)},
         onLogoutClick = { viewModel.onLogoutClick(clearAndNavigate) }
     )
 }
@@ -81,7 +76,7 @@ fun DashboardScreenContent(
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    colors = listOf(Color(0xFFFFFFFF), Color(0xFFFFFFFF))
+                    colors = listOf(Color(0xFFF9F9F9), Color(0xFFF9F9F9))
                 )
             )
             .padding(0.dp, 32.dp),
@@ -315,13 +310,15 @@ fun DashboardScreenContent(
                     titleKanji     = "カタカナ",
                     subtitle       = "Katakana",
                     size           = 140.dp,
-                    backgroundColor = Color(0xFFFFF59D)
+                    backgroundColor = Color(0xFFFFF59D),
+                    onClick         = openKatakanaChart
                 )
                 MemoryHintCard(
                     titleKanji     = "かんじ",
                     subtitle       = "Kanji",
                     size           = 140.dp,
                     backgroundColor = Color(0xFFC8F7C5)
+                    //onClick         = openKanjiChart
                 )
             }
 
@@ -400,28 +397,6 @@ fun MemoryHintCard(
                 fontSize = 14.sp
             )
         }
-    }
-}
-
-
-
-@Composable
-fun OptionIcon(
-    @DrawableRes iconRes: Int,
-    contentDescription: String? = null,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    IconButton(
-        onClick = onClick,
-        modifier = modifier.size(56.dp)
-    ) {
-        Icon(
-            painter = painterResource(id = iconRes),
-            contentDescription = contentDescription,
-            modifier = Modifier.size(32.dp),
-            tint = Color.Black
-        )
     }
 }
 

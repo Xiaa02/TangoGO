@@ -39,6 +39,15 @@ fun HiraganaQ1Screen(
     var showCorrectPopup by remember { mutableStateOf(false) }
     var showWrongPopup by remember { mutableStateOf(false) }
 
+    val correctSheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true,
+        confirmValueChange = { false }
+    )
+    val wrongSheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true,
+        confirmValueChange = { false }
+    )
+
     val context = LocalContext.current
 
     Scaffold(
@@ -235,27 +244,19 @@ fun HiraganaQ1Screen(
 
     if (showCorrectPopup) {
         ModalBottomSheet(
-            onDismissRequest = { },
+            onDismissRequest = {},
+            sheetState = correctSheetState,
             containerColor = Color.White,
             tonalElevation = 8.dp,
             shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "✅ Good job!",
-                    color = Color(0xFF4CAF50),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
+            BackHandler(enabled = true) {}
+            Column(Modifier.fillMaxWidth().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Text("⭕ Good job!", color = Color(0xFF4CAF50), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(12.dp))
-                Text("Explanation:", color = Color.Black, fontSize = 16.sp)
+                Text("Explanation:", fontSize = 16.sp)
                 Spacer(Modifier.height(4.dp))
-                Text("あさ - asa", color = Color.Black, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("あさ - asa", fontSize = 24.sp, fontWeight = FontWeight.Bold)
                 Text("あ = a", color = Color.Gray, fontSize = 16.sp)
                 Text("さ = sa", color = Color.Gray, fontSize = 16.sp)
                 Spacer(Modifier.height(20.dp))
@@ -267,9 +268,7 @@ fun HiraganaQ1Screen(
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50)),
                     shape = RoundedCornerShape(15.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp)
+                    modifier = Modifier.fillMaxWidth().height(50.dp)
                 ) {
                     Text("CONTINUE", fontWeight = FontWeight.Bold, color = Color.White)
                 }
@@ -279,27 +278,19 @@ fun HiraganaQ1Screen(
 
     if (showWrongPopup) {
         ModalBottomSheet(
-            onDismissRequest = { },
+            onDismissRequest = {},
+            sheetState = wrongSheetState,
             containerColor = Color.White,
             tonalElevation = 8.dp,
             shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)
         ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "❌ Incorrect",
-                    color = Color(0xFFE57373),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
+            BackHandler(enabled = true) {}
+            Column(Modifier.fillMaxWidth().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
+                Text("❌ Incorrect", color = Color(0xFFE57373), fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(12.dp))
-                Text("Correct Answer:", color = Color.Black, fontSize = 16.sp)
+                Text("Correct Answer:", fontSize = 16.sp)
                 Spacer(Modifier.height(4.dp))
-                Text("あさ", color = Color.Black, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("あさ", fontSize = 24.sp, fontWeight = FontWeight.Bold)
                 Text("asa", color = Color.Gray, fontSize = 16.sp)
                 Spacer(Modifier.height(20.dp))
                 Button(
@@ -309,9 +300,7 @@ fun HiraganaQ1Screen(
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFE57373)),
                     shape = RoundedCornerShape(15.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp)
+                    modifier = Modifier.fillMaxWidth().height(50.dp)
                 ) {
                     Text("GOT IT", fontWeight = FontWeight.Bold, color = Color.White)
                 }
