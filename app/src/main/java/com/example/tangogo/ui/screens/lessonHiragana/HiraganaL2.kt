@@ -1,9 +1,7 @@
 package com.example.tangogo.ui.screens.lessonHiragana
 
 import android.content.Context
-import android.media.MediaPlayer
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -16,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -31,7 +30,6 @@ import com.example.tangogo.R
 @Composable
 fun HiraganaL2Screen(
     navigateBack: () -> Unit,
-    navigateToDashboard: () -> Unit,
     navigateToNext: () -> Unit
 ) {
     val context = LocalContext.current
@@ -59,11 +57,11 @@ fun HiraganaL2Screen(
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        navigateToDashboard()
+                        navigateBack()
                     }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_logout),
-                            contentDescription = "Dashboard",
+                            painter = painterResource(id = R.drawable.ic_arrow_back),
+                            contentDescription = "Back",
                             tint = Color(0xFF3F3F3F)
                         )
                     }
@@ -94,129 +92,50 @@ fun HiraganaL2Screen(
                     .padding(bottom = 8.dp, start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text(
-                    text = "だい1か",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
-                )
-                Text(
-                    text = "ひらがな",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
-                )
-                Text(
-                    text = "Hiragana",
-                    fontSize = 18.sp,
-                    color = Color.DarkGray
-                )
+                Text("だい1か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("ひらがな", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("Hiragana", fontSize = 18.sp, color = Color.DarkGray)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text(
-                    text = "ひらがな を よみましょう",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.Black,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Justify
-                )
-
-                Text(
-                    text = "Let's read Hiragana.",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Normal,
-                    color = Color.DarkGray,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Justify
-                )
+                Text("ひらがな を よみましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
+                Text("Let's read Hiragana.", fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
 
                 Spacer(modifier = Modifier.height(20.dp))
-
-                Text(
-                    text = "Greetings.",
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.DarkGray,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Justify
-                )
+                Text("Greetings.", fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = Color.DarkGray)
             }
 
             Spacer(modifier = Modifier.height(2.dp))
 
-            GreetingsTextCard(
-                imageResId = R.drawable.ohayougozaimasu_img,
-                word = "おはよう\nございます",
-                reading = "ohayou gozaimasu",
-                meaning = "Good morning",
-                soundResId = R.raw.ohayougozaimasu,
-                context = context
-            )
+            GreetingsTextCard(R.drawable.ohayougozaimasu_img, "おはよう\nございます", "ohayou gozaimasu", "Good morning", R.raw.ohayougozaimasu, context)
+            GreetingsTextCard(R.drawable.konnichiwa_img, "こんにちは", "konnichiwa", "Good afternoon/Hello", R.raw.konnichiwa, context)
+            GreetingsTextCard(R.drawable.konbanwa_img, "こんばんは", "konbanwa", "Good evening", R.raw.konbanwa, context)
+            GreetingsTextCard(R.drawable.arigatou_img, "ありがとう", "arigatou", "Thank you (informal)", R.raw.arigatou, context)
+            GreetingsTextCard(R.drawable.sumimasen_img, "すみません", "sumimasen", "Excuse me / I'm sorry", R.raw.sumimasen, context)
+            GreetingsTextCard(R.drawable.sayounara_img, "さようなら", "sayounara", "Goodbye", R.raw.sayounara, context)
+            GreetingsTextCard(R.drawable.hai_img, "はい", "hai", "Yes", R.raw.hai, context)
+            GreetingsTextCard(R.drawable.iie_img, "いいえ", "iie", "No", R.raw.iie, context)
 
-            GreetingsTextCard(
-                imageResId = R.drawable.konnichiwa_img,
-                word = "こんにちは",
-                reading = "konnichiwa",
-                meaning = "Good afternoon/Hello",
-                soundResId = R.raw.konnichiwa,
-                context = context
-            )
+            Spacer(modifier = Modifier.height(32.dp))
 
-            GreetingsTextCard(
-                imageResId = R.drawable.konbanwa_img,
-                word = "こんばんは",
-                reading = "konbanwa",
-                meaning = "Good evening",
-                soundResId = R.raw.konbanwa,
-                context = context
-            )
+            // Continue Button
+            Button(
+                onClick = navigateToNext,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF061428),
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(50),
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .height(56.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .shadow(10.dp, RoundedCornerShape(50))
+            ) {
+                Text("Continue", fontSize = 15.sp, fontWeight = FontWeight.Bold)
+            }
 
-            GreetingsTextCard(
-                imageResId = R.drawable.arigatou_img,
-                word = "ありがとう",
-                reading = "arigatou",
-                meaning = "Thank you (informal)",
-                soundResId = R.raw.arigatou,
-                context = context
-            )
-
-            GreetingsTextCard(
-                imageResId = R.drawable.sumimasen_img,
-                word = "すみません",
-                reading = "sumimasen",
-                meaning = "Excuse me / I'm sorry",
-                soundResId = R.raw.sumimasen,
-                context = context
-            )
-
-            GreetingsTextCard(
-                imageResId = R.drawable.sayounara_img,
-                word = "さようなら",
-                reading = "sayounara",
-                meaning = "Goodbye",
-                soundResId = R.raw.sayounara,
-                context = context
-            )
-
-            GreetingsTextCard(
-                imageResId = R.drawable.hai_img,
-                word = "はい",
-                reading = "hai",
-                meaning = "Yes",
-                soundResId = R.raw.hai,
-                context = context
-            )
-
-            GreetingsTextCard(
-                imageResId = R.drawable.iie_img,
-                word = "いいえ",
-                reading = "iie",
-                meaning = "No",
-                soundResId = R.raw.iie,
-                context = context
-            )
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
@@ -234,18 +153,11 @@ fun GreetingsTextCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFFDFCFB)
-        ),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
         elevation = CardDefaults.cardElevation(4.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .padding(12.dp)
-                .fillMaxWidth()
-        ) {
-
+        Column(modifier = Modifier.padding(12.dp).fillMaxWidth()) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -257,9 +169,7 @@ fun GreetingsTextCard(
                     contentDescription = "Play Sound",
                     modifier = Modifier
                         .size(22.dp)
-                        .clickable {
-                            playAudio4(context, soundResId)
-                        }
+                        .clickable { playAudio(context, soundResId) }
                 )
             }
 
@@ -286,30 +196,11 @@ fun GreetingsTextCard(
                         .weight(1f)
                         .fillMaxHeight()
                 ) {
-                    Text(
-                        text = word,
-                        fontSize = 22.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFF3F3F3F),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    Text(word, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F), textAlign = TextAlign.Center)
                     Spacer(modifier = Modifier.height(2.dp))
-                    Text(
-                        text = reading,
-                        fontSize = 16.sp,
-                        color = Color(0xFF757575),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    Text(reading, fontSize = 16.sp, color = Color(0xFF757575), textAlign = TextAlign.Center)
                     Spacer(modifier = Modifier.height(2.dp))
-                    Text(
-                        text = meaning,
-                        fontSize = 16.sp,
-                        color = Color(0xFF000000),
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
+                    Text(meaning, fontSize = 16.sp, color = Color(0xFF000000), textAlign = TextAlign.Center)
                 }
             }
 
@@ -318,11 +209,6 @@ fun GreetingsTextCard(
     }
 }
 
-fun playAudio4(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
-}
 
 @Preview(showBackground = true)
 @Composable
@@ -330,7 +216,6 @@ fun playAudio4(context: Context, resId: Int) {
 fun HiraganaL2ScreenPreview() {
     HiraganaL2Screen(
         navigateBack = {},
-        navigateToDashboard = {},
         navigateToNext = {}
     )
 }

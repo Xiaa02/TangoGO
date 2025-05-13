@@ -1,4 +1,4 @@
-package com.example.tangogo.ui.screens.lessonHiragana
+package com.example.tangogo.ui.screens.lessonKatakana
 
 import android.content.Context
 import android.media.MediaPlayer
@@ -29,7 +29,7 @@ import com.example.tangogo.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HiraganaL1Screen(
+fun KatakanaL1Screen(
     navigateBack: () -> Unit,
     navigateToNext: () -> Unit
 ) {
@@ -49,7 +49,7 @@ fun HiraganaL1Screen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "ひらがな",
+                            text = "カタカナ",
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -95,29 +95,29 @@ fun HiraganaL1Screen(
                     .padding(bottom = 8.dp, start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text("だい1か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
-                Text("ひらがな", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
-                Text("Hiragana", fontSize = 18.sp, color = Color.DarkGray)
+                Text("だい2か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("カタカナ", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("Katakana", fontSize = 18.sp, color = Color.DarkGray)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text("ひらがな を よみましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
-                Text("Let's read Hiragana.", fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
+                Text("カタカナ を よみましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
+                Text("Let's read Katakana.", fontSize = 20.sp,fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            // Word Cards
-            HiraganaTextCard(R.drawable.asa_img, "あさ", "asa", "Morning", R.raw.asa, context)
-            HiraganaTextCard(R.drawable.yoru_img, "よる", "yoru", "Evening/Night", R.raw.yoru, context)
-            HiraganaTextCard(R.drawable.tsukue_img, "つくえ", "tsukue", "Desk", R.raw.tsukue, context)
-            HiraganaTextCard(R.drawable.yasai_img, "やさい", "yasai", "Vegetable", R.raw.yasai, context)
-            HiraganaTextCard(R.drawable.sakana_img, "さかな", "sakana", "Fish", R.raw.sakana, context)
-            HiraganaTextCard(R.drawable.tamago_img, "たまご", "tamago", "Egg", R.raw.tamago, context)
-            HiraganaTextCard(R.drawable.kazoku_img, "かぞく", "kazoku", "Family", R.raw.kazoku, context)
-            HiraganaTextCard(R.drawable.nihongo_img, "にほんご", "nihongo", "Japanese language", R.raw.nihongo, context)
-            HiraganaTextCard(R.drawable.inu_img, "いぬ", "inu", "Dog", R.raw.inu, context)
-            HiraganaTextCard(R.drawable.neko_img, "ねこ", "neko", "Cat", R.raw.neko, context)
+            // Katakana Word Cards
+            KatakanaTextCard(R.drawable.airconditioner_img, "エアコン", "eakon", "Air Conditioner", R.raw.eakon, context)
+            KatakanaTextCard(R.drawable.shirt_img, "シャツ", "shatsu", "Shirt", R.raw.shatsu, context)
+            KatakanaTextCard(R.drawable.bread_img, "パン", "pan", "Bread", R.raw.pan, context)
+            KatakanaTextCard(R.drawable.television_img, "テレビ", "terebi", "Television", R.raw.terebi, context)
+            KatakanaTextCard(R.drawable.camera_img, "カメラ", "kamera", "Camera", R.raw.kamera, context)
+            KatakanaTextCard(R.drawable.toilet_img, "トイレ", "toire", "Toilet", R.raw.toire, context)
+            KatakanaTextCard(R.drawable.coffee_img, "コーヒー", "koohii", "Coffee", R.raw.koohii, context)
+            KatakanaTextCard(R.drawable.table_img, "テーブル", "teeburu", "Table", R.raw.teeburu, context)
+            KatakanaTextCard(R.drawable.sofa_img, "ソファ", "sofa", "Sofa", R.raw.sofa, context)
+            KatakanaTextCard(R.drawable.bed_img, "ベッド", "beddo", "Bed", R.raw.beddo, context)
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -144,7 +144,7 @@ fun HiraganaL1Screen(
 }
 
 @Composable
-fun HiraganaTextCard(
+fun KatakanaTextCard(
     imageResId: Int,
     word: String,
     reading: String,
@@ -222,8 +222,8 @@ fun playAudio(context: Context, resId: Int) {
 
 @Preview(showBackground = true)
 @Composable
-fun HiraganaL1ScreenPreview() {
-    HiraganaL1Screen(
+fun KatakanaL1ScreenPreview() {
+    KatakanaL1Screen(
         navigateBack = {},
         navigateToNext = {}
     )

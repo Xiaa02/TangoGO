@@ -1,7 +1,6 @@
-package com.example.tangogo.ui.screens.lessonHiragana
+package com.example.tangogo.ui.screens.lessonKatakana
 
 import android.content.Context
-import android.media.MediaPlayer
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,7 +28,7 @@ import com.example.tangogo.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HiraganaL1Screen(
+fun KatakanaL2Screen(
     navigateBack: () -> Unit,
     navigateToNext: () -> Unit
 ) {
@@ -49,7 +48,7 @@ fun HiraganaL1Screen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "ひらがな",
+                            text = "カタカナ",
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -87,8 +86,6 @@ fun HiraganaL1Screen(
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-            // Section Title
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -96,28 +93,35 @@ fun HiraganaL1Screen(
                 horizontalAlignment = Alignment.Start
             ) {
                 Text("だい1か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
-                Text("ひらがな", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
-                Text("Hiragana", fontSize = 18.sp, color = Color.DarkGray)
+                Text("カタカナ", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("Katakana", fontSize = 18.sp, color = Color.DarkGray)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text("ひらがな を よみましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
-                Text("Let's read Hiragana.", fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
+                Text("カタカナ を よみましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
+                Text("Let's read Katakana.", fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
+
+                Spacer(modifier = Modifier.height(20.dp))
+                Text("Countries.", fontSize = 18.sp, fontWeight = FontWeight.SemiBold, color = Color.DarkGray)
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(2.dp))
 
-            // Word Cards
-            HiraganaTextCard(R.drawable.asa_img, "あさ", "asa", "Morning", R.raw.asa, context)
-            HiraganaTextCard(R.drawable.yoru_img, "よる", "yoru", "Evening/Night", R.raw.yoru, context)
-            HiraganaTextCard(R.drawable.tsukue_img, "つくえ", "tsukue", "Desk", R.raw.tsukue, context)
-            HiraganaTextCard(R.drawable.yasai_img, "やさい", "yasai", "Vegetable", R.raw.yasai, context)
-            HiraganaTextCard(R.drawable.sakana_img, "さかな", "sakana", "Fish", R.raw.sakana, context)
-            HiraganaTextCard(R.drawable.tamago_img, "たまご", "tamago", "Egg", R.raw.tamago, context)
-            HiraganaTextCard(R.drawable.kazoku_img, "かぞく", "kazoku", "Family", R.raw.kazoku, context)
-            HiraganaTextCard(R.drawable.nihongo_img, "にほんご", "nihongo", "Japanese language", R.raw.nihongo, context)
-            HiraganaTextCard(R.drawable.inu_img, "いぬ", "inu", "Dog", R.raw.inu, context)
-            HiraganaTextCard(R.drawable.neko_img, "ねこ", "neko", "Cat", R.raw.neko, context)
+            // Replace with countries in Katakana
+            CountryTextCard(R.drawable.america_img, "アメリカ", "Amerika", R.raw.amerika, context)
+            CountryTextCard(R.drawable.canada_img, "カナダ", "Kanada", R.raw.canada, context)
+            CountryTextCard(R.drawable.malaysia_img, "マレーシア", "Mareeshia", R.raw.malaysia, context)
+            CountryTextCard(R.drawable.indonesia_img, "インドネシア", "Indoneshia", R.raw.indonesia, context)
+            CountryTextCard(R.drawable.spain_img, "スペイン", "Supein", R.raw.spain, context)
+            CountryTextCard(R.drawable.mexico_img, "メキシコ", "Mekishiko", R.raw.mexico, context)
+            CountryTextCard(R.drawable.germany_img, "ドイツ", "Doitsu", R.raw.germany, context)
+            CountryTextCard(R.drawable.france_img, "フランス", "Furansu", R.raw.france, context)
+            CountryTextCard(R.drawable.italy_img, "イタリア", "Itaria", R.raw.italy, context)
+            CountryTextCard(R.drawable.uk_img, "イギリス", "Igirisu", R.raw.uk, context)
+            CountryTextCard(R.drawable.australia_img, "オーストラリア", "Oosutoraria", R.raw.australia, context)
+            CountryTextCard(R.drawable.brazil_img, "ブラジル", "Burajiru", R.raw.brazil, context)
+            CountryTextCard(R.drawable.russia_img, "ロシア", "Roshia", R.raw.russia, context)
+            CountryTextCard(R.drawable.india_img, "インド", "Indo", R.raw.india, context)
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -144,11 +148,10 @@ fun HiraganaL1Screen(
 }
 
 @Composable
-fun HiraganaTextCard(
+fun CountryTextCard(
     imageResId: Int,
-    word: String,
-    reading: String,
-    meaning: String,
+    countryInKatakana: String,
+    countryInEnglish: String,
     soundResId: Int,
     context: Context
 ) {
@@ -160,9 +163,7 @@ fun HiraganaTextCard(
         elevation = CardDefaults.cardElevation(4.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(12.dp).fillMaxWidth()
-        ) {
+        Column(modifier = Modifier.padding(12.dp).fillMaxWidth()) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -185,7 +186,7 @@ fun HiraganaTextCard(
             ) {
                 Image(
                     painter = painterResource(id = imageResId),
-                    contentDescription = "Word Image",
+                    contentDescription = "Country Image",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .weight(1f)
@@ -201,11 +202,9 @@ fun HiraganaTextCard(
                         .weight(1f)
                         .fillMaxHeight()
                 ) {
-                    Text(word, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F), textAlign = TextAlign.Center)
+                    Text(countryInKatakana, fontSize = 22.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F), textAlign = TextAlign.Center)
                     Spacer(modifier = Modifier.height(2.dp))
-                    Text(reading, fontSize = 16.sp, color = Color(0xFF757575), textAlign = TextAlign.Center)
-                    Spacer(modifier = Modifier.height(2.dp))
-                    Text(meaning, fontSize = 16.sp, color = Color(0xFF000000), textAlign = TextAlign.Center)
+                    Text(countryInEnglish, fontSize = 16.sp, color = Color(0xFF757575), textAlign = TextAlign.Center)
                 }
             }
 
@@ -214,16 +213,11 @@ fun HiraganaTextCard(
     }
 }
 
-fun playAudio(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
-}
-
 @Preview(showBackground = true)
 @Composable
-fun HiraganaL1ScreenPreview() {
-    HiraganaL1Screen(
+@OptIn(ExperimentalMaterial3Api::class)
+fun KatakanaL2ScreenPreview() {
+    KatakanaL2Screen(
         navigateBack = {},
         navigateToNext = {}
     )

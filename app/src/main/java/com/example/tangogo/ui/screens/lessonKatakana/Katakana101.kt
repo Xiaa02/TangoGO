@@ -1,4 +1,4 @@
-package com.example.tangogo.ui.screens.lessonHiragana
+package com.example.tangogo.ui.screens.lessonKatakana
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
@@ -26,7 +26,7 @@ import com.example.tangogo.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Hiragana101Screen(
+fun Katakana101Screen(
     navigateBack: () -> Unit,
     navigateToNext: () -> Unit
 ) {
@@ -44,7 +44,7 @@ fun Hiragana101Screen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "ひらがな",
+                            text = "カタカナ",
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -89,19 +89,19 @@ fun Hiragana101Screen(
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = "だい1か",
+                    text = "だい2か",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
                 Text(
-                    text = "ひらがな",
+                    text = "カタカナ",
                     fontSize = 22.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
                 Text(
-                    text = "Hiragana",
+                    text = "Katakana",
                     fontSize = 18.sp,
                     color = Color.DarkGray
                 )
@@ -109,22 +109,22 @@ fun Hiragana101Screen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
-                    text = "ひらがな",
-                    fontSize = 22.sp,
+                    text = "カタカナ",
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
                 Text(
-                    text = "Hiragana 101",
-                    fontSize = 22.sp,
+                    text = "Katakana 101",
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
-                    text = "Hiragana (ひらがな) is one of the three Japanese writing systems that consist of 46 basic symbols. It is used to write native Japanese words and grammatical elements.",
+                    text = "Katakana (カタカナ) is one of the three Japanese writing systems that consist of 46 basic symbols.",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color(0xFF444444),
@@ -134,8 +134,9 @@ fun Hiragana101Screen(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
+                // Insert additional text here
                 Text(
-                    text = "Consonants are combined with the vowels /a, i, u, e, o/ to form syllables. (*except for the letter [ん/N])",
+                    text = "Katakana is primarily used to write foreign words, names, and onomatopoeia. It is also used for emphasis and some loanwords.",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color(0xFF444444),
@@ -143,133 +144,87 @@ fun Hiragana101Screen(
                     textAlign = TextAlign.Justify
                 )
 
-                Spacer(modifier = Modifier.height(24.dp))
+                Spacer(modifier = Modifier.height(20.dp))
             }
 
-            HiraganaItem(
-                word = "ふりがな",
-                reading = "Furigana",
-                explanation = "Hiragana is used to assist in reading kanji.\nUsually used for Japanese language beginners, children's books, and signage.",
-                example = "Example: 桜 (さくら) — sakura [cherry blossom]"
+            Text(
+                text = "Foreign Words",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF000000),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Justify
             )
 
-            HiraganaItem(
-                word = "おくりがな",
-                reading = "Okurigana",
-                explanation = "Combination of Hiragana and Kanji in one word that holds grammar function.",
-                example = "Example: 食べます (たべます) — tabemasu [eat/eating]"
+            KatakanaItem(
+                word = "ケーキ",
+                reading = "keeki",
+                explanation = "Cake is from english word.",
+                example = "Example: ケーキ (keeki) meaning 'cake'."
             )
 
-            HiraganaItem(
-                word = "せいおん",
-                reading = "Sei-on",
-                explanation = "It refers to the basic hiragana sounds like あ, い, う, え, お, か, き, く, etc.\nThey are \"clear sounds\", without any marks like ゛(dakuten) or ゜(handakuten).",
-                example ="Example:\n"+
-                        "• [お/o] and [を/o] pronunciation:\n" +
-                        "   - Pronunciation is the same.\n" +
-                        "   - [お] is used in normal words:\n" +
-                        "       * おかね (okane) — money\n" +
-                        "       * おなか (onaka) — stomach\n" +
-                        "   - [を] is used as a grammar particle:\n" +
-                        "       * りんごをたべます (ringo-o tabemasu) — I eat an apple\n\n" +
-                        "• [は/ha] and [は/wa] pronunciation:\n" +
-                        "   - Pronunciation is different.\n" +
-                        "   - [は] is used for [ha] sounds in words:\n" +
-                        "       * はる (haru) — spring\n" +
-                        "       * はこ (hako) — box\n" +
-                        "   - [は] (read as 'wa') is used as a grammar particle:\n" +
-                        "       * ハシムさんはいいがくせいです (Hashimu-san wa ii gakusei desu) — Hashim is a good student\n\n" +
-                        "• [へ/he] and [へ/e] pronunciation:\n" +
-                        "   - Pronunciation is different.\n" +
-                        "   - [へ] is used for [he] sounds in words:\n" +
-                        "       * へい (hei) — brick wall\n" +
-                        "   - [へ] (read as 'e') is used as a grammar particle:\n" +
-                        "       * こうえんへいきます (Kouen-e ikimasu) — I go to the park"
+            KatakanaItem(
+                word = "マラッカ",
+                reading = "marakka",
+                explanation = "Used to represents a place name, a common use of Katakana for geographical locations.",
+                example = "Example: マラッカ (marakka) — Melaka."
             )
 
-            HiraganaItem(
-                word = "はつおん",
-                reading = "Hatsu-on",
-                explanation = "It refers to the ん (N) sound, known as 撥音 (hatsuon) — the special nasal sound \"ん\" (n).",
-                example = "Example:\n"+
-                        "• [m] sound before 'b', 'p', 'm' sounds:\n" +
-                        "   - あんぱん (ampan) — Japanese snack\n" +
-                        "   - しんぶん (shimbun) — newspaper\n" +
-                        "   - さんま (samma) — a type of fish\n\n" +
-                        "• [ŋ] (ng) sound before 'k', 'g' sounds:\n" +
-                        "   - こんかい (kongkai) — this time\n" +
-                        "   - あんがい (anggai) — unexpected\n" +
-                        "   - りんご (ringgo) — apple\n\n" +
-                        "• [n] sound before other sounds:\n" +
-                        "   - あんしん (anshin) — safe / relieved\n" +
-                        "   - かんたん (kantan) — easy\n" +
-                        "   - せんせい (sensei) — teacher"
+            KatakanaItem(
+                word = "アルバイト",
+                reading = "arubaito",
+                explanation = "Katakana is used to spell foreign words.",
+                example = "Example: アルバイト (arubaito) means part-time job."
             )
 
-            HiraganaItem(
-                word = "だくおん",
-                reading = "Daku-on",
-                explanation = "Daku-on refers to voiced sounds made by adding ゛to k, s, t, h rows.\nSounds like g, z, d, b.",
-                example = "Example:\n"+
-                        "• か → が (ka → ga)\n" +
-                        "• さ → ざ (sa → za)\n" +
-                        "• た → だ (ta → da)\n" +
-                        "• は → ば (ha → ba)\n\n" +
-                        "Special cases:\n" +
-                        "• じ and ぢ are pronounced the same (ji)\n" +
-                        "• ず and づ are pronounced the same (zu)"
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Text(
+                text = "Onomatopoeia",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF000000),
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Justify
             )
 
-            HiraganaItem(
-                word = "はんだくおん",
-                reading = "Handaku-on",
-                explanation = "Handaku-on refers to the semi-voiced sounds made by adding ゜to the 'h' row, changing it to 'p' sounds.",
-                example = "Example:\n"+
-                        "• は → ぱ (ha → pa)\n• ひ → ぴ (hi → pi)\n• ふ → ぷ (fu → pu)\n• へ → ぺ (he → pe)\n• ほ → ぽ (ho → po)"
+            KatakanaItem(
+                word = "にゃあにゃあ",
+                reading = "nyaanyaa",
+                explanation = "Onomatopoeia: Animal sounds, like the sound of a cat.",
+                example = "Example: にゃあにゃあ (nyaanyaa) — sound of a cat"
             )
 
-            HiraganaItem(
-                word = "ようおん",
-                reading = "You-on",
-                explanation = "You-on combines smaller や (ya), ゆ (yu), or よ (yo) with other hiragana to form blended sounds.",
-                example = "• き + や → きゃ (kya)\n" +
-                        "• ぎ + や → ぎゃ (gya)\n\n" +
-                        "Examples:\n" +
-                        "• きゃく (kyaku) — guest\n" +
-                        "• きやく (kiyaku) — regulation (different meaning if ya is not small!)"
+            KatakanaItem(
+                word = "もーもー",
+                reading = "moomoo",
+                explanation = "Onomatopoeia: Animal sounds, like the sound of a cow.",
+                example = "Example: もーもー (moomoo) — sound of a cow"
             )
 
-            HiraganaItem(
-                word = "ちょうおん",
-                reading = "Chou-on",
-                explanation = "Chou-on is the lengthening of vowel sounds (a, i, u, e, o), making the sound longer by one beat.",
-                example = "• 4 tempo: おばさん (obasan) — aunt\n" +
-                        "• 5 tempo: おばあさん (obaasan) — grandmother\n\n" +
-                        "Other examples:\n" +
-                        "• おかあさん (okaasan) — mother\n" +
-                        "• せんしゅう (senshuu) — last week\n" +
-                        "• とうきょう (toukyou) — Tokyo\n" +
-                        "• おおさか (oosaka) — Osaka"
+            KatakanaItem(
+                word = "ワンワン",
+                reading = "wanwan",
+                explanation = "Onomatopoeia: Animal sounds, like the sound of a dog.",
+                example = "Example: ワンワン (wanwan) — sound of a dog"
             )
 
-            HiraganaItem(
-                word = "そくおん",
-                reading = "Soku-on",
-                explanation = "Soku-on uses a small っ (small tsu) to double the consonant that follows (pp, tt, ss, kk sounds).",
-                example ="Example:\n"+
-                        "• しっぽ (shippo) — tail (pp)\n" +
-                        "• あさって (asatte) — day after tomorrow (tt)\n" +
-                        "• まっしろ (masshiro) — pure white (ss)\n" +
-                        "• さっき (sakki) — a while ago (kk)\n\n" +
-                        "⚡ Important: Small っ must be written smaller to avoid different meanings.\n\n" +
-                        "Small つ (っ): はっか (hakka) — ignition\n" +
-                        "Big つ (つ): はつか (hatsuka) — 20th day\n" +
-                        "No つ: はか (haka) — grave"
+            KatakanaItem(
+                word = "ザザザ",
+                reading = "zaazaa",
+                explanation = "Onomatopoeia: A heavy rain sound.",
+                example = "Example: ザザザ (zaazaa) — sound of heavy rain"
+            )
+
+            KatakanaItem(
+                word = "トントン",
+                reading = "tonton",
+                explanation = "Onomatopoeia: The sound of a door knocking.",
+                example = "Example: トントン (tonton) — sound of a door knocking"
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // Continue Button
             Button(
                 onClick = navigateToNext,
                 colors = ButtonDefaults.buttonColors(
@@ -291,8 +246,10 @@ fun Hiragana101Screen(
     }
 }
 
+
+
 @Composable
-fun HiraganaItem(
+fun KatakanaItem(
     word: String,
     reading: String,
     explanation: String,
@@ -374,8 +331,8 @@ fun HiraganaItem(
 @Preview(showBackground = true)
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun Hiragana101ScreenPreview() {
-    Hiragana101Screen(
+fun Katakana101ScreenPreview() {
+    Katakana101Screen(
         navigateBack = {},
         navigateToNext = {}
     )

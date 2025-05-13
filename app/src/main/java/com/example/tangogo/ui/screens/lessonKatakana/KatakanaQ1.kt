@@ -1,4 +1,4 @@
-package com.example.tangogo.ui.screens.lessonHiragana
+package com.example.tangogo.ui.screens.lessonKatakana
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
@@ -22,16 +22,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tangogo.R
-import com.example.tangogo.ui.screens.lessonKatakana.playAudio
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HiraganaQ1Screen(
+fun KatakanaQ1Screen(
     navigateBack: () -> Unit,
     navigateToNext: () -> Unit
 ) {
-    val correctAnswer = listOf("あ", "さ")
-    val options = listOf("あ", "お", "さ", "き")
+    val correctAnswer = listOf("テレビ") // Correct answer is テレビ
+    val options = listOf("テレビ", "カメラ", "ソファ", "ベッド")
 
     var selectedAnswers by remember { mutableStateOf<List<String>>(emptyList()) }
     var showCorrectPopup by remember { mutableStateOf(false) }
@@ -57,7 +56,7 @@ fun HiraganaQ1Screen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "ひらがな",
+                            text = "カタカナ",
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -102,7 +101,7 @@ fun HiraganaQ1Screen(
             )
 
             Text(
-                text = "ひらがなを えらびましょう",
+                text = "カタカナを えらびましょう",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier
@@ -112,7 +111,7 @@ fun HiraganaQ1Screen(
             )
 
             Text(
-                text = "Choose the correct hiragana",
+                text = "Choose the correct Katakana word",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier
@@ -144,7 +143,7 @@ fun HiraganaQ1Screen(
                             modifier = Modifier
                                 .size(28.dp)
                                 .clickable {
-                                    playAudio(context, R.raw.asa)
+                                    playAudio(context, R.raw.terebi) // Plays the sound for テレビ
                                 }
                         )
                     }
@@ -156,8 +155,8 @@ fun HiraganaQ1Screen(
                             .align(Alignment.CenterHorizontally)
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.asa_img),
-                            contentDescription = "Morning",
+                            painter = painterResource(id = R.drawable.television_img),
+                            contentDescription = "Television",
                             contentScale = ContentScale.Crop,
                             modifier = Modifier.fillMaxSize()
                         )
@@ -169,8 +168,8 @@ fun HiraganaQ1Screen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.align(Alignment.CenterHorizontally)
                     ) {
-                        Text("morning", fontSize = 18.sp, fontWeight = FontWeight.Bold)
-                        Text("asa", fontSize = 16.sp)
+                        Text("television", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                        Text("terebi", fontSize = 16.sp)
                     }
                 }
             }
@@ -196,15 +195,13 @@ fun HiraganaQ1Screen(
                                         if (contains(character)) remove(character)
                                         else add(character)
                                     }
-                                    playAudio(
-                                        context, when (character) {
-                                            "あ" -> R.raw.a
-                                            "お" -> R.raw.o
-                                            "さ" -> R.raw.sa
-                                            "き" -> R.raw.ki
-                                            else -> R.raw.asa
-                                        }
-                                    )
+                                    playAudio(context, when (character) {
+                                        "テレビ" -> R.raw.terebi
+                                        "カメラ" -> R.raw.kamera
+                                        "ソファ" -> R.raw.sofa
+                                        "ベッド" -> R.raw.beddo
+                                        else -> R.raw.terebi
+                                    })
                                 },
                                 colors = ButtonDefaults.buttonColors(containerColor = color),
                                 shape = RoundedCornerShape(10.dp),
@@ -263,9 +260,10 @@ fun HiraganaQ1Screen(
                 Spacer(Modifier.height(12.dp))
                 Text("Explanation:", fontSize = 16.sp)
                 Spacer(Modifier.height(4.dp))
-                Text("あさ - asa", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                Text("あ = a", color = Color.Gray, fontSize = 16.sp)
-                Text("さ = sa", color = Color.Gray, fontSize = 16.sp)
+                Text("テレビ - Terebi", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("テ = te", color = Color.Gray, fontSize = 16.sp)
+                Text("レ = re", color = Color.Gray, fontSize = 16.sp)
+                Text("ビ = bi", color = Color.Gray, fontSize = 16.sp)
                 Spacer(Modifier.height(20.dp))
                 Button(
                     onClick = {
@@ -297,8 +295,8 @@ fun HiraganaQ1Screen(
                 Spacer(Modifier.height(12.dp))
                 Text("Correct Answer:", fontSize = 16.sp)
                 Spacer(Modifier.height(4.dp))
-                Text("あさ", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                Text("asa", color = Color.Gray, fontSize = 16.sp)
+                Text("テレビ", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("tere-bi", color = Color.Gray, fontSize = 16.sp)
                 Spacer(Modifier.height(20.dp))
                 Button(
                     onClick = {
@@ -318,12 +316,11 @@ fun HiraganaQ1Screen(
     BackHandler(onBack = navigateBack)
 }
 
-
 @Preview(showBackground = true)
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
-fun HiraganaQ1ScreenPreview() {
-    HiraganaQ1Screen(
+fun KatakanaQ1ScreenPreview() {
+    KatakanaQ1Screen(
         navigateBack = {},
         navigateToNext = {}
     )

@@ -19,7 +19,7 @@ class DashboardViewModel @Inject constructor(
     }
 
     fun openKatakana(openScreen: (String) -> Unit) {
-        openScreen(Routes.LESSON_KATAKANA)
+        openScreen(Routes.LESSON_KATAKANA101)
     }
 
     fun openHiraganaChart(openScreen: (String) -> Unit) {

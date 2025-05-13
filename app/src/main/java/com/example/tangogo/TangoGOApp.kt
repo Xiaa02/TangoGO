@@ -1,8 +1,6 @@
 package com.example.tangogo
 
-import android.content.Intent
 import android.content.res.Resources
-import android.net.Uri
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,7 +23,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tangogo.common.snackbar.SnackbarManager
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaQ1Screen
-import com.example.tangogo.ui.screens.lessonKatakana.KatakanaScreen
+import com.example.tangogo.ui.screens.lessonKatakana.KatakanaTableScreen
 import com.example.tangogo.ui.screens.dashboard.DashboardScreen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaQ2Screen
 import com.example.tangogo.ui.screens.login.LoginScreen
@@ -33,6 +31,14 @@ import com.example.tangogo.ui.screens.lessonHiragana.Hiragana101Screen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaL1Screen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaL2Screen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaSpeakScreen
+import com.example.tangogo.ui.screens.lessonHiragana.HiraganaTableScreen
+import com.example.tangogo.ui.screens.lessonHiragana.LessonCompleteScreen
+import com.example.tangogo.ui.screens.lessonKatakana.Katakana101Screen
+import com.example.tangogo.ui.screens.lessonKatakana.KatakanaL1Screen
+import com.example.tangogo.ui.screens.lessonKatakana.KatakanaL2Screen
+import com.example.tangogo.ui.screens.lessonKatakana.KatakanaQ1Screen
+import com.example.tangogo.ui.screens.lessonKatakana.KatakanaQ2Screen
+import com.example.tangogo.ui.screens.lessonKatakana.KatakanaSpeakScreen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaMemoryScreen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaMnemonicScreen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaStrokeScreen
@@ -475,10 +481,23 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
         )
     }
 
+    composable(Routes.LESSON_COMPLETE) {
+        LessonCompleteScreen(
+            navigateToDashboard = { appState.navController.navigate(Routes.DASHBOARD) }
+        )
+    }
+
     composable(Routes.LESSON_HIRAGANA101) {
         Hiragana101Screen(
             navigateBack = { appState.popUp() },
-            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            //navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToNext = { appState.navController.navigate(Routes.HIRAGANA_TABLE) }
+        )
+    }
+
+    composable(Routes.HIRAGANA_TABLE) {
+        HiraganaTableScreen(
+            navigateBack = { appState.popUp() },
             navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAL1) }
         )
     }
@@ -486,14 +505,12 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_HIRAGANAL1) {
         HiraganaL1Screen(
             navigateBack = { appState.popUp() },
-            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
             navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAL2) }
         )
     }
     composable(Routes.LESSON_HIRAGANAL2) {
         HiraganaL2Screen(
             navigateBack = { appState.popUp() },
-            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
             navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAQ1) }
         )
     }
@@ -501,7 +518,6 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_HIRAGANAQ1) {
         HiraganaQ1Screen(
             navigateBack = { appState.popUp() },
-            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
             navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAQ2) }
         )
     }
@@ -509,7 +525,6 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_HIRAGANAQ2) {
         HiraganaQ2Screen(
             navigateBack = { appState.navController.popBackStack() },
-            navigateToDashboard = { appState.navController.navigate(Routes.DASHBOARD) },
             navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANASPEAK) }
         )
     }
@@ -517,19 +532,55 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_HIRAGANASPEAK) {
         HiraganaSpeakScreen(
             navigateBack = { appState.navController.popBackStack() },
-            navigateToDashboard = { appState.navController.navigate(Routes.DASHBOARD) },
-            navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANASPEAK) }
+            navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
         )
     }
 
-    composable(Routes.LESSON_KATAKANA) {
-        KatakanaScreen(
+    composable(Routes.LESSON_KATAKANA101) {
+        Katakana101Screen(
             navigateBack = { appState.popUp() },
-            onVideoClick = { videoUrl ->
-                val context = appState.navController.context
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
-                context.startActivity(intent)
-            }
+            navigateToNext = { appState.navController.navigate(Routes.KATAKANA_TABLE) }
+        )
+    }
+
+    composable(Routes.KATAKANA_TABLE) {
+        KatakanaTableScreen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_KATAKANAL1) }
+        )
+    }
+
+    composable(Routes.LESSON_KATAKANAL1) {
+        KatakanaL1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_KATAKANAL2) }
+        )
+    }
+    composable(Routes.LESSON_KATAKANAL2) {
+        KatakanaL2Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_KATAKANAQ1) }
+        )
+    }
+
+    composable(Routes.LESSON_KATAKANAQ1) {
+        KatakanaQ1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_KATAKANAQ2) }
+        )
+    }
+
+    composable(Routes.LESSON_KATAKANAQ2) {
+        KatakanaQ2Screen(
+            navigateBack = { appState.navController.popBackStack() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_KATAKANASPEAK) }
+        )
+    }
+
+    composable(Routes.LESSON_KATAKANASPEAK) {
+        KatakanaSpeakScreen(
+            navigateBack = { appState.navController.popBackStack() },
+            navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
         )
     }
 

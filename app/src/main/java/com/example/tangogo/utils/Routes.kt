@@ -5,13 +5,24 @@ object Routes {
     const val LOGIN = "login"
     const val REGISTER = "register"
     const val DASHBOARD = "dashboard"
+    const val LESSON_COMPLETE = "lesson_complete"
+
     const val LESSON_HIRAGANA101 = "hiragana101"
+    const val HIRAGANA_TABLE = "hiraganatable"
     const val LESSON_HIRAGANAL1 = "hiraganaL1"
     const val LESSON_HIRAGANAL2 = "hiraganaL2"
     const val LESSON_HIRAGANAQ1 = "hiraganaQ1"
     const val LESSON_HIRAGANAQ2 = "hiraganaQ2"
     const val LESSON_HIRAGANASPEAK = "hiraganaSpeak"
-    const val LESSON_KATAKANA = "lesson_katakana"
+
+    const val LESSON_KATAKANA101 = "katakana101"
+    const val KATAKANA_TABLE = "katakanatable"
+    const val LESSON_KATAKANAL1 = "katakanaL1"
+    const val LESSON_KATAKANAL2 = "katakanaL2"
+    const val LESSON_KATAKANAQ1 = "katakanaQ1"
+    const val LESSON_KATAKANAQ2 = "katakanaQ2"
+    const val LESSON_KATAKANASPEAK = "katakanaSpeak"
+
 
     //Hiragana
     const val HIRAGANA_CHART = "hiragana_chart"

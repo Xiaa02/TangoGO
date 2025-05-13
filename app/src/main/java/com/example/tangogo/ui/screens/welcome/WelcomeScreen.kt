@@ -67,7 +67,7 @@ fun WelcomeScreenContent(
                         fontWeight = FontWeight.Bold,
                         style = MaterialTheme.typography.bodyLarge.copy(
                             brush = Brush.linearGradient(
-                                listOf(Color(0xFF80ACEC), Color(0xFF8583CC))
+                                listOf(Color(0xFF9DCEFF), Color(0xFFCC8FED))
                             )
                         )
                     )
@@ -87,7 +87,7 @@ fun WelcomeScreenContent(
             Button(
                 onClick = onGetStarted,
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF8583CC),
+                    containerColor = Color(0xFF061428),
                     contentColor   = Color.White,
                 ),
                 shape = RoundedCornerShape(50),

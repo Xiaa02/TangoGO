@@ -1,4 +1,4 @@
-package com.example.tangogo.ui.screens.lessonHiragana
+package com.example.tangogo.ui.screens.lessonKatakana
 
 import android.Manifest
 import android.content.Context
@@ -39,18 +39,17 @@ data class VocabCard(val word: String, val audioRes: Int, val imageRes: Int)
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
-fun HiraganaSpeakScreen(
+fun KatakanaSpeakScreen(
     navigateBack: () -> Unit,
-    //navigateToNext: () -> Unit,
     navigateToLessonComplete: () -> Unit
 ) {
     val context = LocalContext.current
     val isInPreview = LocalInspectionMode.current
 
     val vocabList = listOf(
-        VocabCard("こんにちは", R.raw.konnichiwa, R.drawable.konnichiwa_img),
-        VocabCard("ありがとう", R.raw.arigatou, R.drawable.arigatou_img),
-        VocabCard("おはよう", R.raw.ohayou, R.drawable.ohayougozaimasu_img)
+        VocabCard("カメラ", R.raw.kamera, R.drawable.camera_img),
+        VocabCard("イギリス", R.raw.uk, R.drawable.uk_img),
+        VocabCard("フランス", R.raw.france, R.drawable.france_img)
     )
 
     var currentIndex by remember { mutableIntStateOf(0) }
@@ -88,14 +87,12 @@ fun HiraganaSpeakScreen(
         }
     }
 
-
-
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                        Text("ひらがな", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
+                        Text("カタカナ", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
                     }
                 },
                 navigationIcon = {
@@ -154,7 +151,6 @@ fun HiraganaSpeakScreen(
                     )
 
                     Spacer(modifier = Modifier.height(20.dp))
-
                 }
 
                 Card(
@@ -188,7 +184,7 @@ fun HiraganaSpeakScreen(
 
                         Image(
                             painter = painterResource(id = currentCard.imageRes),
-                            contentDescription = "Word Image",
+                            contentDescription = "Image",
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .size(220.dp)
@@ -214,9 +210,7 @@ fun HiraganaSpeakScreen(
                                 }
                             },
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = if (isListening) Color(0xFFE6DEF7) else Color(
-                                    0xFF061428
-                                )
+                                containerColor = if (isListening) Color(0xFFE6DEF7) else Color(0xFF061428)
                             ),
                             shape = RoundedCornerShape(30.dp),
                             modifier = Modifier.fillMaxWidth().height(50.dp)
@@ -251,10 +245,10 @@ fun HiraganaSpeakScreen(
                 }
             }
         } else {
-            // Show nothing can show a final image/message later if needed)
-            }
+            // Show nothing or can show a final image/message later if needed)
         }
     }
+}
 
 fun startSpeechToText(
     context: Context,
@@ -299,10 +293,9 @@ fun startSpeechToText(
 
 @Preview(showBackground = true)
 @Composable
-fun HiraganaSpeakScreenPreview() {
-    HiraganaSpeakScreen(
+fun KatakanaSpeakScreenPreview() {
+    KatakanaSpeakScreen(
         navigateBack = {},
-        //navigateToNext = {},
         navigateToLessonComplete = {}
     )
 }

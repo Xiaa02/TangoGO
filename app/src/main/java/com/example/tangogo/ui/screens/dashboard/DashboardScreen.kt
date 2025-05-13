@@ -219,7 +219,7 @@ fun DashboardScreenContent(
                     width          = 140.dp,
                     height         = 180.dp,
                     backgroundColor = Color(0xFF9B1C1C),
-                    onClick         = openLessonHiragana //tobe change
+                    onClick         = openLessonKatakana
                 )
                 LessonCard(
                     titleKanji     = "こんにちは",

@@ -1,7 +1,5 @@
 package com.example.tangogo.ui.screens.lessonHiragana
 
-import android.content.Context
-import android.media.MediaPlayer
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,12 +22,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.tangogo.R
+import com.example.tangogo.ui.screens.lessonKatakana.playAudio
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HiraganaQ2Screen(
     navigateBack: () -> Unit,
-    navigateToDashboard: () -> Unit,
     navigateToNext: () -> Unit
 ) {
     val correctAnswer = listOf("よ", "る")
@@ -75,10 +73,10 @@ fun HiraganaQ2Screen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = { navigateToDashboard() }) {
+                    IconButton(onClick = { navigateToNext() }) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_logout),
-                            contentDescription = "Logout"
+                            painter = painterResource(id = R.drawable.ic_arrow_next),
+                            contentDescription = "Next"
                         )
                     }
                 }
@@ -94,7 +92,7 @@ fun HiraganaQ2Screen(
         ) {
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "Vocabulary",
+                text = "Quiz",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier
@@ -147,7 +145,7 @@ fun HiraganaQ2Screen(
                             modifier = Modifier
                                 .size(28.dp)
                                 .clickable {
-                                    playAudio2(context, R.raw.yoru)
+                                    playAudio(context, R.raw.yoru)
                                 }
                         )
                     }
@@ -199,6 +197,15 @@ fun HiraganaQ2Screen(
                                         if (contains(character)) remove(character)
                                         else add(character)
                                     }
+                                    playAudio(
+                                        context, when (character) {
+                                            "き" -> R.raw.ki
+                                            "よ" -> R.raw.yo
+                                            "る" -> R.raw.ru
+                                            "あ" -> R.raw.a
+                                            else -> R.raw.yoru
+                                        }
+                                    )
                                 },
                                 colors = ButtonDefaults.buttonColors(containerColor = color),
                                 shape = RoundedCornerShape(10.dp),
@@ -221,10 +228,10 @@ fun HiraganaQ2Screen(
                     val noWrong = selectedAnswers.all { correctAnswer.contains(it) }
 
                     if (allCorrect && noWrong) {
-                        playAudio2(context, R.raw.ding) // ✅ play sound immediately
+                        playAudio(context, R.raw.ding) // ✅ play sound immediately
                         showCorrectPopup = true
                     } else {
-                        playAudio2(context, R.raw.incorrect) // ❌ play sound immediately
+                        playAudio(context, R.raw.incorrect) // ❌ play sound immediately
                         showWrongPopup = true
                     }
                 },
@@ -257,9 +264,9 @@ fun HiraganaQ2Screen(
                 Spacer(Modifier.height(12.dp))
                 Text("Explanation:", fontSize = 16.sp)
                 Spacer(Modifier.height(4.dp))
-                Text("あさ - asa", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                Text("あ = a", color = Color.Gray, fontSize = 16.sp)
-                Text("さ = sa", color = Color.Gray, fontSize = 16.sp)
+                Text("よる - yoru", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("よ = yo", color = Color.Gray, fontSize = 16.sp)
+                Text("る = ru", color = Color.Gray, fontSize = 16.sp)
                 Spacer(Modifier.height(20.dp))
                 Button(
                     onClick = {
@@ -291,8 +298,8 @@ fun HiraganaQ2Screen(
                 Spacer(Modifier.height(12.dp))
                 Text("Correct Answer:", fontSize = 16.sp)
                 Spacer(Modifier.height(4.dp))
-                Text("あさ", fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                Text("asa", color = Color.Gray, fontSize = 16.sp)
+                Text("よる", fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                Text("yoru", color = Color.Gray, fontSize = 16.sp)
                 Spacer(Modifier.height(20.dp))
                 Button(
                     onClick = {
@@ -312,19 +319,12 @@ fun HiraganaQ2Screen(
     BackHandler(onBack = navigateBack)
 }
 
-fun playAudio2(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
-}
-
 @Preview(showBackground = true)
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun HiraganaQ2ScreenPreview() {
     HiraganaQ2Screen(
         navigateBack = {},
-        navigateToDashboard = {},
         navigateToNext = {}
     )
 }
