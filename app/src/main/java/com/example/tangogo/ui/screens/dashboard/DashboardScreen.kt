@@ -55,8 +55,10 @@ fun DashboardScreen(
         fullName = fullName,
         openLessonHiragana = { viewModel.openHiragana(openScreen) },
         openLessonKatakana = { viewModel.openKatakana(openScreen) },
+       // openLessonHello = { viewModel.openHello(openScreen) },
         openHiraganaChart = { viewModel.openHiraganaChart(openScreen) },
         openKatakanaChart = { viewModel.openKatakanaChart(openScreen)},
+        openKanjiChart = { viewModel.openKanjiChart(openScreen)},
         onLogoutClick = { viewModel.onLogoutClick(clearAndNavigate) }
     )
 }
@@ -66,11 +68,12 @@ fun DashboardScreenContent(
     fullName: String = "User",
     openLessonHiragana: () -> Unit,
     openLessonKatakana: () -> Unit,
+   // openLessonHello: () -> Unit,
     openHiraganaChart: () -> Unit,
     openKatakanaChart: () -> Unit,
+    openKanjiChart: () -> Unit,
     onLogoutClick: () -> Unit
 ) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -125,63 +128,71 @@ fun DashboardScreenContent(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Lesson Progress Card
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp, horizontal = 16.dp),
-            shape = RoundedCornerShape(20.dp),
-            elevation = CardDefaults.cardElevation(4.dp)
-        ) {
-            Column(modifier = Modifier.padding(20.dp)) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(text = "Lesson Progress", fontSize = 16.sp, color = Color.Black, fontWeight = FontWeight.Normal)
-                    Spacer(modifier = Modifier.width(12.dp))
+//        // Lesson Progress Card
+//        Card(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(vertical = 8.dp, horizontal = 16.dp),
+//            shape = RoundedCornerShape(20.dp),
+//            elevation = CardDefaults.cardElevation(4.dp)
+//        ) {
+//            Column(modifier = Modifier.padding(20.dp)) {
+//                Row(
+//                    verticalAlignment = Alignment.CenterVertically,
+//                    modifier = Modifier.fillMaxWidth()
+//                ) {
+//                    Text(text = "Lesson Progress", fontSize = 16.sp, color = Color.Black, fontWeight = FontWeight.Normal)
+//                    Spacer(modifier = Modifier.width(12.dp))
+//
+//                    LinearProgressIndicator(
+//                        progress = 0.16f,
+//                        modifier = Modifier
+//                            .weight(1f)
+//                            .height(16.dp),
+//                        color = MaterialTheme.colorScheme.primary,
+//                        trackColor = Color.LightGray
+//                    )
+//                }
+//
+//                Spacer(modifier = Modifier.height(20.dp))
+//
+//                Box(
+//                    modifier = Modifier
+//                        .align(Alignment.Start)
+//                        .clickable { /* Handle Continue click if needed */ }
+//                        .background(color = Color.White, shape = RoundedCornerShape(15.dp))
+//                        .padding(horizontal = 16.dp, vertical = 10.dp),
+//                    contentAlignment = Alignment.Center
+//                ) {
+//                    Row(verticalAlignment = Alignment.CenterVertically) {
+//                        Text(
+//                            text = "Continue",
+//                            fontSize = 14.sp,
+//                            color = Color.Black,
+//                            fontWeight = FontWeight.Bold
+//                        )
+//                        Spacer(modifier = Modifier.width(8.dp))
+//                        Icon(
+//                            painter = painterResource(id = R.drawable.right_arrow),
+//                            contentDescription = "Right Arrow",
+//                            modifier = Modifier.size(18.dp),
+//                            tint = Color.Black
+//                        )
+//                    }
+//                }
+//            }
+//        }
 
-                    LinearProgressIndicator(
-                        progress = 0.16f,
-                        modifier = Modifier
-                            .weight(1f)
-                            .height(16.dp),
-                        color = MaterialTheme.colorScheme.primary,
-                        trackColor = Color.LightGray
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Box(
-                    modifier = Modifier
-                        .align(Alignment.Start)
-                        .clickable { /* Handle Continue click if needed */ }
-                        .background(color = Color.White, shape = RoundedCornerShape(15.dp))
-                        .padding(horizontal = 16.dp, vertical = 10.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(
-                            text = "Continue",
-                            fontSize = 14.sp,
-                            color = Color.Black,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Icon(
-                            painter = painterResource(id = R.drawable.right_arrow),
-                            contentDescription = "Right Arrow",
-                            modifier = Modifier.size(18.dp),
-                            tint = Color.Black
-                        )
-                    }
-                }
-            }
-        }
+        // Vocabulary Word Section
+        VocabularyWordCard(
+            wordKanji = "食べ物",
+            wordKana = "たべもの",
+            meaning = "Food"
+        )
 
         // Lessons Section
         Spacer(modifier = Modifier.height(24.dp))
+
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(
                 modifier = Modifier
@@ -255,18 +266,18 @@ fun DashboardScreenContent(
                 )
                 LessonCard(
                     titleKanji     = "いえ",
-                    subtitle       = "House",
+                    subtitle       = "Home",
                     width          = 140.dp,
                     height         = 180.dp,
-                    backgroundColor = Color(0xFFB7520F),
+                    backgroundColor = Color(0xFFFF9800),
                     onClick         = openLessonHiragana //tobe change
                 )
                 LessonCard(
                     titleKanji     = "せいかつ",
-                    subtitle       = "Lifestyle",
+                    subtitle       = "Daily Life",
                     width          = 140.dp,
                     height         = 180.dp,
-                    backgroundColor = Color(0xFF852E68),
+                    backgroundColor = Color(0xFFA83760),
                     onClick         = openLessonHiragana //tobe change
                 )
                 // Additional LessonCard items if needed
@@ -317,8 +328,8 @@ fun DashboardScreenContent(
                     titleKanji     = "かんじ",
                     subtitle       = "Kanji",
                     size           = 140.dp,
-                    backgroundColor = Color(0xFFC8F7C5)
-                    //onClick         = openKanjiChart
+                    backgroundColor = Color(0xFFC8F7C5),
+                    onClick         = openKanjiChart
                 )
             }
 
@@ -400,6 +411,56 @@ fun MemoryHintCard(
     }
 }
 
+@Composable
+fun VocabularyWordCard(
+    wordKanji: String,
+    wordKana: String,
+    meaning: String,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 16.dp),
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(4.dp)
+    ) {
+        Column(modifier = Modifier.padding(20.dp)) {
+            Text(
+                text = "Word of the Day",
+                fontSize = 16.sp,
+                color = Color.Black,
+                fontWeight = FontWeight.Normal
+            )
+            Spacer(modifier = Modifier.height(12.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(
+                    text = wordKanji,
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF9B1C1C)
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                Column {
+                    Text(
+                        text = wordKana,
+                        fontSize = 16.sp,
+                        color = Color(0xFF666666)
+                    )
+                    Text(
+                        text = meaning,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
+                        color = Color.Black
+                    )
+                }
+            }
+        }
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
@@ -411,6 +472,7 @@ fun TangoGOPreview() {
             openLessonKatakana = { },
             openHiraganaChart = { },
             openKatakanaChart = { },
+            openKanjiChart = { },
             onLogoutClick = { }
         )
     }

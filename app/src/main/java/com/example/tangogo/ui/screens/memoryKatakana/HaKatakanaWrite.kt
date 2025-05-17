@@ -36,6 +36,8 @@ fun HaKatakanaWriteScreen(
     onStrokeClick: () -> Unit = {},
     onWriteClick: () -> Unit = {}
 ) {
+    val backgroundColor = Color(0xFFFFF59D)
+
     val context = LocalContext.current
     val paths = remember { mutableStateListOf<Path>() }
     var currentPath by remember { mutableStateOf(Path()) }
@@ -49,29 +51,47 @@ fun HaKatakanaWriteScreen(
         topBar = {
             TopAppBar(
                 title = {
-                    Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                        Text("Memory Hints", style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold))
+                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                        Text(
+                            text = "Memory Hints",
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                        )
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFFFF59D)),
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = backgroundColor,
+                    titleContentColor = Color.Black
+                ),
                 navigationIcon = {
-                    IconButton(onClick = navigateToKatakanaChart) {
-                        Icon(painterResource(id = R.drawable.ic_arrow_back), contentDescription = "Chart")
+                    IconButton(onClick = { navigateToKatakanaChart() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_arrow_back),
+                            contentDescription = "Chart"
+                        )
                     }
                 },
                 actions = {
-                    IconButton(onClick = navigateToDashboard) {
-                        Icon(painterResource(id = R.drawable.ic_logout), contentDescription = "Home")
+                    IconButton(onClick = { navigateToDashboard() }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_logout),
+                            contentDescription = "Home"
+                        )
                     }
                 }
             )
         },
-        containerColor = Color(0xFFFFF59D)
+        containerColor = backgroundColor
     ) { padding ->
         Column(
-            Modifier.fillMaxSize().background(Color(0xFFFFF59D)).padding(padding).padding(horizontal = 16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier
+                .fillMaxSize()
+                .background(backgroundColor)
+                .padding(padding)
+                .padding(horizontal = 5.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            Spacer(modifier = Modifier.height(16.dp))
+
             Column(
                 modifier = Modifier
                     .width(300.dp)
@@ -85,7 +105,7 @@ fun HaKatakanaWriteScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "ハ – ha",
+                text = "ハ - ha",
                 fontSize = 25.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(vertical = 20.dp)

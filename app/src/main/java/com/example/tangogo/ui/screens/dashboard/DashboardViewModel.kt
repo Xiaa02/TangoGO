@@ -29,6 +29,9 @@ class DashboardViewModel @Inject constructor(
         openScreen(Routes.KATAKANA_CHART)
     }
 
+    fun openKanjiChart(openScreen: (String) -> Unit) {
+        openScreen(Routes.KANJI_CHART)
+    }
 
     fun onLogoutClick(clearAndNavigate: (String) -> Unit) {
         launchCatching {

@@ -29,7 +29,6 @@ import com.example.tangogo.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HiraganaChartScreen(
-    navigateBack: () -> Unit,
     navigateToDashboard: () -> Unit,
     onCharClick: (String) -> Unit
 ) {
@@ -62,7 +61,7 @@ fun HiraganaChartScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = navigateBack) {
+                    IconButton(onClick = navigateToDashboard) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_back),
                             contentDescription = "Back"
@@ -72,8 +71,8 @@ fun HiraganaChartScreen(
                 actions = {
                     IconButton(onClick = navigateToDashboard) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_logout),
-                            contentDescription = "Logout"
+                            painter = painterResource(id = R.drawable.ic_home),
+                            contentDescription = "Dashboard"
                         )
                     }
                 }
@@ -217,7 +216,7 @@ fun HiraganaChartScreen(
         }
     }
 
-    BackHandler(onBack = navigateBack)
+    BackHandler(onBack = navigateToDashboard)
 }
 
 private fun getVowelColor(vowel: String): Color = when (vowel) {
@@ -233,8 +232,7 @@ private fun getVowelColor(vowel: String): Color = when (vowel) {
 @Composable
 fun HiraganaChartScreenPreview() {
     HiraganaChartScreen(
-        navigateBack = {},
         navigateToDashboard = {},
-        onCharClick = { /* handle navigation for character */ }
+        onCharClick = { /* handle navigation for character */ },
     )
 }

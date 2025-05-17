@@ -39,6 +39,13 @@ import com.example.tangogo.ui.screens.lessonKatakana.KatakanaL2Screen
 import com.example.tangogo.ui.screens.lessonKatakana.KatakanaQ1Screen
 import com.example.tangogo.ui.screens.lessonKatakana.KatakanaQ2Screen
 import com.example.tangogo.ui.screens.lessonKatakana.KatakanaSpeakScreen
+import com.example.tangogo.ui.screens.lessonHello.HelloL1Screen
+import com.example.tangogo.ui.screens.lessonHello.HelloL2Screen
+import com.example.tangogo.ui.screens.lessonHello.HelloL3Screen
+import com.example.tangogo.ui.screens.lessonHello.HelloL4Screen
+import com.example.tangogo.ui.screens.lessonHello.HelloL5Screen
+import com.example.tangogo.ui.screens.lessonHello.HelloQ1Screen
+import com.example.tangogo.ui.screens.lessonHello.HelloQ2Screen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaMemoryScreen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaMnemonicScreen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaStrokeScreen
@@ -409,6 +416,67 @@ import com.example.tangogo.ui.screens.memoryKatakana.YuKatakanaMemoryScreen
 import com.example.tangogo.ui.screens.memoryKatakana.YuKatakanaMnemonicScreen
 import com.example.tangogo.ui.screens.memoryKatakana.YuKatakanaStrokeScreen
 import com.example.tangogo.ui.screens.memoryKatakana.YuKatakanaWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.KanjiChartScreen
+import com.example.tangogo.ui.screens.memoryKanji.SakanaKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.SakanaKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.SakanaKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.SakanaKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.NikuKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.NikuKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.NikuKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.NikuKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.MizuKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.MizuKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.MizuKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.MizuKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.TabemasuKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.TabemasuKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.TabemasuKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.TabemasuKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.OokiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.OokiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.OokiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.OokiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.ChiisaiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.ChiisaiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.ChiisaiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.ChiisaiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.IchijiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.IchijiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.IchijiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.IchijiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.IchijihanKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.IchijihanKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.IchijihanKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.IchijihanKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.GetsuyoubiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.GetsuyoubiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.GetsuyoubiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.GetsuyoubiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.KayoubiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.KayoubiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.KayoubiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.KayoubiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.SuiyoubiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.SuiyoubiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.SuiyoubiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.SuiyoubiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.MokuyoubiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.MokuyoubiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.MokuyoubiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.MokuyoubiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.KinyoubiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.KinyoubiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.KinyoubiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.KinyoubiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.DoyoubiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.DoyoubiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.DoyoubiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.DoyoubiKanjiWriteScreen
+import com.example.tangogo.ui.screens.memoryKanji.NichiyoubiKanjiMemoryScreen
+import com.example.tangogo.ui.screens.memoryKanji.NichiyoubiKanjiMnemonicScreen
+import com.example.tangogo.ui.screens.memoryKanji.NichiyoubiKanjiStrokeScreen
+import com.example.tangogo.ui.screens.memoryKanji.NichiyoubiKanjiWriteScreen
 import com.example.tangogo.ui.screens.register.RegisterScreen
 import com.example.tangogo.ui.screens.welcome.WelcomeScreen
 import com.example.tangogo.ui.theme.TangoGOTheme
@@ -532,6 +600,7 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_HIRAGANASPEAK) {
         HiraganaSpeakScreen(
             navigateBack = { appState.navController.popBackStack() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
             navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
         )
     }
@@ -580,13 +649,65 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_KATAKANASPEAK) {
         KatakanaSpeakScreen(
             navigateBack = { appState.navController.popBackStack() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
             navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
         )
     }
 
+    composable(Routes.LESSON_HELLOL1) {
+        HelloL1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HELLOL2) }
+        )
+    }
+
+    composable(Routes.LESSON_HELLOL2) {
+        HelloL2Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HELLOL3) }
+        )
+    }
+
+    composable(Routes.LESSON_HELLOL3) {
+        HelloL3Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HELLOL4) }
+        )
+    }
+
+    composable(Routes.LESSON_HELLOL4) {
+        HelloL4Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HELLOL5) }
+        )
+    }
+
+
+    composable(Routes.LESSON_HELLOL5) {
+        HelloL5Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HELLOQ1) }
+        )
+    }
+
+    composable(Routes.LESSON_HELLOQ1) {
+        HelloQ1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HELLOQ2) }
+        )
+    }
+
+    composable(Routes.LESSON_HELLOQ2) {
+        HelloQ2Screen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
+        )
+    }
+
+
     composable(Routes.HIRAGANA_CHART) {
         HiraganaChartScreen(
-            navigateBack        = { appState.popUp() },
             navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
             onCharClick         = { char ->
                 when (char) {
@@ -643,7 +764,6 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
 
     composable(Routes.KATAKANA_CHART) {
         KatakanaChartScreen(
-            navigateBack = { appState.popUp() },
             navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
             onCharClick = { char ->
                 when (char) {
@@ -698,6 +818,35 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
         )
     }
 
+    composable(Routes.KANJI_CHART) {
+        KanjiChartScreen(
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            onCharClick = { char ->
+                when (char) {
+                    // Food
+                    "魚" -> appState.navController.navigate(Routes.SAKANA_KANJI_MEMORY)
+                    "肉" -> appState.navController.navigate(Routes.NIKU_KANJI_MEMORY)
+                    "水" -> appState.navController.navigate(Routes.MIZU_KANJI_MEMORY)
+                    "食" -> appState.navController.navigate(Routes.TABEMASU_KANJI_MEMORY)
+
+                    // Home
+                    "大" -> appState.navController.navigate(Routes.OOKI_KANJI_MEMORY)
+                    "小" -> appState.navController.navigate(Routes.CHIISAI_KANJI_MEMORY)
+
+                    // Life
+                    "時" -> appState.navController.navigate(Routes.ICHIJI_KANJI_MEMORY)
+                    "半" -> appState.navController.navigate(Routes.ICHIJIHAN_KANJI_MEMORY)
+                    "月" -> appState.navController.navigate(Routes.GETSUYOUBI_KANJI_MEMORY)
+                    "火" -> appState.navController.navigate(Routes.KAYOUBI_KANJI_MEMORY)
+                    "水" -> appState.navController.navigate(Routes.SUIYOUBI_KANJI_MEMORY) //same char but diff meaning
+                    "木" -> appState.navController.navigate(Routes.MOKUYOUBI_KANJI_MEMORY)
+                    "金" -> appState.navController.navigate(Routes.KINYOUBI_KANJI_MEMORY)
+                    "土" -> appState.navController.navigate(Routes.DOYOUBI_KANJI_MEMORY)
+                    "日" -> appState.navController.navigate(Routes.NICHIYOUBI_KANJI_MEMORY)
+                }
+            }
+        )
+    }
 
     composable(Routes.A_HIRAGANA_MEMORY) {
         AHiraganaMemoryScreen(
@@ -4748,6 +4897,667 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
             onMnemonicClick = { appState.navController.navigate(Routes.N_KATAKANA_MNEMONIC) },
             onStrokeClick = { appState.navController.navigate(Routes.N_KATAKANA_STROKE) },
             onWriteClick = { appState.navController.navigate(Routes.N_KATAKANA_WRITE) }
+        )
+    }
+
+    //Kanji
+    composable(Routes.SAKANA_KANJI_MEMORY) {
+        SakanaKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.SAKANA_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.SAKANA_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.SAKANA_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.SAKANA_KANJI_MNEMONIC) {
+        SakanaKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.SAKANA_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.SAKANA_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.SAKANA_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.SAKANA_KANJI_STROKE) {
+        SakanaKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.SAKANA_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.SAKANA_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.SAKANA_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.SAKANA_KANJI_WRITE) {
+        SakanaKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.SAKANA_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.SAKANA_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.SAKANA_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.NIKU_KANJI_MEMORY) {
+        NikuKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.NIKU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.NIKU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.NIKU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.NIKU_KANJI_MNEMONIC) {
+        NikuKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.NIKU_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.NIKU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.NIKU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.NIKU_KANJI_STROKE) {
+        NikuKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.NIKU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.NIKU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.NIKU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.NIKU_KANJI_WRITE) {
+        NikuKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.NIKU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.NIKU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.NIKU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.MIZU_KANJI_MEMORY) {
+        MizuKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.MIZU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.MIZU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.MIZU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.MIZU_KANJI_MNEMONIC) {
+        MizuKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.MIZU_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.MIZU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.MIZU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.MIZU_KANJI_STROKE) {
+        MizuKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.MIZU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.MIZU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.MIZU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.MIZU_KANJI_WRITE) {
+        MizuKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.MIZU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.MIZU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.MIZU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.TABEMASU_KANJI_MEMORY) {
+        TabemasuKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.TABEMASU_KANJI_MNEMONIC) {
+        TabemasuKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.TABEMASU_KANJI_STROKE) {
+        TabemasuKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.TABEMASU_KANJI_WRITE) {
+        TabemasuKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.TABEMASU_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.OOKI_KANJI_MEMORY) {
+        OokiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.OOKI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.OOKI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.OOKI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.OOKI_KANJI_MNEMONIC) {
+        OokiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.OOKI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.OOKI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.OOKI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.OOKI_KANJI_STROKE) {
+        OokiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.OOKI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.OOKI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.OOKI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.OOKI_KANJI_WRITE) {
+        OokiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.OOKI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.OOKI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.OOKI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.CHIISAI_KANJI_MEMORY) {
+        ChiisaiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.CHIISAI_KANJI_MNEMONIC) {
+        ChiisaiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.CHIISAI_KANJI_STROKE) {
+        ChiisaiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.CHIISAI_KANJI_WRITE) {
+        ChiisaiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.CHIISAI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.ICHIJI_KANJI_MEMORY) {
+        IchijiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.ICHIJI_KANJI_MNEMONIC) {
+        IchijiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.ICHIJI_KANJI_STROKE) {
+        IchijiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.ICHIJI_KANJI_WRITE) {
+        IchijiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.ICHIJI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.ICHIJIHAN_KANJI_MEMORY) {
+        IchijihanKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.ICHIJIHAN_KANJI_MNEMONIC) {
+        IchijihanKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.ICHIJIHAN_KANJI_STROKE) {
+        IchijihanKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.ICHIJIHAN_KANJI_WRITE) {
+        IchijihanKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.ICHIJIHAN_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.GETSUYOUBI_KANJI_MEMORY) {
+        GetsuyoubiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.GETSUYOUBI_KANJI_MNEMONIC) {
+        GetsuyoubiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.GETSUYOUBI_KANJI_STROKE) {
+        GetsuyoubiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.GETSUYOUBI_KANJI_WRITE) {
+        GetsuyoubiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.GETSUYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.KAYOUBI_KANJI_MEMORY) {
+        KayoubiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.KAYOUBI_KANJI_MNEMONIC) {
+        KayoubiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.KAYOUBI_KANJI_STROKE) {
+        KayoubiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.KAYOUBI_KANJI_WRITE) {
+        KayoubiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.KAYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.SUIYOUBI_KANJI_MEMORY) {
+        SuiyoubiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.SUIYOUBI_KANJI_MNEMONIC) {
+        SuiyoubiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.SUIYOUBI_KANJI_STROKE) {
+        SuiyoubiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.SUIYOUBI_KANJI_WRITE) {
+        SuiyoubiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.SUIYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.MOKUYOUBI_KANJI_MEMORY) {
+        MokuyoubiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.MOKUYOUBI_KANJI_MNEMONIC) {
+        MokuyoubiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.MOKUYOUBI_KANJI_STROKE) {
+        MokuyoubiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.MOKUYOUBI_KANJI_WRITE) {
+        MokuyoubiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.MOKUYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.KINYOUBI_KANJI_MEMORY) {
+        KinyoubiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.KINYOUBI_KANJI_MNEMONIC) {
+        KinyoubiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.KINYOUBI_KANJI_STROKE) {
+        KinyoubiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.KINYOUBI_KANJI_WRITE) {
+        KinyoubiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.KINYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.DOYOUBI_KANJI_MEMORY) {
+        DoyoubiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.DOYOUBI_KANJI_MNEMONIC) {
+        DoyoubiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.DOYOUBI_KANJI_STROKE) {
+        DoyoubiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.DOYOUBI_KANJI_WRITE) {
+        DoyoubiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.DOYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.NICHIYOUBI_KANJI_MEMORY) {
+        NichiyoubiKanjiMemoryScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.navigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.NICHIYOUBI_KANJI_MNEMONIC) {
+        NichiyoubiKanjiMnemonicScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_MEMORY) },
+            onStrokeClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.NICHIYOUBI_KANJI_STROKE) {
+        NichiyoubiKanjiStrokeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_WRITE) }
+        )
+    }
+
+    composable(Routes.NICHIYOUBI_KANJI_WRITE) {
+        NichiyoubiKanjiWriteScreen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToKanjiChart = { appState.navigate(Routes.KANJI_CHART) },
+            onMnemonicClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_MNEMONIC) },
+            onStrokeClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_STROKE) },
+            onWriteClick = { appState.navController.navigate(Routes.NICHIYOUBI_KANJI_WRITE) }
         )
     }
 

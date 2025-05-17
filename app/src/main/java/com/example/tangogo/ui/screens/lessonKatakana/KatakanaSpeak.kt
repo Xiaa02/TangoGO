@@ -41,6 +41,7 @@ data class VocabCard(val word: String, val audioRes: Int, val imageRes: Int)
 @Composable
 fun KatakanaSpeakScreen(
     navigateBack: () -> Unit,
+    navigateToDashboard: () -> Unit,
     navigateToLessonComplete: () -> Unit
 ) {
     val context = LocalContext.current
@@ -96,8 +97,23 @@ fun KatakanaSpeakScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(painterResource(id = R.drawable.ic_arrow_back), contentDescription = "Back")
+                    IconButton(onClick = {
+                        navigateBack()
+                    }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_arrow_back),
+                            contentDescription = "Back",
+                            tint = Color(0xFF3F3F3F)
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = navigateToDashboard) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_home),
+                            contentDescription = "Dashboard",
+                            tint = Color(0xFF3F3F3F)
+                        )
                     }
                 }
             )
@@ -296,6 +312,7 @@ fun startSpeechToText(
 fun KatakanaSpeakScreenPreview() {
     KatakanaSpeakScreen(
         navigateBack = {},
+        navigateToDashboard = {},
         navigateToLessonComplete = {}
     )
 }

@@ -23,6 +23,14 @@ object Routes {
     const val LESSON_KATAKANAQ2 = "katakanaQ2"
     const val LESSON_KATAKANASPEAK = "katakanaSpeak"
 
+    const val LESSON_HELLOL1 = "helloL1"
+    const val LESSON_HELLOL2 = "helloL2"
+    const val LESSON_HELLOL3 = "helloL3"
+    const val LESSON_HELLOL4 = "helloL4"
+    const val LESSON_HELLOL5 = "helloL5"
+    const val LESSON_HELLOQ1 = "helloQ1"
+    const val LESSON_HELLOQ2 = "helloQ2"
+
 
     //Hiragana
     const val HIRAGANA_CHART = "hiragana_chart"
@@ -489,4 +497,81 @@ object Routes {
     const val N_KATAKANA_MNEMONIC = "n_katakana_mnemonic"
     const val N_KATAKANA_STROKE = "n_katakana_draw"
     const val N_KATAKANA_WRITE = "n_katakana_write"
+
+    //Kanji
+    const val KANJI_CHART = "kanji_chart"
+    const val SAKANA_KANJI_MEMORY = "sakana_kanji_memory"
+    const val SAKANA_KANJI_MNEMONIC = "sakana_kanji_mnemonic"
+    const val SAKANA_KANJI_STROKE = "sakana_kanji_draw"
+    const val SAKANA_KANJI_WRITE = "sakana_kanji_write"
+
+    const val NIKU_KANJI_MEMORY = "niku_kanji_memory"
+    const val NIKU_KANJI_MNEMONIC = "niku_kanji_mnemonic"
+    const val NIKU_KANJI_STROKE = "niku_kanji_draw"
+    const val NIKU_KANJI_WRITE = "niku_kanji_write"
+
+    const val OOKI_KANJI_MEMORY = "ooki_kanji_memory"
+    const val OOKI_KANJI_MNEMONIC = "ooki_kanji_mnemonic"
+    const val OOKI_KANJI_STROKE = "ooki_kanji_draw"
+    const val OOKI_KANJI_WRITE = "ooki_kanji_write"
+
+    const val CHIISAI_KANJI_MEMORY = "chiisai_kanji_memory"
+    const val CHIISAI_KANJI_MNEMONIC = "chiisai_kanji_mnemonic"
+    const val CHIISAI_KANJI_STROKE = "chiisai_kanji_draw"
+    const val CHIISAI_KANJI_WRITE = "chiisai_kanji_write"
+
+    const val TABEMASU_KANJI_MEMORY = "tabemasu_kanji_memory"
+    const val TABEMASU_KANJI_MNEMONIC = "tabemasu_kanji_mnemonic"
+    const val TABEMASU_KANJI_STROKE = "tabemasu_kanji_draw"
+    const val TABEMASU_KANJI_WRITE = "tabemasu_kanji_write"
+
+    const val MIZU_KANJI_MEMORY = "mizu_kanji_memory"
+    const val MIZU_KANJI_MNEMONIC = "mizu_kanji_mnemonic"
+    const val MIZU_KANJI_STROKE = "mizu_kanji_draw"
+    const val MIZU_KANJI_WRITE = "mizu_kanji_write"
+
+    const val ICHIJI_KANJI_MEMORY = "ichiji_kanji_memory"
+    const val ICHIJI_KANJI_MNEMONIC = "ichiji_kanji_mnemonic"
+    const val ICHIJI_KANJI_STROKE = "ichiji_kanji_draw"
+    const val ICHIJI_KANJI_WRITE = "ichiji_kanji_write"
+
+    const val ICHIJIHAN_KANJI_MEMORY = "ichijihan_kanji_memory"
+    const val ICHIJIHAN_KANJI_MNEMONIC = "ichijihan_kanji_mnemonic"
+    const val ICHIJIHAN_KANJI_STROKE = "ichijihan_kanji_draw"
+    const val ICHIJIHAN_KANJI_WRITE = "ichijihan_kanji_write"
+
+    const val GETSUYOUBI_KANJI_MEMORY = "getsuyoubi_kanji_memory"
+    const val GETSUYOUBI_KANJI_MNEMONIC = "getsuyoubi_kanji_mnemonic"
+    const val GETSUYOUBI_KANJI_STROKE = "getsuyoubi_kanji_draw"
+    const val GETSUYOUBI_KANJI_WRITE = "getsuyoubi_kanji_write"
+
+    const val DOYOUBI_KANJI_MEMORY = "doyoubi_kanji_memory"
+    const val DOYOUBI_KANJI_MNEMONIC = "doyoubi_kanji_mnemonic"
+    const val DOYOUBI_KANJI_STROKE = "doyoubi_kanji_draw"
+    const val DOYOUBI_KANJI_WRITE = "doyoubi_kanji_write"
+
+    const val KAYOUBI_KANJI_MEMORY = "kayoubi_kanji_memory"
+    const val KAYOUBI_KANJI_MNEMONIC = "kayoubi_kanji_mnemonic"
+    const val KAYOUBI_KANJI_STROKE = "kayoubi_kanji_draw"
+    const val KAYOUBI_KANJI_WRITE = "kayoubi_kanji_write"
+
+    const val KINYOUBI_KANJI_MEMORY = "kinyoubi_kanji_memory"
+    const val KINYOUBI_KANJI_MNEMONIC = "kinyoubi_kanji_mnemonic"
+    const val KINYOUBI_KANJI_STROKE = "kinyoubi_kanji_draw"
+    const val KINYOUBI_KANJI_WRITE = "kinyoubi_kanji_write"
+
+    const val MOKUYOUBI_KANJI_MEMORY = "mokuyoubi_kanji_memory"
+    const val MOKUYOUBI_KANJI_MNEMONIC = "mokuyoubi_kanji_mnemonic"
+    const val MOKUYOUBI_KANJI_STROKE = "mokuyoubi_kanji_draw"
+    const val MOKUYOUBI_KANJI_WRITE = "mokuyoubi_kanji_write"
+
+    const val NICHIYOUBI_KANJI_MEMORY = "nichiyoubi_kanji_memory"
+    const val NICHIYOUBI_KANJI_MNEMONIC = "nichiyoubi_kanji_mnemonic"
+    const val NICHIYOUBI_KANJI_STROKE = "nichiyoubi_kanji_draw"
+    const val NICHIYOUBI_KANJI_WRITE = "nichiyoubi_kanji_write"
+
+    const val SUIYOUBI_KANJI_MEMORY = "suiyoubi_kanji_memory"
+    const val SUIYOUBI_KANJI_MNEMONIC = "suiyoubi_kanji_mnemonic"
+    const val SUIYOUBI_KANJI_STROKE = "suiyoubi_kanji_draw"
+    const val SUIYOUBI_KANJI_WRITE = "suiyoubi_kanji_write"
 }

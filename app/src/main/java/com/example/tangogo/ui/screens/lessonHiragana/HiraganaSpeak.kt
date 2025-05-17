@@ -42,6 +42,7 @@ data class VocabCard(val word: String, val audioRes: Int, val imageRes: Int)
 fun HiraganaSpeakScreen(
     navigateBack: () -> Unit,
     //navigateToNext: () -> Unit,
+    navigateToDashboard: () -> Unit,
     navigateToLessonComplete: () -> Unit
 ) {
     val context = LocalContext.current
@@ -99,8 +100,23 @@ fun HiraganaSpeakScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = navigateBack) {
-                        Icon(painterResource(id = R.drawable.ic_arrow_back), contentDescription = "Back")
+                    IconButton(onClick = {
+                        navigateBack()
+                    }) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_arrow_back),
+                            contentDescription = "Back",
+                            tint = Color(0xFF3F3F3F)
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = navigateToDashboard) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_home),
+                            contentDescription = "Dashboard",
+                            tint = Color(0xFF3F3F3F)
+                        )
                     }
                 }
             )
@@ -130,8 +146,6 @@ fun HiraganaSpeakScreen(
                             .padding(start = 20.dp, top = 8.dp, bottom = 8.dp),
                         textAlign = TextAlign.Start
                     )
-
-                    Spacer(modifier = Modifier.height(20.dp))
 
                     Text(
                         text = "きいて はなして",
@@ -303,6 +317,7 @@ fun HiraganaSpeakScreenPreview() {
     HiraganaSpeakScreen(
         navigateBack = {},
         //navigateToNext = {},
+        navigateToDashboard = {},
         navigateToLessonComplete = {}
     )
 }
