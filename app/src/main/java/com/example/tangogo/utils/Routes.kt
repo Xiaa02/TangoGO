@@ -7,6 +7,7 @@ object Routes {
     const val DASHBOARD = "dashboard"
     const val LESSON_COMPLETE = "lesson_complete"
 
+    const val LESSON_HIRAGANAWELCOME = "hiraganaWelcome"
     const val LESSON_HIRAGANA101 = "hiragana101"
     const val HIRAGANA_TABLE = "hiraganatable"
     const val LESSON_HIRAGANAL1 = "hiraganaL1"
@@ -15,6 +16,7 @@ object Routes {
     const val LESSON_HIRAGANAQ2 = "hiraganaQ2"
     const val LESSON_HIRAGANASPEAK = "hiraganaSpeak"
 
+    const val LESSON_KATAKANAWELCOME = "katakanaWelcome"
     const val LESSON_KATAKANA101 = "katakana101"
     const val KATAKANA_TABLE = "katakanatable"
     const val LESSON_KATAKANAL1 = "katakanaL1"
@@ -23,6 +25,7 @@ object Routes {
     const val LESSON_KATAKANAQ2 = "katakanaQ2"
     const val LESSON_KATAKANASPEAK = "katakanaSpeak"
 
+    const val LESSON_HELLOWELCOME = "helloWelcome"
     const val LESSON_HELLOL1 = "helloL1"
     const val LESSON_HELLOL2 = "helloL2"
     const val LESSON_HELLOL3 = "helloL3"
@@ -30,6 +33,17 @@ object Routes {
     const val LESSON_HELLOL5 = "helloL5"
     const val LESSON_HELLOQ1 = "helloQ1"
     const val LESSON_HELLOQ2 = "helloQ2"
+
+    const val LESSON_FAMILYWELCOME = "familyWelcome"
+    const val LESSON_FAMILYL1 = "familyL1"
+    const val LESSON_FAMILYL2 = "familyL2"
+    const val LESSON_FAMILYL3 = "familyL3"
+    const val LESSON_FAMILYL4 = "familyL4"
+
+    const val LESSON_FOODWELCOME = "foodWelcome"
+    const val LESSON_FOODL1 = "foodL1"
+    const val LESSON_FOODL2 = "foodL2"
+    const val LESSON_FOODL3 = "foodL3"
 
 
     //Hiragana

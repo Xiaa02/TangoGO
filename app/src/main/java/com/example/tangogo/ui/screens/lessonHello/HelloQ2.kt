@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.tangogo.ui.screens.lessonHello
 
 import android.media.MediaPlayer
@@ -14,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +31,43 @@ fun HelloQ2Screen(
     navigateToDashboard: () -> Unit,
     navigateToLessonComplete: () -> Unit
 ) {
+    val context = LocalContext.current
+
+    // MediaPlayer for question audios
+    var questionMediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    // MediaPlayer for feedback sounds (ding / error)
+    var feedbackMediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
+    // Function to play question audio, ensuring only one at a time
+    val playQuestionAudio: (Int) -> Unit = { resId ->
+        questionMediaPlayer?.let {
+            if (it.isPlaying) it.stop()
+            it.release()
+        }
+        questionMediaPlayer = MediaPlayer.create(context, resId).apply {
+            setOnCompletionListener {
+                it.release()
+                questionMediaPlayer = null
+            }
+            start()
+        }
+    }
+
+    // Function to play feedback sound, ensuring only one at a time
+    val playFeedbackSound: (Boolean) -> Unit = { correct ->
+        feedbackMediaPlayer?.let {
+            if (it.isPlaying) it.stop()
+            it.release()
+        }
+        val soundRes = if (correct) R.raw.ding else R.raw.error
+        feedbackMediaPlayer = MediaPlayer.create(context, soundRes).apply {
+            setOnCompletionListener {
+                it.release()
+                feedbackMediaPlayer = null
+            }
+            start()
+        }
+    }
 
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
@@ -40,7 +78,10 @@ fun HelloQ2Screen(
                     titleContentColor = Color(0xFF3F3F3F)
                 ),
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    Box(
+                        modifier = Modifier.fillMaxWidth(),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Text(
                             text = "こんにちは",
                             style = MaterialTheme.typography.titleMedium.copy(
@@ -50,9 +91,7 @@ fun HelloQ2Screen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        navigateBack()
-                    }) {
+                    IconButton(onClick = navigateBack) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_back),
                             contentDescription = "Back",
@@ -87,18 +126,34 @@ fun HelloQ2Screen(
                     .padding(bottom = 8.dp, start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text("Quiz", fontSize = 20.sp, fontWeight = FontWeight.Normal, color = Color.Black)
+                Text(
+                    "Quiz",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.Black
+                )
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Text("（　）に　ひらがな（は・も）を　かきましょう。", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
-                Text("Write hiragana (wa or mo) in the blanks.", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
-
+                Text(
+                    "____に　ひらがな（は・も）を　かきましょう。",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.Black,
+                    textAlign = TextAlign.Justify
+                )
+                Text(
+                    "Write hiragana (wa or mo) in the blanks.",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.DarkGray,
+                    textAlign = TextAlign.Justify
+                )
             }
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            HelloQ2Card(
+            ListenSelectCard(
                 question = "1\n" +
                         "さとう：ヤンさんは　エンジニアですか。\n" +
                         "ヤン：いいえ。わたし____エンジニアじゃないです。\n" +
@@ -108,10 +163,12 @@ fun HelloQ2Screen(
                         "Satoo: Soo desu ka.",
                 options = listOf("は", "も"),
                 correctAnswer = "は",
-                soundResId = R.raw.kaiwa029_1
+                soundResId = R.raw.kaiwa029_1,
+                playAudio = playQuestionAudio,
+                playFeedbackSound = playFeedbackSound
             )
 
-            HelloQ2Card(
+            ListenSelectCard(
                 question = "2\n" +
                         "きむら：おしごとは　なんですか。\n" +
                         "やぎ：わたしは こうむいんです。\n" +
@@ -121,10 +178,12 @@ fun HelloQ2Screen(
                         "Kimura: Soo desu ka. Watashi____koomuin desu.",
                 options = listOf("は", "も"),
                 correctAnswer = "も",
-                soundResId = R.raw.kaiwa029_2
+                soundResId = R.raw.kaiwa029_2,
+                playAudio = playQuestionAudio,
+                playFeedbackSound = playFeedbackSound
             )
 
-            HelloQ2Card(
+            ListenSelectCard(
                 question = "3\n" +
                         "カーラ：やぎさんは フランスごが　できますか。\n" +
                         "やぎ：はい、すこし　できます。\n" +
@@ -136,10 +195,12 @@ fun HelloQ2Screen(
                         "Kaara: Soo desu ka. Sugoi desu ne.",
                 options = listOf("は", "も"),
                 correctAnswer = "も",
-                soundResId = R.raw.kaiwa029_3
+                soundResId = R.raw.kaiwa029_3,
+                playAudio = playQuestionAudio,
+                playFeedbackSound = playFeedbackSound
             )
 
-            HelloQ2Card(
+            ListenSelectCard(
                 question = "4\n" +
                         "やぎ：キムさんは なにごが　できますか。\n" +
                         "キム：えいごが　できます。\n" +
@@ -151,7 +212,9 @@ fun HelloQ2Screen(
                         "Kimu: Chuugokugo____dekimasen.",
                 options = listOf("は", "も"),
                 correctAnswer = "は",
-                soundResId = R.raw.kaiwa029_4
+                soundResId = R.raw.kaiwa029_4,
+                playAudio = playQuestionAudio,
+                playFeedbackSound = playFeedbackSound
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -178,36 +241,18 @@ fun HelloQ2Screen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HelloQ2Card(
+fun ListenSelectCard(
     question: String,
     romaji: String,
     options: List<String>,
     correctAnswer: String,
     soundResId: Int,
+    playAudio: (Int) -> Unit,
+    playFeedbackSound: (Boolean) -> Unit,
 ) {
-    val context = LocalContext.current
     var selectedAnswer by remember { mutableStateOf("") }
     var isCorrect by remember { mutableStateOf<Boolean?>(null) }
     var expanded by remember { mutableStateOf(false) }
-
-    val isPreview = LocalInspectionMode.current
-    val mediaPlayer = remember {
-        if (!isPreview) MediaPlayer.create(context, soundResId) else null
-    }
-
-    fun playFeedbackSound(correct: Boolean) {
-        val soundRes = if (correct) R.raw.ding else R.raw.error
-        MediaPlayer.create(context, soundRes)?.apply {
-            setOnCompletionListener { release() }
-            start()
-        }
-    }
-
-    DisposableEffect(mediaPlayer) {
-        onDispose {
-            mediaPlayer?.release()
-        }
-    }
 
     Card(
         modifier = Modifier
@@ -239,15 +284,7 @@ fun HelloQ2Card(
                     modifier = Modifier.padding(end = 8.dp)
                 )
 
-                IconButton(onClick = {
-                    mediaPlayer?.let {
-                        if (it.isPlaying) {
-                            it.pause()
-                            it.seekTo(0)
-                        }
-                        it.start()
-                    }
-                }) {
+                IconButton(onClick = { playAudio(soundResId) }) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.VolumeUp,
                         contentDescription = "Play Sound",

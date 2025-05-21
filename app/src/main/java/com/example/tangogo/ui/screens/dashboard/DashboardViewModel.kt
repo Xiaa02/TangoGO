@@ -15,11 +15,23 @@ class DashboardViewModel @Inject constructor(
     val currentUser = accountService.currentUser
 
     fun openHiragana(openScreen: (String) -> Unit) {
-        openScreen(Routes.LESSON_HIRAGANA101)
+        openScreen(Routes.LESSON_HIRAGANAWELCOME)
     }
 
     fun openKatakana(openScreen: (String) -> Unit) {
-        openScreen(Routes.LESSON_KATAKANA101)
+        openScreen(Routes.LESSON_KATAKANAWELCOME)
+    }
+
+    fun openHello(openScreen: (String) -> Unit) {
+        openScreen(Routes.LESSON_HELLOWELCOME)
+    }
+
+    fun openFamily(openScreen: (String) -> Unit) {
+        openScreen(Routes.LESSON_FAMILYWELCOME)
+    }
+
+    fun openFood(openScreen: (String) -> Unit) {
+        openScreen(Routes.LESSON_FOODWELCOME)
     }
 
     fun openHiraganaChart(openScreen: (String) -> Unit) {

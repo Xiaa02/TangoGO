@@ -97,7 +97,7 @@ fun HelloQ1Screen(
             Spacer(modifier = Modifier.height(24.dp))
 
 
-            HelloQ1Card(
+            QuestionImageCard(
                 question = "ちゅうごくごです。にほんご_______。",
                 romaji = "Chuugokugo desu. Nihongo_______.",
                 options = listOf("a.です", "b.じゃないです"),
@@ -105,7 +105,7 @@ fun HelloQ1Screen(
                 imageResId = R.drawable.chinese_lang
             )
 
-            HelloQ1Card(
+            QuestionImageCard(
                 question = "にほんごじゃないです。かんこくご_______。",
                 romaji = "Nihongo janai desu. Kankokugo_______.",
                 options = listOf("a.です", "b.じゃないです"),
@@ -113,7 +113,7 @@ fun HelloQ1Screen(
                 imageResId = R.drawable.korean_lang
             )
 
-            HelloQ1Card(
+            QuestionImageCard(
                 question = "フランスごです。えいご_______。",
                 romaji = "Furansugo desu. Eego_______.",
                 options = listOf("a です", "b.じゃないです"),
@@ -121,7 +121,7 @@ fun HelloQ1Screen(
                 imageResId = R.drawable.france_lang
             )
 
-            HelloQ1Card(
+            QuestionImageCard(
                 question = "えいごじゃないです。ドイツご_______。",
                 romaji = "Eego janai desu. Doitsugo_______.",
                 options = listOf("a です", "b.じゃないです"),
@@ -154,7 +154,7 @@ fun HelloQ1Screen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HelloQ1Card(
+fun QuestionImageCard(
     question: String,
     romaji: String,
     options: List<String>,

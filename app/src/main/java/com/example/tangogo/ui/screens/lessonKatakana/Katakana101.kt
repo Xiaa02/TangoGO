@@ -89,7 +89,7 @@ fun Katakana101Screen(
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = "だい2か",
+                    text = "Lesson 2",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
@@ -100,20 +100,9 @@ fun Katakana101Screen(
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
-                Text(
-                    text = "Katakana",
-                    fontSize = 18.sp,
-                    color = Color.DarkGray
-                )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text(
-                    text = "カタカナ",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
-                )
                 Text(
                     text = "Katakana 101",
                     fontSize = 20.sp,

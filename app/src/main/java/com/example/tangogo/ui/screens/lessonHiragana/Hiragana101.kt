@@ -89,7 +89,7 @@ fun Hiragana101Screen(
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = "だい1か",
+                    text = "Lesson 1",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
@@ -100,20 +100,10 @@ fun Hiragana101Screen(
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black
                 )
-                Text(
-                    text = "Hiragana",
-                    fontSize = 18.sp,
-                    color = Color.DarkGray
-                )
+
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text(
-                    text = "ひらがな",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    color = Color.Black
-                )
                 Text(
                     text = "Hiragana 101",
                     fontSize = 22.sp,

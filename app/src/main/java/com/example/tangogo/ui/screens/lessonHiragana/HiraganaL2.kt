@@ -92,7 +92,7 @@ fun HiraganaL2Screen(
                     .padding(bottom = 8.dp, start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text("だい1か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("Lesson 1", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
                 Text("ひらがな", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
                 Text("Hiragana", fontSize = 18.sp, color = Color.DarkGray)
 

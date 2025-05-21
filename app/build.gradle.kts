@@ -84,6 +84,12 @@ dependencies {
     ksp("com.google.dagger:dagger-compiler:2.51.1")
     */
 
+
+    // or Accompanist Pager
+    implementation ("com.google.accompanist:accompanist-pager:0.30.1")
+    implementation ("com.google.accompanist:accompanist-pager-indicators:0.30.1")
+
+
     //Retrofit
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")

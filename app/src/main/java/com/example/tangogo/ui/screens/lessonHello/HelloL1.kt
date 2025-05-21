@@ -1,6 +1,5 @@
 package com.example.tangogo.ui.screens.lessonHello
 
-import android.content.Context
 import android.media.MediaPlayer
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -11,7 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,6 +33,26 @@ fun HelloL1Screen(
     navigateToNext: () -> Unit
 ) {
     val context = LocalContext.current
+
+    // MediaPlayer state to keep track of currently playing audio
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
+    // playAudio function shared to all cards
+    val playAudio: (Int) -> Unit = { resId ->
+        mediaPlayer?.let {
+            if (it.isPlaying) {
+                it.stop()
+            }
+            it.release()
+        }
+        mediaPlayer = MediaPlayer.create(context, resId).apply {
+            setOnCompletionListener {
+                it.release()
+                mediaPlayer = null
+            }
+            start()
+        }
+    }
 
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
@@ -95,11 +114,10 @@ fun HelloL1Screen(
                     .padding(bottom = 8.dp, start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text("だい3か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("Lesson 3", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
                 Text("どうぞ よろしく", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
-                Text("Douzo yoroshiku", fontSize = 18.sp, color = Color.DarkGray)
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
                 Text("1.もじとことば", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
                 Text("Letters and words", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
@@ -112,13 +130,13 @@ fun HelloL1Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            //Cards for country and its languages
-            HelloTextCard(R.drawable.japan_img, "にほん", "Nihon", "Japanese", R.raw.nihon, context)
-            HelloTextCard(R.drawable.germany_img, "ドイツ", "Doitsu", "German", R.raw.germany, context)
-            HelloTextCard(R.drawable.china_img, "ちゅうごく", "Chuugoku", "Chinese", R.raw.chuugoku, context)
-            HelloTextCard(R.drawable.korea_img, "かんこく", "Kankoku", "Korean", R.raw.kankoku, context)
-            HelloTextCard(R.drawable.egypt_img, "エジプト", "Ejiputo", "Egyptian Arabic", R.raw.ejiputo, context)
-            HelloTextCard(R.drawable.australia_img, "オーストラリア", "Oosutoraria", "English", R.raw.australia, context)
+            // Cards for country and its languages, passing playAudio lambda
+            HelloTextCard(R.drawable.japan_img, "にほん", "Nihon", "Japanese", R.raw.nihon, playAudio)
+            HelloTextCard(R.drawable.germany_img, "ドイツ", "Doitsu", "German", R.raw.germany, playAudio)
+            HelloTextCard(R.drawable.china_img, "ちゅうごく", "Chuugoku", "Chinese", R.raw.chuugoku, playAudio)
+            HelloTextCard(R.drawable.korea_img, "かんこく", "Kankoku", "Korean", R.raw.kankoku, playAudio)
+            HelloTextCard(R.drawable.egypt_img, "エジプト", "Ejiputo", "Egyptian Arabic", R.raw.ejiputo, playAudio)
+            HelloTextCard(R.drawable.australia_img, "オーストラリア", "Oosutoraria", "English", R.raw.australia, playAudio)
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -151,7 +169,7 @@ fun HelloTextCard(
     reading: String,
     meaning: String,
     soundResId: Int,
-    context: Context
+    playAudio: (Int) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -162,7 +180,9 @@ fun HelloTextCard(
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(
-            modifier = Modifier.padding(12.dp).fillMaxWidth()
+            modifier = Modifier
+                .padding(12.dp)
+                .fillMaxWidth()
         ) {
             Row(
                 modifier = Modifier
@@ -175,7 +195,7 @@ fun HelloTextCard(
                     contentDescription = "Play Sound",
                     modifier = Modifier
                         .size(22.dp)
-                        .clickable { playAudio(context, soundResId) }
+                        .clickable { playAudio(soundResId) }
                 )
             }
 
@@ -213,12 +233,6 @@ fun HelloTextCard(
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
-}
-
-fun playAudio(context: Context, resId: Int) {
-    val mediaPlayer = MediaPlayer.create(context, resId)
-    mediaPlayer.setOnCompletionListener { it.release() }
-    mediaPlayer.start()
 }
 
 @Preview(showBackground = true)

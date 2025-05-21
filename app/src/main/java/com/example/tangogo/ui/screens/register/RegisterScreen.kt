@@ -145,7 +145,7 @@ fun RegisterScreenContent(
         Button(
             onClick = { onRegisterClick() },
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF8583CC),
+                containerColor = Color(0xFF061428),
                 contentColor = Color.White
             ),
             shape = RoundedCornerShape(50),

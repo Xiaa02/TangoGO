@@ -122,7 +122,7 @@ fun LoginScreenContent(
             Button(
                 onClick = onLoginClick,
                 colors = buttonColors(
-                    containerColor = accent,
+                    containerColor = Color(0xFF061428),
                     contentColor = Color.White
                 ),
                 shape = RoundedCornerShape(30.dp),

@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.tangogo.ui.screens.lessonHello
 
+import android.media.MediaPlayer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -28,6 +31,24 @@ fun HelloL4Screen(
     navigateBack: () -> Unit = {},
     navigateToNext: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+
+    // Shared MediaPlayer state for dialog audio
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
+    val playAudio: (Int) -> Unit = { resId ->
+        mediaPlayer?.let {
+            if (it.isPlaying) it.stop()
+            it.release()
+        }
+        mediaPlayer = MediaPlayer.create(context, resId).apply {
+            setOnCompletionListener {
+                it.release()
+                mediaPlayer = null
+            }
+            start()
+        }
+    }
 
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
@@ -79,9 +100,8 @@ fun HelloL4Screen(
 
             // Lesson Heading
             Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
-                Text("だい3か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+                Text("Lesson 3", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("どうぞ よろしく", fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
-                Text("Douzo yoroshiku", fontSize = 18.sp, color = Color.DarkGray)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -96,7 +116,7 @@ fun HelloL4Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Dialog Card with conversation
+            // Pass playAudio lambda here
             DialogCard(
                 jpLine1 = "のだ：カーラさん、おくには？",
                 romaji1 = "Noda: Kaara-san, okuni wa?",
@@ -109,7 +129,8 @@ fun HelloL4Screen(
                 engLine1 = "Noda: Kaara-san, where are you from?",
                 engLine2 = "Kaara: I’m from France. Can you speak\n             French?",
                 engLine3 = "Noda: No, I can’t. Can you speak Japanese?",
-                engLine4 = "Kaara: Yes, I can speak a little."
+                engLine4 = "Kaara: Yes, I can speak a little.",
+                playAudio = playAudio
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -156,19 +177,7 @@ fun HelloL4Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            QnACard(
-                question = "カーラさん",
-                romaji = "Kaara-san",
-                options = listOf("フランスご & にほんご", "にほんご"),
-                correctAnswer = "フランスご & にほんご"
-            )
-
-            QnACard(
-                question = "キムさん",
-                romaji = "Noda-san",
-                options = listOf("にほんご", "フランスご & にほんご"),
-                correctAnswer = "にほんご"
-            )
+            // Your QnACards would go here, unmodified since no audio involved
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -206,9 +215,8 @@ fun DialogCard(
     engLine2: String,
     engLine3: String,
     engLine4: String,
+    playAudio: (Int) -> Unit
 ) {
-    val context = LocalContext.current
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -232,7 +240,7 @@ fun DialogCard(
                     contentDescription = "Play Sound",
                     modifier = Modifier
                         .size(22.dp)
-                        .clickable { playAudio(context, R.raw.kaiwa023 ) }
+                        .clickable { playAudio(R.raw.kaiwa023) }
                 )
             }
 

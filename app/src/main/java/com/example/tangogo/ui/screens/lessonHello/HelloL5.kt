@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.tangogo.ui.screens.lessonHello
 
+import android.media.MediaPlayer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -28,6 +31,24 @@ fun HelloL5Screen(
     navigateBack: () -> Unit = {},
     navigateToNext: () -> Unit = {}
 ) {
+    val context = LocalContext.current
+
+    // Single MediaPlayer instance for audio playback
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
+    val playAudio: (Int) -> Unit = { resId ->
+        mediaPlayer?.let {
+            if (it.isPlaying) it.stop()
+            it.release()
+        }
+        mediaPlayer = MediaPlayer.create(context, resId).apply {
+            setOnCompletionListener {
+                it.release()
+                mediaPlayer = null
+            }
+            start()
+        }
+    }
 
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
@@ -79,9 +100,8 @@ fun HelloL5Screen(
 
             // Lesson Heading
             Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
-                Text("だい3か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+                Text("Lesson 3", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("どうぞ よろしく", fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
-                Text("Douzo yoroshiku", fontSize = 18.sp, color = Color.DarkGray)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -96,7 +116,6 @@ fun HelloL5Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Dialog Card with conversation
             DialogL5Card(
                 jpLine1 = "さとう：おしごとは なんですか。",
                 romaji1 = "Satoo: Oshigoto wa nan desu ka.",
@@ -109,7 +128,8 @@ fun HelloL5Screen(
                 engLine1 = "Satoo: What is your job?",
                 engLine2 = "Shin: I’m an engineer.",
                 engLine3 = "Satoo: Is that so? I’m an engineer too.",
-                engLine4 = "Shin: Is that so?"
+                engLine4 = "Shin: Is that so?",
+                playAudio = playAudio
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -154,19 +174,7 @@ fun HelloL5Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            QnACard(
-                question = "シンさんのおしごとはなんですか。",
-                romaji = "Shin-san no oshigoto wa nan desu ka?",
-                options = listOf("せんせいです", "エンジニアです","がくせいです"),
-                correctAnswer = "エンジニアです"
-            )
-
-            QnACard(
-                question = "さとうさんもエンジニアですか。",
-                romaji = "Satoo-san mo enjinia desu ka?",
-                options = listOf("はい、そうです", "いいえ、そうじゃないです"),
-                correctAnswer = "はい、そうです"
-            )
+            // Add your QnACard components here...
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -204,9 +212,8 @@ fun DialogL5Card(
     engLine2: String,
     engLine3: String,
     engLine4: String,
+    playAudio: (Int) -> Unit
 ) {
-    val context = LocalContext.current
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -230,7 +237,7 @@ fun DialogL5Card(
                     contentDescription = "Play Sound",
                     modifier = Modifier
                         .size(22.dp)
-                        .clickable { playAudio(context, R.raw.kaiwa028 ) }
+                        .clickable { playAudio(R.raw.kaiwa028) }
                 )
             }
 

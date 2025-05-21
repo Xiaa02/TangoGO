@@ -1,11 +1,12 @@
 package com.example.tangogo.ui.screens.lessonHello
 
+import android.media.MediaPlayer
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -26,6 +27,24 @@ fun HelloL2Screen(
     navigateToNext: () -> Unit
 ) {
     val context = LocalContext.current
+
+    // Shared MediaPlayer state
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
+    // Shared playAudio lambda
+    val playAudio: (Int) -> Unit = { resId ->
+        mediaPlayer?.let {
+            if (it.isPlaying) it.stop()
+            it.release()
+        }
+        mediaPlayer = MediaPlayer.create(context, resId).apply {
+            setOnCompletionListener {
+                it.release()
+                mediaPlayer = null
+            }
+            start()
+        }
+    }
 
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
@@ -49,9 +68,7 @@ fun HelloL2Screen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        navigateBack()
-                    }) {
+                    IconButton(onClick = { navigateBack() }) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_arrow_back),
                             contentDescription = "Back",
@@ -87,9 +104,8 @@ fun HelloL2Screen(
                     .padding(bottom = 8.dp, start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text("だい3か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("Lesson 3", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
                 Text("どうぞ よろしく", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
-                Text("Douzo yoroshiku", fontSize = 18.sp, color = Color.DarkGray)
 
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -104,13 +120,13 @@ fun HelloL2Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Cards for each occupation
-            HelloTextCard(R.drawable.student_img, "がくせい", "Gakusei", "Student", R.raw.gakusei, context)
-            HelloTextCard(R.drawable.teacher_img, "きょうし", "Kyoushi", "Teacher", R.raw.kyoushi, context)
-            HelloTextCard(R.drawable.housewife_img, "しゅふ", "Shufu", "Housewife", R.raw.shufu, context)
-            HelloTextCard(R.drawable.employee_img, "かいしゃいん", "Kaishain", "Company Employee", R.raw.kaishain, context)
-            HelloTextCard(R.drawable.civil_servant_img, "こうむいん", "Koumuin", "Civil Servant", R.raw.koumuin, context)
-            HelloTextCard(R.drawable.engineer_img, "エンジニア", "Enjinia", "Engineer", R.raw.enjinia, context)
+            // Use modified HelloTextCard which accepts playAudio lambda
+            HelloTextCard(R.drawable.student_img, "がくせい", "Gakusei", "Student", R.raw.gakusei, playAudio)
+            HelloTextCard(R.drawable.teacher_img, "きょうし", "Kyoushi", "Teacher", R.raw.kyoushi, playAudio)
+            HelloTextCard(R.drawable.housewife_img, "しゅふ", "Shufu", "Housewife", R.raw.shufu, playAudio)
+            HelloTextCard(R.drawable.employee_img, "かいしゃいん", "Kaishain", "Company Employee", R.raw.kaishain, playAudio)
+            HelloTextCard(R.drawable.civil_servant_img, "こうむいん", "Koumuin", "Civil Servant", R.raw.koumuin, playAudio)
+            HelloTextCard(R.drawable.engineer_img, "エンジニア", "Enjinia", "Engineer", R.raw.enjinia, playAudio)
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -135,7 +151,6 @@ fun HelloL2Screen(
         }
     }
 }
-
 
 
 @Preview(showBackground = true)

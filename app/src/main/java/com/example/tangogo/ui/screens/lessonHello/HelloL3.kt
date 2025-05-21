@@ -1,6 +1,7 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.tangogo.ui.screens.lessonHello
 
-import android.content.Context
 import android.media.MediaPlayer
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,6 +33,24 @@ fun HelloL3Screen(
     navigateToNext: () -> Unit = {}
 ) {
     val context = LocalContext.current
+
+    // Shared MediaPlayer for dialog audio
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
+    // Shared playAudio function to ensure only one audio plays at a time
+    val playAudio: (Int) -> Unit = { resId ->
+        mediaPlayer?.let {
+            if (it.isPlaying) it.stop()
+            it.release()
+        }
+        mediaPlayer = MediaPlayer.create(context, resId).apply {
+            setOnCompletionListener {
+                it.release()
+                mediaPlayer = null
+            }
+            start()
+        }
+    }
 
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
@@ -83,9 +102,8 @@ fun HelloL3Screen(
 
             // Lesson Heading
             Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
-                Text("だい3か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+                Text("Lesson 3", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("どうぞ よろしく", fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
-                Text("Douzo yoroshiku", fontSize = 18.sp, color = Color.DarkGray)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -100,7 +118,7 @@ fun HelloL3Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Dialog Card with sound icon
+            // Dialog Card with shared playAudio passed
             DialogCard(
                 "キム: はじめまして。きむです。\n          どうぞよろしく。",
                 "Kimu: Hajimemashite. Kimu desu.\n            Doozo yoroshiku.",
@@ -118,7 +136,7 @@ fun HelloL3Screen(
                 "Kimu: Kaara-san, what is your job?",
                 "Kaara: I am a student. By the way, is\n            Kimu-san a teacher?",
                 "Kimu: No, I am not a teacher. I am a\n            student.",
-                context
+                playAudio
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -177,6 +195,7 @@ fun HelloL3Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
+            // Pass a separate MediaPlayer state for feedback sounds inside QnACard
             QnACard(
                 question = "キムさんは、がくせいですか？",
                 romaji = "Kimu-san wa gakusei desu ka?",
@@ -222,7 +241,8 @@ fun DialogCard(
     sentence4: String, romaji4: String,
     sentence5: String, romaji5: String,
     translation1: String, translation2: String,
-    translation3: String, translation4: String, translation5: String, context: Context
+    translation3: String, translation4: String, translation5: String,
+    playAudio: (Int) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -247,7 +267,7 @@ fun DialogCard(
                     contentDescription = "Play Sound",
                     modifier = Modifier
                         .size(22.dp)
-                        .clickable { playAudio(context, R.raw.kaiwa017 ) }
+                        .clickable { playAudio(R.raw.kaiwa017) }
                 )
             }
 
@@ -298,14 +318,25 @@ fun QnACard(
     correctAnswer: String
 ) {
     val context = LocalContext.current
+
+    // MediaPlayer state to ensure only one feedback sound plays at a time
+    var feedbackPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+
     var selectedAnswer by remember { mutableStateOf("") }
     var isCorrect by remember { mutableStateOf<Boolean?>(null) }
     var expanded by remember { mutableStateOf(false) }
 
     fun playFeedbackSound(correct: Boolean) {
+        feedbackPlayer?.let {
+            if (it.isPlaying) it.stop()
+            it.release()
+        }
         val soundRes = if (correct) R.raw.ding else R.raw.error
-        MediaPlayer.create(context, soundRes)?.apply {
-            setOnCompletionListener { release() }
+        feedbackPlayer = MediaPlayer.create(context, soundRes).apply {
+            setOnCompletionListener {
+                it.release()
+                feedbackPlayer = null
+            }
             start()
         }
     }

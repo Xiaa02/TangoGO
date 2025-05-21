@@ -1,4 +1,4 @@
-package com.example.tangogo.ui.screens.lessonHello
+package com.example.tangogo.ui.screens.lessonComplete
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -83,7 +83,7 @@ fun LessonCompleteScreen(
             shape = RoundedCornerShape(50),
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 40.dp)
+                .padding(bottom = 75.dp)
                 .fillMaxWidth(0.9f)
                 .height(56.dp)
                 .shadow(10.dp, RoundedCornerShape(50))

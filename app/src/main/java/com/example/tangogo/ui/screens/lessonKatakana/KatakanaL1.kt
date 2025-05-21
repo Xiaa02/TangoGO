@@ -95,7 +95,7 @@ fun KatakanaL1Screen(
                     .padding(bottom = 8.dp, start = 4.dp),
                 horizontalAlignment = Alignment.Start
             ) {
-                Text("だい2か", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
+                Text("Lesson 2", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
                 Text("カタカナ", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
                 Text("Katakana", fontSize = 18.sp, color = Color.DarkGray)
 
