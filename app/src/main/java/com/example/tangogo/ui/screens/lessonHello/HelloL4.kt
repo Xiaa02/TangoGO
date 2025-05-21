@@ -177,7 +177,19 @@ fun HelloL4Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Your QnACards would go here, unmodified since no audio involved
+            QnACard(
+                question = "カーラさん",
+                romaji = "Kaara-san",
+                options = listOf("フランスご & にほんご", "にほんご"),
+                correctAnswer = "フランスご & にほんご"
+            )
+
+            QnACard(
+                question = "キムさん",
+                romaji = "Noda-san",
+                options = listOf("にほんご", "フランスご & にほんご"),
+                correctAnswer = "にほんご"
+            )
 
             Spacer(modifier = Modifier.height(32.dp))
 

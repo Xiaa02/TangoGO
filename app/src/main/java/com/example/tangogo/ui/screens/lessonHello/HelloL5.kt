@@ -174,7 +174,19 @@ fun HelloL5Screen(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Add your QnACard components here...
+            QnACard(
+                question = "シンさんのおしごとはなんですか。",
+                romaji = "Shin-san no oshigoto wa nan desu ka?",
+                options = listOf("せんせいです", "エンジニアです","がくせいです"),
+                correctAnswer = "エンジニアです"
+            )
+
+            QnACard(
+                question = "さとうさんもエンジニアですか。",
+                romaji = "Satoo-san mo enjinia desu ka?",
+                options = listOf("はい、そうです", "いいえ、そうじゃないです"),
+                correctAnswer = "はい、そうです"
+            )
 
             Spacer(modifier = Modifier.height(32.dp))
 
