@@ -13,4 +13,8 @@ interface AccountService {
     suspend fun sendRecoveryEmail(email: String)
     suspend fun deleteAccount()
     suspend fun logOut()
+
+    suspend fun updateUserName(firstName: String, lastName: String)
+    suspend fun updateAvatarUrl(url: String)
+
 }

@@ -83,6 +83,23 @@ class AccountServiceImpl @Inject constructor(
         auth.signOut()
     }
 
+    override suspend fun updateUserName(firstName: String, lastName: String) {
+        val uid = auth.currentUser?.uid ?: return
+        firestore.collection("users").document(uid).update(
+            mapOf(
+                "firstName" to firstName,
+                "lastName" to lastName
+            )
+        )
+    }
+
+    override suspend fun updateAvatarUrl(url: String) {
+        val uid = auth.currentUser?.uid ?: return
+        firestore.collection("users").document(uid)
+            .update("avatarUrl", url)
+            .await()
+    }
+
     companion object {
         private const val USER_COLLECTION = "users"
     }

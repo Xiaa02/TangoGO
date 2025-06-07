@@ -119,11 +119,6 @@ fun HelloL1Screen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text("1.もじとことば", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
-                Text("Letters and words", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
-
-                Spacer(modifier = Modifier.height(20.dp))
-
                 Text("くにとご", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
                 Text("Country and Language", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
             }

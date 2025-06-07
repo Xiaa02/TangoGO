@@ -182,7 +182,7 @@ fun RegisterScreenContent(
                 ) { append("Login") }
             }
         )
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(45.dp))
     }
 }
 

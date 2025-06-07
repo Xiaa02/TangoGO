@@ -116,7 +116,7 @@ fun FoodL2Screen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
-                    "2.かいわと ぶんぽう",
+                    "かいわと ぶんぽう",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black,

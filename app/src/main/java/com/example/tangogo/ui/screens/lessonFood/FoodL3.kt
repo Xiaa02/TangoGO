@@ -31,7 +31,8 @@ import com.example.tangogo.R
 @Composable
 fun FoodL3Screen(
     navigateBack: () -> Unit,
-    navigateToNext: () -> Unit
+    navigateToDashboard: () -> Unit,
+    navigateToLessonComplete: () -> Unit
 ) {
     val context = LocalContext.current
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
@@ -84,10 +85,10 @@ fun FoodL3Screen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = navigateToNext) {
+                    IconButton(onClick = navigateToDashboard) {
                         Icon(
-                            painter = painterResource(id = R.drawable.ic_arrow_next),
-                            contentDescription = "Next",
+                            painter = painterResource(id = R.drawable.ic_home),
+                            contentDescription = "Dashboard",
                             tint = Color(0xFF3F3F3F)
                         )
                     }
@@ -112,11 +113,6 @@ fun FoodL3Screen(
             ) {
                 Text("Lesson 5", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
                 Text("なにが すきですか", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Text("3.かいわと ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
-                Text("Conversation and Grammar", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
@@ -260,7 +256,7 @@ fun FoodL3Screen(
             Spacer(modifier = Modifier.height(32.dp))
 
             Button(
-                onClick = navigateToNext,
+                onClick = navigateToLessonComplete,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF061428),
                     contentColor = Color.White
@@ -503,6 +499,7 @@ fun BreakfastPreferenceTable(
 fun FoodL3ScreenPreview() {
     FoodL3Screen(
         navigateBack = {},
-        navigateToNext = {}
+        navigateToDashboard = {},
+        navigateToLessonComplete = {}
     )
 }

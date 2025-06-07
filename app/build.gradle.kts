@@ -129,6 +129,7 @@ dependencies {
     implementation("com.google.firebase:firebase-perf")
     implementation("com.google.firebase:firebase-config")
     implementation("com.google.firebase:firebase-messaging")
+    implementation("com.google.firebase:firebase-storage-ktx")
 
     // Test
     testImplementation("junit:junit:4.+")

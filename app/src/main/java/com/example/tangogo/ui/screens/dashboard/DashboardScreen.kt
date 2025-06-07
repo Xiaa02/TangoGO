@@ -65,9 +65,13 @@ fun DashboardScreen(
         openLessonHello = { viewModel.openHello(openScreen) },
         openLessonFamily = { viewModel.openFamily(openScreen) },
         openLessonFood = { viewModel.openFood(openScreen) },
+        openLessonWhere = { viewModel.openWhere(openScreen) },
+        openLessonHome = { viewModel.openHome(openScreen) },
+        openLessonDaily = { viewModel.openDaily(openScreen) },
         openHiraganaChart  = { viewModel.openHiraganaChart(openScreen) },
         openKatakanaChart  = { viewModel.openKatakanaChart(openScreen) },
         openKanjiChart     = { viewModel.openKanjiChart(openScreen) },
+        openSettings      = { viewModel.openSettings(openScreen) },
         onLogoutClick      = { viewModel.onLogoutClick(clearAndNavigate) }
     )
 }
@@ -80,9 +84,13 @@ fun DashboardScreenContent(
     openLessonHello: () -> Unit,
     openLessonFamily: () -> Unit,
     openLessonFood: () -> Unit,
+    openLessonWhere: () -> Unit,
+    openLessonHome: () -> Unit,
+    openLessonDaily: () -> Unit,
     openHiraganaChart:  () -> Unit,
     openKatakanaChart:  () -> Unit,
     openKanjiChart:     () -> Unit,
+    openSettings:     () -> Unit,
     onLogoutClick:      () -> Unit
 ) {
     Column(
@@ -105,9 +113,11 @@ fun DashboardScreenContent(
             verticalAlignment   = Alignment.CenterVertically
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.account),
-                contentDescription = "Profile",
-                modifier = Modifier.size(40.dp),
+                painter = painterResource(id = R.drawable.ic_settings),
+                contentDescription = "Settings",
+                modifier = Modifier
+                    .size(25.dp)
+                    .clickable { openSettings() },
                 tint = Color.Black
             )
             Icon(
@@ -120,7 +130,7 @@ fun DashboardScreenContent(
             )
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         // Greeting
         Row(
@@ -138,7 +148,6 @@ fun DashboardScreenContent(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Vocabulary carousel
         val vocabList = listOf(
             Vocab("食べ物", "たべもの", "Food"),
             Vocab("水", "みず", "Water"),
@@ -154,8 +163,22 @@ fun DashboardScreenContent(
             Vocab("雨", "あめ", "Rain"),
             Vocab("山", "やま", "Mountain"),
             Vocab("川", "かわ", "River"),
-            Vocab("魚", "さかな", "Fish")
-            // add more items here
+            Vocab("魚", "さかな", "Fish"),
+            Vocab("朝", "あさ", "Morning"),
+            Vocab("夜", "よる", "Night"),
+            Vocab("火", "ひ", "Fire"),
+            Vocab("月", "つき", "Moon"),
+            Vocab("花", "はな", "Flower"),
+            Vocab("人", "ひと", "Person"),
+            Vocab("名前", "なまえ", "Name"),
+            Vocab("国", "くに", "Country"),
+            Vocab("日本", "にほん", "Japan"),
+            Vocab("英語", "えいご", "English (language)"),
+            Vocab("お茶", "おちゃ", "Green Tea"),
+            Vocab("牛乳", "ぎゅうにゅう", "Milk"),
+            Vocab("ご飯", "ごはん", "Cooked Rice / Meal"),
+            Vocab("電話", "でんわ", "Telephone"),
+            Vocab("時計", "とけい", "Clock / Watch")
         )
 
         AutoSlidingVocabularyCarousel(
@@ -191,9 +214,9 @@ fun DashboardScreenContent(
                 LessonCard("こんにちは","Hello",    140.dp, 180.dp, Color(0xFF1E3170), openLessonHello)
                 LessonCard("かぞく",   "Family",    140.dp, 180.dp, Color(0xFF1E3170), openLessonFamily)
                 LessonCard("たべもの","Food",      140.dp, 180.dp, Color(0xFF093D16), openLessonFood)
-                LessonCard("どこ",     "Where",     140.dp, 180.dp, Color(0xFF093D16), openLessonHiragana)
-                LessonCard("いえ",     "Home",      140.dp, 180.dp, Color(0xFFFF9800), openLessonHiragana)
-                LessonCard("せいかつ","DailyLife",140.dp, 180.dp, Color(0xFFA83760), openLessonHiragana)
+                LessonCard("どこ",     "Where",     140.dp, 180.dp, Color(0xFF093D16), openLessonWhere)
+                LessonCard("いえ",     "Home",      140.dp, 180.dp, Color(0xFFFF9800), openLessonHome)
+                LessonCard("せいかつ","DailyLife",140.dp, 180.dp, Color(0xFFA83760), openLessonDaily)
             }
         }
 
@@ -363,9 +386,13 @@ fun TangoGOPreview() {
             openLessonHello = {},
             openLessonFamily = {},
             openLessonFood = {},
+            openLessonWhere = {},
+            openLessonHome = {},
+            openLessonDaily = {},
             openHiraganaChart   = {},
             openKatakanaChart   = {},
             openKanjiChart      = {},
+            openSettings      = {},
             onLogoutClick       = {}
         )
     }

@@ -137,7 +137,7 @@ fun HiraganaTableScreen(
 
             // Vowel Header
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp), modifier = Modifier.padding(bottom = 8.dp)) {
-                Box(Modifier.size(40.dp).background(Color(0xFFF1F1F1), RoundedCornerShape(8.dp)), contentAlignment = Alignment.Center) {
+                Box(Modifier.size(40.dp).background(Color(0xFFFCF5FD), RoundedCornerShape(8.dp)), contentAlignment = Alignment.Center) {
                     Text("V/C", fontSize = 14.sp, color = Color.DarkGray)
                 }
                 listOf("a", "i", "u", "e", "o").forEach { vowel ->
@@ -164,7 +164,10 @@ fun HiraganaTableScreen(
                     }
                     row.forEach { char ->
                         Box(
-                            modifier = Modifier.size(40.dp).background(if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent, RoundedCornerShape(8.dp))
+                            modifier = Modifier
+                                .size(40.dp)
+                                .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
+                                .background(if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent, RoundedCornerShape(8.dp))
                                 .then(if (char.isNotEmpty()) Modifier.clickable { playSound(char); onCharClick(char) } else Modifier),
                             contentAlignment = Alignment.Center
                         ) {
@@ -187,10 +190,14 @@ fun HiraganaTableScreen(
                     }
                     row.forEach { char ->
                         Box(
-                            modifier = Modifier.size(40.dp).background(Color(0xFFF1F1F1), RoundedCornerShape(8.dp)).clickable { playSound(char); onCharClick(char) },
+                            modifier = Modifier
+                                .size(40.dp)
+                                .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
+                                .background(if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent, RoundedCornerShape(8.dp))
+                                .then(if (char.isNotEmpty()) Modifier.clickable { playSound(char); onCharClick(char) } else Modifier),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(char, fontSize = 18.sp)
+                            if (char.isNotEmpty()) Text(char, fontSize = 18.sp)
                         }
                     }
                 }
@@ -209,10 +216,14 @@ fun HiraganaTableScreen(
                     }
                     row.forEach { char ->
                         Box(
-                            modifier = Modifier.size(40.dp).background(Color(0xFFF1F1F1), RoundedCornerShape(8.dp)).clickable { playSound(char); onCharClick(char) },
+                            modifier = Modifier
+                                .size(40.dp)
+                                .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
+                                .background(if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent, RoundedCornerShape(8.dp))
+                                .then(if (char.isNotEmpty()) Modifier.clickable { playSound(char); onCharClick(char) } else Modifier),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(char, fontSize = 18.sp)
+                            if (char.isNotEmpty()) Text(char, fontSize = 18.sp)
                         }
                     }
                 }

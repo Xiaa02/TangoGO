@@ -7,12 +7,12 @@ import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.material3.ButtonDefaults.buttonColors
-//import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.tangogo.common.composable.EmailField
 import com.example.tangogo.common.composable.PasswordField
+import com.example.tangogo.common.snackbar.SnackbarManager
+import com.example.tangogo.common.snackbar.SnackbarMessage
 import com.example.tangogo.ui.theme.TangoGOTheme
 
 @Composable
@@ -28,15 +30,38 @@ fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState
+    val snackbarHostState = remember { SnackbarHostState() }
+    val snackbarMessage by SnackbarManager.snackbarMessages.collectAsState()
 
-    LoginScreenContent(
-        uiState = uiState,
-        onEmailChange = viewModel::onEmailChange,
-        onPasswordChange = viewModel::onPasswordChange,
-        onLoginClick = { viewModel.onLoginClick(openAndPopUp) },
-        onNotRegistered = { viewModel.onNotRegistered(openAndPopUp) }
-    )
+    val context = LocalContext.current
+
+    LaunchedEffect(snackbarMessage) {
+        snackbarMessage?.let { message ->
+            val text = when (message) {
+                is SnackbarMessage.ResourceSnackbar -> context.getString(message.message)
+                is SnackbarMessage.StringSnackbar -> message.message
+            }
+            snackbarHostState.showSnackbar(text)
+            SnackbarManager.clearSnackbarState()
+        }
+    }
+
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
+    ) { padding ->
+        LoginScreenContent(
+            modifier = Modifier.padding(padding),
+            uiState = uiState,
+            onEmailChange = viewModel::onEmailChange,
+            onPasswordChange = viewModel::onPasswordChange,
+            onLoginClick = { viewModel.onLoginClick(openAndPopUp) },
+            onNotRegistered = { viewModel.onNotRegistered(openAndPopUp) },
+            onForgotPassword = viewModel::onForgotPasswordClick
+        )
+    }
 }
+
 
 @Composable
 fun LoginScreenContent(
@@ -46,6 +71,7 @@ fun LoginScreenContent(
     onPasswordChange: (String) -> Unit,
     onLoginClick: () -> Unit,
     onNotRegistered: () -> Unit,
+    onForgotPassword: () -> Unit
 ) {
     val accent = Color(0xFF8583CC)
 
@@ -54,13 +80,12 @@ fun LoginScreenContent(
         cubicTo(
             size.width * 0.25f, size.height * 0.55f,
             size.width * 0.35f, size.height,
-            size.width,         size.height * 1.00f
+            size.width, size.height * 1.00f
         )
         lineTo(size.width, 0f)
         lineTo(0f, 0f)
         close()
     }
-
 
     Box(modifier = modifier.fillMaxSize()) {
 
@@ -105,7 +130,6 @@ fun LoginScreenContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 20.dp, bottom = 15.dp)
-
             )
 
             PasswordField(
@@ -116,8 +140,24 @@ fun LoginScreenContent(
                     .padding(vertical = 8.dp)
             )
 
+            // Forgot Password section
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp, bottom = 24.dp)
+            ) {
+                Text(
+                    text = "Forgot Password?",
+                    color = accent,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp,
+                    modifier = Modifier
+                        .align(Alignment.CenterEnd)
+                        .clickable(onClick = onForgotPassword)
+                )
+            }
 
-            Spacer(Modifier.height(150.dp))
+            Spacer(Modifier.height(80.dp))
 
             Button(
                 onClick = onLoginClick,
@@ -159,7 +199,8 @@ fun LoginScreenPreview() {
             onEmailChange = {},
             onPasswordChange = {},
             onLoginClick = {},
-            onNotRegistered = {}
+            onNotRegistered = {},
+            onForgotPassword = {}
         )
     }
 }

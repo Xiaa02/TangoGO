@@ -7,16 +7,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -127,6 +122,7 @@ fun KatakanaChartScreen(
                 Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // Vowel header row
                 item {
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -134,39 +130,81 @@ fun KatakanaChartScreen(
                         modifier = Modifier.padding(bottom = 8.dp)
                     ) {
                         Box(
-                            Modifier.size(40.dp).background(Color(0xFFF1F1F1), RoundedCornerShape(8.dp)),
+                            Modifier
+                                .size(40.dp)
+                                .background(Color(0xFFFCF5FD), RoundedCornerShape(8.dp)),
                             contentAlignment = Alignment.Center
-                        ) { Text("V/C", fontSize = 14.sp, color = Color.DarkGray) }
-
+                        ) {
+                            Text(
+                                text = "V/C",
+                                fontSize = 14.sp,
+                                color = Color.DarkGray,
+                                textAlign = TextAlign.Center
+                            )
+                        }
                         listOf("a", "i", "u", "e", "o").forEach { vowel ->
                             Box(
-                                Modifier.size(40.dp).background(getVowelColor(vowel), RoundedCornerShape(8.dp))
+                                Modifier
+                                    .size(40.dp)
+                                    .background(getVowelColor(vowel), RoundedCornerShape(8.dp))
                                     .clickable { onCharClick(vowel) },
                                 contentAlignment = Alignment.Center
-                            ) { Text(text = vowel, fontSize = 16.sp, color = Color.White) }
+                            ) {
+                                Text(text = vowel, fontSize = 16.sp, color = Color.White)
+                            }
                         }
                     }
                 }
 
+                // Consonant rows
                 itemsIndexed(table) { rowIndex, rowData ->
+                    val rowLabel = consonants[rowIndex]
+
                     Row(
                         horizontalArrangement = Arrangement.spacedBy(16.dp),
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(vertical = 4.dp)
                     ) {
+                        // Row header (consonant)
                         Box(
-                            Modifier.size(40.dp)
-                                .background(if (consonants[rowIndex].isNotEmpty()) Color(0xFF9B1C1C) else Color.Transparent, RoundedCornerShape(8.dp))
-                                .then(if (consonants[rowIndex].isNotEmpty()) Modifier.clickable { onCharClick(consonants[rowIndex]) } else Modifier),
+                            Modifier
+                                .size(40.dp)
+                                .background(
+                                    if (rowLabel.isNotEmpty()) Color(0xFF9B1C1C) else Color.Transparent,
+                                    RoundedCornerShape(8.dp)
+                                )
+                                .then(
+                                    if (rowLabel.isNotEmpty())
+                                        Modifier.clickable { onCharClick(rowLabel) }
+                                    else Modifier
+                                ),
                             contentAlignment = Alignment.Center
-                        ) { if (consonants[rowIndex].isNotEmpty()) Text(text = consonants[rowIndex], fontSize = 16.sp, color = Color.White) }
+                        ) {
+                            if (rowLabel.isNotEmpty()) {
+                                Text(text = rowLabel, fontSize = 16.sp, color = Color.White)
+                            }
+                        }
 
+                        // Character cells
                         rowData.forEach { char ->
+                            val baseModifier = Modifier
+                                .size(40.dp)
+                                .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
+                                .background(
+                                    if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent,
+                                    RoundedCornerShape(8.dp)
+                                )
+
                             Box(
-                                Modifier.size(40.dp).background(if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent, RoundedCornerShape(8.dp))
-                                    .then(if (char.isNotEmpty()) Modifier.clickable { onCharClick(char) } else Modifier),
+                                modifier = if (char.isNotEmpty())
+                                    baseModifier.clickable { onCharClick(char) }
+                                else baseModifier,
                                 contentAlignment = Alignment.Center
-                            ) { if (char.isNotEmpty()) Text(text = char, fontSize = 18.sp) }
+                            ) {
+                                if (char.isNotEmpty()) {
+                                    Text(text = char, fontSize = 18.sp)
+                                }
+                            }
                         }
                     }
                 }

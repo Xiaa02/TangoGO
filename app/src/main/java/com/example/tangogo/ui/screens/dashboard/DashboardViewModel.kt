@@ -34,6 +34,18 @@ class DashboardViewModel @Inject constructor(
         openScreen(Routes.LESSON_FOODWELCOME)
     }
 
+    fun openWhere(openScreen: (String) -> Unit) {
+        openScreen(Routes.LESSON_WHEREWELCOME)
+    }
+
+    fun openHome(openScreen: (String) -> Unit) {
+        openScreen(Routes.LESSON_HOMEWELCOME)
+    }
+
+    fun openDaily(openScreen: (String) -> Unit) {
+        openScreen(Routes.LESSON_DAILYWELCOME)
+    }
+
     fun openHiraganaChart(openScreen: (String) -> Unit) {
         openScreen(Routes.HIRAGANA_CHART)
     }
@@ -43,6 +55,10 @@ class DashboardViewModel @Inject constructor(
 
     fun openKanjiChart(openScreen: (String) -> Unit) {
         openScreen(Routes.KANJI_CHART)
+    }
+
+    fun openSettings(openScreen: (String) -> Unit) {
+        openScreen(Routes.SETTINGS)
     }
 
     fun onLogoutClick(clearAndNavigate: (String) -> Unit) {

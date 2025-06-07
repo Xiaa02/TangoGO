@@ -107,7 +107,7 @@ fun HelloL3Screen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text("2.かいわと ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+                Text("かいわと ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Conversation and Grammar", fontSize = 18.sp, color = Color.DarkGray)
 
                 Spacer(modifier = Modifier.height(20.dp))

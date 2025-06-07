@@ -5,6 +5,12 @@ object Routes {
     const val LOGIN = "login"
     const val REGISTER = "register"
     const val DASHBOARD = "dashboard"
+    const val SETTINGS = "settings"
+    const val PROFILE = "profile"
+    const val ABOUT = "about"
+    const val EDITNAME = "edit_name"
+    const val EDITPASSWORD = "edit_name"
+
     const val LESSON_COMPLETE = "lesson_complete"
 
     const val LESSON_HIRAGANAWELCOME = "hiraganaWelcome"
@@ -44,6 +50,21 @@ object Routes {
     const val LESSON_FOODL1 = "foodL1"
     const val LESSON_FOODL2 = "foodL2"
     const val LESSON_FOODL3 = "foodL3"
+
+    const val LESSON_WHEREWELCOME = "whereWelcome"
+    const val LESSON_WHEREL1 = "whereL1"
+    const val LESSON_WHEREL2 = "whereL2"
+    const val LESSON_WHEREL3 = "whereL3"
+
+    const val LESSON_HOMEWELCOME = "homeWelcome"
+    const val LESSON_HOMEL1 = "homeL1"
+    const val LESSON_HOMEL2 = "homeL2"
+    const val LESSON_HOMEL3 = "homeL3"
+
+    const val LESSON_DAILYWELCOME = "dailyWelcome"
+    const val LESSON_DAILYL1 = "dailyL1"
+    const val LESSON_DAILYL2 = "dailyL2"
+    const val LESSON_DAILYL3 = "dailyL3"
 
 
     //Hiragana

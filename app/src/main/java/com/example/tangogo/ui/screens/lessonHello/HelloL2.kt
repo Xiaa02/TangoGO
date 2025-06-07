@@ -109,11 +109,6 @@ fun HelloL2Screen(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Text("2.もじとことば", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
-                Text("Letters and words", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
-
-                Spacer(modifier = Modifier.height(20.dp))
-
                 Text("しごとと せんもん", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
                 Text("Occupations and Professions", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
             }

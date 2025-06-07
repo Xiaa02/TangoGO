@@ -44,7 +44,7 @@ fun FamilyL3Screen(
                 title = {
                     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                         Text(
-                            text = "こんにちは",
+                            text = "かぞく",
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -93,7 +93,7 @@ fun FamilyL3Screen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text("3.かいわと ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
+                Text("1.かいわと ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
                 Text("Conversation and Grammar", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
 
                 Spacer(modifier = Modifier.height(20.dp))

@@ -10,21 +10,31 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tangogo.common.snackbar.SnackbarManager
-import com.example.tangogo.ui.screens.lessonComplete.LessonCompleteScreen
 import com.example.tangogo.ui.screens.dashboard.DashboardScreen
 import com.example.tangogo.ui.screens.login.LoginScreen
+import com.example.tangogo.ui.screens.register.RegisterScreen
+import com.example.tangogo.ui.screens.welcome.WelcomeScreen
+import com.example.tangogo.ui.screens.settings.SettingsScreen
+import com.example.tangogo.ui.screens.lessonComplete.LessonCompleteScreen
+import com.example.tangogo.ui.screens.lessonDailyLife.DailyL1Screen
+import com.example.tangogo.ui.screens.lessonDailyLife.DailyL2Screen
+import com.example.tangogo.ui.screens.lessonDailyLife.DailyL3Screen
+import com.example.tangogo.ui.screens.lessonDailyLife.DailyWelcomeScreen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaWelcomeScreen
 import com.example.tangogo.ui.screens.lessonHiragana.Hiragana101Screen
 import com.example.tangogo.ui.screens.lessonHiragana.HiraganaL1Screen
@@ -58,6 +68,14 @@ import com.example.tangogo.ui.screens.lessonFood.FoodWelcomeScreen
 import com.example.tangogo.ui.screens.lessonFood.FoodL1Screen
 import com.example.tangogo.ui.screens.lessonFood.FoodL2Screen
 import com.example.tangogo.ui.screens.lessonFood.FoodL3Screen
+import com.example.tangogo.ui.screens.lessonHome.HomeL1Screen
+import com.example.tangogo.ui.screens.lessonHome.HomeL2Screen
+import com.example.tangogo.ui.screens.lessonHome.HomeL3Screen
+import com.example.tangogo.ui.screens.lessonHome.HomeWelcomeScreen
+import com.example.tangogo.ui.screens.lessonWhere.WhereL1Screen
+import com.example.tangogo.ui.screens.lessonWhere.WhereL2Screen
+import com.example.tangogo.ui.screens.lessonWhere.WhereL3Screen
+import com.example.tangogo.ui.screens.lessonWhere.WhereWelcomeScreen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaMemoryScreen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaMnemonicScreen
 import com.example.tangogo.ui.screens.memoryHiragana.AHiraganaStrokeScreen
@@ -489,8 +507,11 @@ import com.example.tangogo.ui.screens.memoryKanji.NichiyoubiKanjiMemoryScreen
 import com.example.tangogo.ui.screens.memoryKanji.NichiyoubiKanjiMnemonicScreen
 import com.example.tangogo.ui.screens.memoryKanji.NichiyoubiKanjiStrokeScreen
 import com.example.tangogo.ui.screens.memoryKanji.NichiyoubiKanjiWriteScreen
-import com.example.tangogo.ui.screens.register.RegisterScreen
-import com.example.tangogo.ui.screens.welcome.WelcomeScreen
+import com.example.tangogo.ui.screens.profile.ProfileViewModel
+import com.example.tangogo.ui.screens.settings.AboutDevScreen
+import com.example.tangogo.ui.screens.settings.EditNameScreen
+import com.example.tangogo.ui.screens.settings.EditPasswordScreen
+import com.example.tangogo.ui.screens.settings.ProfileScreen
 import com.example.tangogo.ui.theme.TangoGOTheme
 import com.example.tangogo.utils.Routes
 import kotlinx.coroutines.CoroutineScope
@@ -560,6 +581,61 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
             clearAndNavigate = { route -> appState.clearAndNavigate(route) }
         )
     }
+    
+    composable(Routes.SETTINGS) {
+        SettingsScreen(
+            navigateBack = { appState.navController.popBackStack() },
+            navigateToProfile = { appState.navigate(Routes.PROFILE) },
+            navigateToAbout = { appState.navigate(Routes.ABOUT) }
+        )
+    }
+
+    composable(Routes.ABOUT) {
+        AboutDevScreen(
+            navigateBack = { appState.navController.popBackStack() }
+        )
+    }
+
+    composable(Routes.PROFILE) {
+        val viewModel: ProfileViewModel = hiltViewModel()
+        val userState = viewModel.user.collectAsState()
+
+        ProfileScreen(
+            viewModel = viewModel,
+            user = userState.value,
+            navigateBack = { appState.navController.popBackStack() },
+            onDeleteAccount = {
+                viewModel.deleteAccount {
+                    appState.navController.popBackStack()
+                }
+            },
+            navigateToEditName = { appState.navController.navigate(Routes.EDITNAME) },
+            navigateToEditPassword = { appState.navController.navigate(Routes.EDITPASSWORD) }
+        )
+    }
+
+    composable(Routes.EDITNAME) {
+        val viewModel: ProfileViewModel = hiltViewModel()
+        val userState by viewModel.user.collectAsState()
+
+        val fullName = "${userState.firstName} ${userState.lastName}".trim()
+
+        EditNameScreen(
+            currentName = fullName,
+            onSave = { newName -> viewModel.updateUserName(newName) },
+            navigateBack = { appState.navController.popBackStack() }
+        )
+    }
+
+
+    composable(Routes.EDITPASSWORD) {
+        val viewModel: ProfileViewModel = hiltViewModel()
+
+        EditPasswordScreen(
+            viewModel = viewModel,
+            navigateBack = { appState.navController.popBackStack() }
+        )
+    }
 
     composable(Routes.LESSON_COMPLETE) {
         LessonCompleteScreen(
@@ -570,7 +646,7 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_HIRAGANAWELCOME) {
         HiraganaWelcomeScreen(
             navigateBack = { appState.popUp() },
-            navigateToNext = { appState.navController.navigate(Routes.LESSON_HIRAGANAL1) }
+            navigateToNext = { appState.navController.navigate(Routes.HIRAGANA_TABLE) }
         )
     }
     composable(Routes.LESSON_HIRAGANA101) {
@@ -621,7 +697,7 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_KATAKANAWELCOME) {
         KatakanaWelcomeScreen(
             navigateBack = { appState.popUp() },
-            navigateToNext = { appState.navController.navigate(Routes.LESSON_KATAKANAL1) }
+            navigateToNext = { appState.navController.navigate(Routes.KATAKANA_TABLE) }
         )
     }
     composable(Routes.LESSON_KATAKANA101) {
@@ -771,11 +847,88 @@ fun NavGraphBuilder.tangoGOGraph(appState: TangoGOAppState) {
     composable(Routes.LESSON_FOODL3) {
         FoodL3Screen(
             navigateBack = { appState.popUp() },
-            navigateToNext = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
         )
     }
 
+    composable(Routes.LESSON_WHEREWELCOME) {
+        WhereWelcomeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_WHEREL1) }
+        )
+    }
+    composable(Routes.LESSON_WHEREL1) {
+        WhereL1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_WHEREL2) }
+        )
+    }
+    composable(Routes.LESSON_WHEREL2) {
+        WhereL2Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_WHEREL3) }
+        )
+    }
+    composable(Routes.LESSON_WHEREL3) {
+        WhereL3Screen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
+        )
+    }
 
+    composable(Routes.LESSON_HOMEWELCOME) {
+        HomeWelcomeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HOMEL1) }
+        )
+    }
+    composable(Routes.LESSON_HOMEL1) {
+        HomeL1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HOMEL2) }
+        )
+    }
+    composable(Routes.LESSON_HOMEL2) {
+        HomeL2Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_HOMEL3) }
+        )
+    }
+    composable(Routes.LESSON_HOMEL3) {
+        HomeL3Screen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
+        )
+    }
+
+    composable(Routes.LESSON_DAILYWELCOME) {
+        DailyWelcomeScreen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_DAILYL1) }
+        )
+    }
+    composable(Routes.LESSON_DAILYL1) {
+        DailyL1Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_DAILYL2) }
+        )
+    }
+    composable(Routes.LESSON_DAILYL2) {
+        DailyL2Screen(
+            navigateBack = { appState.popUp() },
+            navigateToNext = { appState.navController.navigate(Routes.LESSON_DAILYL3) }
+        )
+    }
+    composable(Routes.LESSON_DAILYL3) {
+        DailyL3Screen(
+            navigateBack = { appState.popUp() },
+            navigateToDashboard = { appState.clearAndNavigate(Routes.DASHBOARD) },
+            navigateToLessonComplete = { appState.navController.navigate(Routes.LESSON_COMPLETE) }
+        )
+    }
 
 
     composable(Routes.HIRAGANA_CHART) {

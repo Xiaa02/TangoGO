@@ -44,7 +44,7 @@ fun FamilyL4Screen(
                 title = {
                     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                         Text(
-                            text = "こんにちは",
+                            text = "かぞく",
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -104,7 +104,7 @@ fun FamilyL4Screen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
-                    "4.かいわと ぶんぽう",
+                    "2.かいわと ぶんぽう",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.Black,

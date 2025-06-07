@@ -65,7 +65,7 @@ fun FamilyL1Screen(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "こんにちは",
+                            text = "かぞく",
                             style = MaterialTheme.typography.titleMedium.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -111,11 +111,6 @@ fun FamilyL1Screen(
             ) {
                 Text("Lesson 4", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
                 Text("かぞく", fontSize = 22.sp, fontWeight = FontWeight.SemiBold, color = Color.Black)
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Text("1.もじとことば", fontSize = 20.sp, fontWeight = FontWeight.SemiBold, color = Color.Black, textAlign = TextAlign.Justify)
-                Text("Letters and words", fontSize = 18.sp, fontWeight = FontWeight.Normal, color = Color.DarkGray, textAlign = TextAlign.Justify)
 
                 Spacer(modifier = Modifier.height(20.dp))
 

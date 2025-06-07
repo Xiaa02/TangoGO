@@ -19,10 +19,8 @@ class LoginViewModel @Inject constructor(
     var uiState = mutableStateOf(LoginUiState())
         private set
 
-    private val email
-        get() = uiState.value.email
-    private val password
-        get() = uiState.value.password
+    private val email get() = uiState.value.email
+    private val password get() = uiState.value.password
 
     fun onEmailChange(newValue: String) {
         uiState.value = uiState.value.copy(email = newValue)
@@ -37,12 +35,10 @@ class LoginViewModel @Inject constructor(
             SnackbarManager.showMessage(AppText.email_error)
             return
         }
-
         if (password.isBlank()) {
             SnackbarManager.showMessage(AppText.empty_password_error)
             return
         }
-
         launchCatching {
             accountService.authenticate(email, password)
             openAndPopUp(Routes.DASHBOARD, Routes.LOGIN)
@@ -58,7 +54,6 @@ class LoginViewModel @Inject constructor(
             SnackbarManager.showMessage(AppText.email_error)
             return
         }
-
         launchCatching {
             accountService.sendRecoveryEmail(email)
             SnackbarManager.showMessage(AppText.recovery_email_sent)

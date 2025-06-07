@@ -17,6 +17,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -137,7 +138,7 @@ fun HiraganaChartScreen(
                         Box(
                             Modifier
                                 .size(40.dp)
-                                .background(Color(0xFFF1F1F1), RoundedCornerShape(8.dp)),
+                                .background(Color(0xFFFCF5FD), RoundedCornerShape(8.dp)),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
@@ -194,6 +195,7 @@ fun HiraganaChartScreen(
                         rowData.forEach { char ->
                             val baseModifier = Modifier
                                 .size(40.dp)
+                                .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
                                 .background(
                                     if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent,
                                     RoundedCornerShape(8.dp)

@@ -105,11 +105,6 @@ fun HelloL4Screen(
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-                Text("3.かいわと ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
-                Text("Conversation and Grammar", fontSize = 18.sp, color = Color.DarkGray)
-
-                Spacer(modifier = Modifier.height(20.dp))
-
                 Text("ききましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Let's listen.", fontSize = 18.sp, color = Color.DarkGray)
             }

@@ -2,7 +2,7 @@ package com.example.tangogo.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFE6DEF7)
+val Purple80 = Color(0xFFFFFFFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
 

@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import com.example.tangogo.R
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.ui.draw.shadow
 
 data class KanjiSection(
     val titleJP: String,
@@ -151,6 +152,7 @@ fun KanjiChartScreen(
                                     Box(
                                         modifier = Modifier
                                             .size(48.dp)
+                                            .shadow(4.dp, RoundedCornerShape(8.dp))
                                             .background(Color(0xFFF1F1F1), RoundedCornerShape(8.dp))
                                             .clickable { onCharClick(kanji) },
                                         contentAlignment = Alignment.Center
