@@ -1,15 +1,9 @@
 package com.example.tangogo.ui.screens.settings
 
-import android.net.Uri
-import android.util.Log
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
+import android.content.Context
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -17,7 +11,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,24 +19,24 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
-import coil.request.ImageRequest
 import com.example.tangogo.R
 import com.example.tangogo.model.User
 import com.example.tangogo.ui.screens.profile.ProfileViewModel
-import kotlinx.coroutines.launch
 
 @Composable
 fun ProfileScreen(
     viewModel: ProfileViewModel? = null,
     user: User = User(),
-    navigateBack: () -> Unit = {},
-    onDeleteAccount: () -> Unit = {},
+    navigateToSettings: () -> Unit = {},
+    onDeleteAccount: (Context) -> Unit = {},
     navigateToEditName: () -> Unit = {},
-    navigateToEditPassword: () -> Unit = {}
+    navigateToEditPassword: () -> Unit = {},
+    navigateToWelcome: () -> Unit = {}
 ) {
-    val userState = viewModel?.user?.collectAsState()?.value ?: user
-    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+
+    //val userState by viewModel?.user?.collectAsState(initial = user) ?: remember { mutableStateOf(user) }
+    val userState by viewModel?.user?.collectAsState() ?: remember { mutableStateOf(user) }
     var showDialog by remember { mutableStateOf(false) }
 
     Surface(
@@ -66,7 +59,7 @@ fun ProfileScreen(
                 contentAlignment = Alignment.Center
             ) {
                 IconButton(
-                    onClick = navigateBack,
+                    onClick = navigateToSettings,
                     modifier = Modifier.align(Alignment.CenterStart)
                 ) {
                     Icon(
@@ -85,32 +78,37 @@ fun ProfileScreen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
+            // Display updated name from user state
             val fullName = "${userState.firstName} ${userState.lastName}".trim()
             val email = userState.email ?: ""
 
+            // ProfileField for Name - Clicking navigates to Edit Name
             ProfileField(
                 label = "Name",
                 value = fullName,
-                enabled = false,
-                onClick = navigateToEditName
+                enabled = false,  // Not editable, just for displaying
+                onClick = navigateToEditName // Trigger navigation to Edit Name screen
             )
 
+            // ProfileField for Password
             ProfileField(
                 label = "Password",
                 value = "********",
-                enabled = false,
+                enabled = false, // Not editable, just for display
                 isPassword = true,
-                onClick = navigateToEditPassword
+                onClick = navigateToEditPassword // Trigger navigation to Edit Password screen
             )
 
+            // ProfileField for Email
             ProfileField(
                 label = "Email",
                 value = email,
-                enabled = false
+                enabled = false  // Not editable
             )
 
             Spacer(modifier = Modifier.height(32.dp))
 
+            // Delete Account Button
             OutlinedButton(
                 onClick = { showDialog = true },
                 modifier = Modifier
@@ -123,6 +121,7 @@ fun ProfileScreen(
                 Text("DELETE ACCOUNT", fontWeight = FontWeight.Bold, color = Color.Red)
             }
 
+            // Dialog for account deletion
             if (showDialog) {
                 AlertDialog(
                     onDismissRequest = { showDialog = false },
@@ -130,8 +129,10 @@ fun ProfileScreen(
                     text = { Text("This will permanently delete your account.") },
                     confirmButton = {
                         TextButton(onClick = {
-                            coroutineScope.launch { onDeleteAccount() }
-                            showDialog = false
+                            // Pass the context and navigate to welcome screen after deletion
+                            onDeleteAccount(context) // Delete the account
+                            navigateToWelcome() // Navigate to welcome screen
+                            showDialog = false // Close the dialog after confirming
                         }) {
                             Text("Yes", color = Color.Red)
                         }
@@ -148,6 +149,7 @@ fun ProfileScreen(
         }
     }
 }
+
 
 
 @Composable
@@ -195,9 +197,6 @@ fun ProfileField(
     }
 }
 
-
-
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewProfileScreen() {
@@ -205,10 +204,9 @@ fun PreviewProfileScreen() {
         user = User(
             firstName = "Nurin",
             lastName = "Pishol",
-            email = "nurin@example.com"
+            email = "email@example.com"
         ),
         navigateToEditName = {},
         navigateToEditPassword = {}
     )
 }
-

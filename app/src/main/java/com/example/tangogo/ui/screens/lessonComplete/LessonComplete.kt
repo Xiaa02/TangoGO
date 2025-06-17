@@ -35,7 +35,7 @@ fun LessonCompleteScreen(
         Box(
             modifier = Modifier
                 .size(400.dp)
-                .offset(x = (-100).dp, y = (100).dp)
+                .offset(x = (-90).dp, y = (120).dp)
                 .shadow(8.dp, CircleShape)
                 .background(Color(0xFFECEAFF), CircleShape)
         ) {
@@ -47,7 +47,7 @@ fun LessonCompleteScreen(
                                 colors = listOf(Color(0xFF9DCEFF), Color(0xFFCC8FED))
                             ),
                             fontWeight = FontWeight.Bold,
-                            fontSize = 35.sp,
+                            fontSize = 45.sp,
                         )
                     ) {
                         append("Lesson\nCompleted !")
@@ -57,7 +57,7 @@ fun LessonCompleteScreen(
                 textAlign = TextAlign.Left,
                 modifier = Modifier
                     .align(Alignment.TopStart)
-                    .padding(start = 140.dp, top = 10.dp)
+                    .padding(start = 120.dp, top = 10.dp)
                     .offset(y = 150.dp)
             )
 

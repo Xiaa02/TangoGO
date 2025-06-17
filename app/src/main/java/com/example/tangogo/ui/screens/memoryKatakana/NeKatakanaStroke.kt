@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -23,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.tangogo.R
+import com.example.tangogo.common.composable.ButtonWithIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,8 +35,7 @@ fun NeKatakanaStrokeScreen(
     onWriteClick: () -> Unit
 ) {
     val backgroundColor = Color(0xFFFFF59D)
-    val buttonColor = Color(0xFFFFFFFF)
-    val iconSize = 32.dp
+   
     val context = LocalContext.current
 
     Scaffold(
@@ -139,27 +138,7 @@ fun NeKatakanaStrokeScreen(
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            @Composable
-            fun ButtonWithIcon(text: String, icon: Painter, onClick: () -> Unit) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Box(
-                        modifier = Modifier
-                            .size(64.dp)
-                            .background(buttonColor, RoundedCornerShape(16.dp))
-                            .clickable { onClick() },
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            painter = icon,
-                            contentDescription = text,
-                            modifier = Modifier.size(iconSize),
-                            tint = Color.Black
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(text, fontSize = 12.sp, color = Color.Black)
-                }
-            }
+            
 
             Row(
                 horizontalArrangement = Arrangement.SpaceEvenly,

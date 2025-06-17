@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -197,7 +198,7 @@ fun HiraganaChartScreen(
                                 .size(40.dp)
                                 .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
                                 .background(
-                                    if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent,
+                                    if (char.isNotEmpty()) Color(0xFFFFFFFF) else Color.Transparent,
                                     RoundedCornerShape(8.dp)
                                 )
 

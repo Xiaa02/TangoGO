@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.tangogo.ui.screens.lessonHome
 
 import android.media.MediaPlayer
@@ -5,8 +7,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.*
@@ -25,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tangogo.R
-import com.example.tangogo.ui.screens.lessonFood.FoodTextCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -346,14 +347,6 @@ fun QuestionImage3Card(
     }
 }
 
-data class HomeItem(
-    val imageResId: Int,
-    val word: String,
-    val reading: String,
-    val meaning: String,
-    val soundResId: Int
-)
-
 @Composable
 fun HomeTextCard(
     imageResId: Int,
@@ -368,7 +361,7 @@ fun HomeTextCard(
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
-        elevation = CardDefaults.cardElevation(4.dp),
+        //elevation = CardDefaults.cardElevation(4.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(

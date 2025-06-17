@@ -1,7 +1,8 @@
 package com.example.tangogo.common.ext
 
+//import android.annotation.SuppressLint
 import android.util.Patterns
-import java.text.SimpleDateFormat
+//import java.text.SimpleDateFormat
 import java.util.regex.Pattern
 
 private const val MIN_PASS_LENGTH = 6
@@ -21,11 +22,11 @@ fun String.passwordMatches(repeated: String): Boolean {
     return this == repeated
 }
 
-fun String.idFromParameter(): String {
-    return this.substring(1, this.length - 1)
-}
-
-fun String.fromDateToLong(): Long {
-    val df = SimpleDateFormat("yyyy.MM.dd HH:mm")
-    return df.parse(this).time
-}
+//fun String.idFromParameter(): String {
+//    return this.substring(1, this.length - 1)
+//}
+//
+//fun String.fromDateToLong(): Long {
+//    val df = SimpleDateFormat("yyyy.MM.dd HH:mm")
+//    return df.parse(this).time
+//}

@@ -6,8 +6,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.*
@@ -35,6 +35,7 @@ fun HiraganaL1Screen(
 ) {
     val context = LocalContext.current
 
+    // Main screen layout with TopAppBar
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
         topBar = {
@@ -79,6 +80,7 @@ fun HiraganaL1Screen(
             )
         }
     ) { padding ->
+        // Scrollable content
         Column(
             modifier = Modifier
                 .padding(padding)
@@ -152,17 +154,19 @@ fun HiraganaTextCard(
     soundResId: Int,
     context: Context
 ) {
+    // Word card layout
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
-        elevation = CardDefaults.cardElevation(4.dp),
+        //elevation = CardDefaults.cardElevation(4.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(
             modifier = Modifier.padding(12.dp).fillMaxWidth()
         ) {
+            // Sound icon
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -178,6 +182,7 @@ fun HiraganaTextCard(
                 )
             }
 
+            // Image and text info
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -214,6 +219,7 @@ fun HiraganaTextCard(
     }
 }
 
+// Audio function
 fun playAudio(context: Context, resId: Int) {
     val mediaPlayer = MediaPlayer.create(context, resId)
     mediaPlayer.setOnCompletionListener { it.release() }

@@ -4,13 +4,13 @@ package com.example.tangogo.ui.screens.lessonFood
 
 import android.content.Context
 import android.media.MediaPlayer
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,21 +35,33 @@ fun FoodL3Screen(
 ) {
     val context = LocalContext.current
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    var isAudioPlaying by remember { mutableStateOf(false) }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer?.apply { if (isPlaying) stop(); release() }
+            mediaPlayer = null
+            isAudioPlaying = false
+        }
+    }
 
     // Single playAudio function controlling MediaPlayer instance
     fun playAudio(resId: Int) {
-        mediaPlayer?.let { player ->
-            if (player.isPlaying) {
-                player.stop()
+        if (isAudioPlaying) {                    // 🔇 stop
+            mediaPlayer?.apply { if (isPlaying) stop(); release() }
+            mediaPlayer = null
+            isAudioPlaying = false
+        } else {                                 // 🔊 play
+            mediaPlayer?.release()
+            mediaPlayer = MediaPlayer.create(context, resId).apply {
+                setOnCompletionListener {
+                    it.release()
+                    mediaPlayer = null
+                    isAudioPlaying = false
+                }
+                start()
             }
-            player.release()
-        }
-        mediaPlayer = MediaPlayer.create(context, resId).apply {
-            setOnCompletionListener {
-                it.release()
-                mediaPlayer = null
-            }
-            start()
+            isAudioPlaying = true
         }
     }
 
@@ -141,7 +152,8 @@ fun FoodL3Screen(
                 engLine4 = "Hose: I often eat bread and fruit.",
                 engLine5 = "Abe: How about eggs?",
                 engLine6 = "Hose: I don’t eat eggs very often.",
-                onPlayAudio = { playAudio(R.raw.kaiwa061) }
+                isAudioPlaying = isAudioPlaying,
+                onPlayAudio    = { playAudio(R.raw.kaiwa061) }
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -158,7 +170,7 @@ fun FoodL3Screen(
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFDAE6FF)),
-                elevation = CardDefaults.cardElevation(4.dp),
+                //elevation = CardDefaults.cardElevation(4.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(
@@ -197,7 +209,7 @@ fun FoodL3Screen(
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFDAE6FF)),
-                elevation = CardDefaults.cardElevation(4.dp),
+                //elevation = CardDefaults.cardElevation(4.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(
@@ -295,16 +307,16 @@ fun DialogCard(
     engLine4: String,
     engLine5: String,
     engLine6: String,
-    onPlayAudio: () -> Unit
+    onPlayAudio: () -> Unit,
+    isAudioPlaying: Boolean
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .shadow(4.dp, RoundedCornerShape(12.dp))
-            .background(Color.White),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
+        //elevation = CardDefaults.cardElevation(4.dp),
+        shape = RoundedCornerShape(16.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp).fillMaxWidth()
@@ -316,10 +328,16 @@ fun DialogCard(
                 horizontalArrangement = Arrangement.End
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                    contentDescription = "Play Sound",
-                    modifier = Modifier.clickable { onPlayAudio() }.size(22.dp)
+                    imageVector = if (isAudioPlaying)
+                        Icons.AutoMirrored.Filled.VolumeUp     // shows “playing”
+                    else
+                        Icons.AutoMirrored.Filled.VolumeOff,   // shows “muted”
+                    contentDescription = if (isAudioPlaying) "Mute" else "Play",
+                    modifier = Modifier
+                        .size(22.dp)
+                        .clickable { onPlayAudio() }
                 )
+
             }
 
             Text(jpLine1, fontSize = 18.sp, fontWeight = FontWeight.Bold)

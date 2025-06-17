@@ -3,14 +3,14 @@
 package com.example.tangogo.ui.screens.lessonHello
 
 import android.media.MediaPlayer
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
+import androidx.compose.material.icons.automirrored.filled.VolumeOff
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,6 +25,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tangogo.R
 
+/* ─────────────────────────────  HELLO LESSON 4  ───────────────────────────── */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HelloL4Screen(
@@ -33,23 +35,45 @@ fun HelloL4Screen(
 ) {
     val context = LocalContext.current
 
-    // Shared MediaPlayer state for dialog audio
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    var isAudioPlaying by remember { mutableStateOf(false) }
 
-    val playAudio: (Int) -> Unit = { resId ->
-        mediaPlayer?.let {
-            if (it.isPlaying) it.stop()
-            it.release()
-        }
-        mediaPlayer = MediaPlayer.create(context, resId).apply {
-            setOnCompletionListener {
-                it.release()
-                mediaPlayer = null
+    /* ─── Stop & release when user leaves this screen ─── */
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer?.apply {
+                if (isPlaying) stop()
+                release()
             }
-            start()
+            mediaPlayer = null
+            isAudioPlaying = false
         }
     }
 
+    /* ─── One-icon Play / Mute toggle ─── */
+    val toggleAudio: (Int) -> Unit = { resId ->
+        if (isAudioPlaying) {                    // ► stop
+            mediaPlayer?.apply {
+                if (isPlaying) stop()
+                release()
+            }
+            mediaPlayer = null
+            isAudioPlaying = false
+        } else {                                 // ► play
+            mediaPlayer?.release()
+            mediaPlayer = MediaPlayer.create(context, resId).apply {
+                setOnCompletionListener {
+                    it.release()
+                    mediaPlayer = null
+                    isAudioPlaying = false
+                }
+                start()
+            }
+            isAudioPlaying = true
+        }
+    }
+
+    /* ─────────────────────────  UI  ───────────────────────── */
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
         topBar = {
@@ -59,12 +83,10 @@ fun HelloL4Screen(
                     titleContentColor = Color(0xFF3F3F3F)
                 ),
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                         Text(
                             text = "こんにちは",
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.Bold
-                            )
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                     }
                 },
@@ -98,20 +120,20 @@ fun HelloL4Screen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // Lesson Heading
-            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
-                Text("Lesson 3", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
+            /* ──── Headings ──── */
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
+                Text("Lesson 4", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("どうぞ よろしく", fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(Modifier.height(20.dp))
 
                 Text("ききましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Let's listen.", fontSize = 18.sp, color = Color.DarkGray)
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
-            // Pass playAudio lambda here
+            /* ──── Dialog ──── */
             DialogCard(
                 jpLine1 = "のだ：カーラさん、おくには？",
                 romaji1 = "Noda: Kaara-san, okuni wa?",
@@ -125,52 +147,52 @@ fun HelloL4Screen(
                 engLine2 = "Kaara: I’m from France. Can you speak\n             French?",
                 engLine3 = "Noda: No, I can’t. Can you speak Japanese?",
                 engLine4 = "Kaara: Yes, I can speak a little.",
-                playAudio = playAudio
+                toggleAudio    = toggleAudio,
+                isAudioPlaying = isAudioPlaying
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(Modifier.height(32.dp))
 
-            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
+            /* ──── Grammar Card ──── */
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
                 Text("つかわれている ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Grammar used.", fontSize = 18.sp, color = Color.DarkGray)
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFDAE6FF)),
-                elevation = CardDefaults.cardElevation(4.dp),
+                //elevation = CardDefaults.cardElevation(4.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
-                Column(
-                    modifier = Modifier.padding(20.dp),
-                    horizontalAlignment = Alignment.Start
-                ) {
+                Column(Modifier.padding(20.dp), horizontalAlignment = Alignment.Start) {
                     Text("_____は______ が できます。", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
                     Text("_____wa______ ga dekimasu.", fontSize = 16.sp, color = Color(0xFF757575))
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(Modifier.height(12.dp))
 
                     Text("_____は______ は できません。", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
                     Text("_____wa______ wa dekimasen.", fontSize = 16.sp, color = Color(0xFF757575))
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(Modifier.height(12.dp))
 
                     Text("_____は______ が できますか。", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
                     Text("_____wa______ ga dekimasu ka.", fontSize = 16.sp, color = Color(0xFF757575))
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(Modifier.height(16.dp))
                 }
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(Modifier.height(32.dp))
 
-            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
+            /* ──── Q&A Section ──── */
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
                 Text("なに ご が できます か。", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Which languages can they speak based on the conversation.", fontSize = 18.sp, color = Color.DarkGray)
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
             QnACard(
                 question = "カーラさん",
@@ -180,62 +202,52 @@ fun HelloL4Screen(
             )
 
             QnACard(
-                question = "キムさん",
+                question = "のださん",
                 romaji = "Noda-san",
                 options = listOf("にほんご", "フランスご & にほんご"),
                 correctAnswer = "にほんご"
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(Modifier.height(32.dp))
 
+            /* ──── Continue Button ──── */
             Button(
                 onClick = navigateToNext,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF061428),
-                    contentColor = Color.White
-                ),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF061428), contentColor = Color.White),
                 shape = RoundedCornerShape(50),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .height(56.dp)
                     .shadow(10.dp, RoundedCornerShape(50))
-            ) {
-                Text("Continue", fontSize = 15.sp, fontWeight = FontWeight.Bold)
-            }
+            ) { Text("Continue", fontSize = 15.sp, fontWeight = FontWeight.Bold) }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(Modifier.height(32.dp))
         }
     }
 }
 
+/* ──────────────────────────  DIALOG CARD  ────────────────────────── */
+
 @Composable
 fun DialogCard(
-    jpLine1: String,
-    romaji1: String,
-    jpLine2: String,
-    romaji2: String,
-    jpLine3: String,
-    romaji3: String,
-    jpLine4: String,
-    romaji4: String,
-    engLine1: String,
-    engLine2: String,
-    engLine3: String,
-    engLine4: String,
-    playAudio: (Int) -> Unit
+    jpLine1: String, romaji1: String,
+    jpLine2: String, romaji2: String,
+    jpLine3: String, romaji3: String,
+    jpLine4: String, romaji4: String,
+    engLine1: String, engLine2: String,
+    engLine3: String, engLine4: String,
+    toggleAudio: (Int) -> Unit,
+    isAudioPlaying: Boolean
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .shadow(4.dp, RoundedCornerShape(12.dp))
-            .background(Color.White),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
+        //elevation = CardDefaults.cardElevation(4.dp),
+        shape = RoundedCornerShape(16.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp).fillMaxWidth()
-        ) {
+        Column(Modifier.padding(16.dp).fillMaxWidth()) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -243,48 +255,50 @@ fun DialogCard(
                 horizontalArrangement = Arrangement.End
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                    contentDescription = "Play Sound",
+                    imageVector = if (isAudioPlaying)
+                        Icons.Filled.VolumeUp
+                    else
+                        Icons.AutoMirrored.Filled.VolumeOff,
+                    contentDescription = if (isAudioPlaying) "Mute" else "Play",
+                    tint = Color.Black,
                     modifier = Modifier
-                        .size(22.dp)
-                        .clickable { playAudio(R.raw.kaiwa023) }
+                        .size(24.dp)
+                        .clickable { toggleAudio(R.raw.kaiwa023) }
                 )
             }
 
             Text(jpLine1, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Text(romaji1, fontSize = 16.sp, color = Color.Gray)
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(Modifier.height(8.dp))
 
             Text(jpLine2, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Text(romaji2, fontSize = 16.sp, color = Color.Gray)
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(Modifier.height(8.dp))
 
             Text(jpLine3, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Text(romaji3, fontSize = 16.sp, color = Color.Gray)
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(Modifier.height(8.dp))
 
             Text(jpLine4, fontSize = 18.sp, fontWeight = FontWeight.Bold)
             Text(romaji4, fontSize = 16.sp, color = Color.Gray)
 
-            Divider(modifier = Modifier.padding(vertical = 16.dp), color = Color.LightGray)
+            Divider(Modifier.padding(vertical = 16.dp), color = Color.LightGray)
 
             Text(engLine1, fontSize = 16.sp)
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(Modifier.height(4.dp))
             Text(engLine2, fontSize = 16.sp)
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(Modifier.height(4.dp))
             Text(engLine3, fontSize = 16.sp)
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(Modifier.height(4.dp))
             Text(engLine4, fontSize = 16.sp)
         }
     }
 }
 
+/* ────────────────────────────  PREVIEW  ─────────────────────────── */
+
 @Preview(showBackground = true)
 @Composable
 fun HelloL4ScreenPreview() {
-    HelloL4Screen(
-        navigateBack = {},
-        navigateToNext = {}
-    )
+    HelloL4Screen(navigateBack = {}, navigateToNext = {})
 }
-

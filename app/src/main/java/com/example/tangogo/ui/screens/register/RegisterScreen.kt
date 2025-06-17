@@ -61,7 +61,6 @@ fun RegisterScreen(
 
 @Composable
 fun RegisterScreenContent(
-    modifier: Modifier = Modifier,
     uiState: RegisterUiState,
     onFirstNameChange: (String) -> Unit,
     onLastNameChange: (String) -> Unit,

@@ -3,8 +3,8 @@ package com.example.tangogo.ui.screens.lessonHello
 import android.media.MediaPlayer
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -114,8 +114,7 @@ fun HelloL2Screen(
             }
 
             Spacer(modifier = Modifier.height(10.dp))
-
-            // Use modified HelloTextCard which accepts playAudio lambda
+            
             HelloTextCard(R.drawable.student_img, "がくせい", "Gakusei", "Student", R.raw.gakusei, playAudio)
             HelloTextCard(R.drawable.teacher_img, "きょうし", "Kyoushi", "Teacher", R.raw.kyoushi, playAudio)
             HelloTextCard(R.drawable.housewife_img, "しゅふ", "Shufu", "Housewife", R.raw.shufu, playAudio)

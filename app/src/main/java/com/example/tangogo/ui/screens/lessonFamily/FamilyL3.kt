@@ -1,13 +1,13 @@
 package com.example.tangogo.ui.screens.lessonFamily
 
 import android.media.MediaPlayer
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -32,6 +32,36 @@ fun FamilyL3Screen(
     navigateBack: () -> Unit,
     navigateToNext: () -> Unit
 ) {
+    val context = LocalContext.current
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    var isAudioPlaying by remember { mutableStateOf(false) }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer?.apply { if (isPlaying) stop(); release() }
+            mediaPlayer = null
+            isAudioPlaying = false
+        }
+    }
+
+    val toggleAudio: (Int) -> Unit = { resId ->
+        if (isAudioPlaying) {                     // 🔇 stop
+            mediaPlayer?.apply { if (isPlaying) stop(); release() }
+            mediaPlayer = null
+            isAudioPlaying = false
+        } else {                                  // 🔊 play
+            mediaPlayer?.release()
+            mediaPlayer = MediaPlayer.create(context, resId).apply {
+                setOnCompletionListener {
+                    it.release()
+                    mediaPlayer = null
+                    isAudioPlaying = false
+                }
+                start()
+            }
+            isAudioPlaying = true
+        }
+    }
 
     Scaffold(
         containerColor = Color(0xFFF3F0FF),
@@ -113,7 +143,9 @@ fun FamilyL3Screen(
                 romaji3 = "Watashitachi wa Osaka ni sunde imasu.",
                 engLine1 = "There are three people in my family.",
                 engLine2 = "It’s my father, my mother, and me.",
-                engLine3 = "We live in Osaka."
+                engLine3 = "We live in Osaka.",
+                isAudioPlaying = isAudioPlaying,
+                onToggleAudio  = { toggleAudio(R.raw.kaiwa037) }
             )
 
             Spacer(modifier = Modifier.height(32.dp))
@@ -130,7 +162,7 @@ fun FamilyL3Screen(
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFDAE6FF)),
-                elevation = CardDefaults.cardElevation(4.dp),
+                //elevation = CardDefaults.cardElevation(4.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(
@@ -275,17 +307,16 @@ fun DialogCard(
     engLine1: String,
     engLine2: String,
     engLine3: String,
+    onToggleAudio: () -> Unit,
+    isAudioPlaying: Boolean
 ) {
-    val context = LocalContext.current
-
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .shadow(4.dp, RoundedCornerShape(12.dp))
-            .background(Color.White),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
+        //elevation = CardDefaults.cardElevation(4.dp),
+        shape = RoundedCornerShape(16.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp).fillMaxWidth()
@@ -297,11 +328,14 @@ fun DialogCard(
                 horizontalArrangement = Arrangement.End
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                    contentDescription = "Play Sound",
+                    imageVector = if (isAudioPlaying)
+                        Icons.AutoMirrored.Filled.VolumeUp    // shows “playing”
+                    else
+                        Icons.AutoMirrored.Filled.VolumeOff,  // shows “muted”
+                    contentDescription = if (isAudioPlaying) "Mute" else "Play",
                     modifier = Modifier
                         .size(22.dp)
-                        .clickable { playAudio(context, R.raw.kaiwa037) }
+                        .clickable { onToggleAudio() }
                 )
             }
 

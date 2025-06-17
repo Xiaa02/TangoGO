@@ -191,7 +191,7 @@ fun KatakanaChartScreen(
                                 .size(40.dp)
                                 .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
                                 .background(
-                                    if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent,
+                                    if (char.isNotEmpty()) Color(0xFFFFFFFF) else Color.Transparent,
                                     RoundedCornerShape(8.dp)
                                 )
 

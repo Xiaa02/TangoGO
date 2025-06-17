@@ -67,8 +67,16 @@ class RegisterViewModel @Inject constructor(
         }
 
         launchCatching {
-            accountService.register(firstName, lastName, email, password)
-            //openAndPopUp(Routes.BMI_WELCOME, Routes.REGISTER)
+            try {
+                accountService.register(firstName, lastName, email, password)
+
+                SnackbarManager.showMessage(AppText.account_created_successfully)
+
+                openAndPopUp(Routes.LOGIN, Routes.REGISTER)
+            } catch (e: Exception) {
+                // If registration fails, show an error message using resource ID
+                SnackbarManager.showMessage(AppText.registration_failed)
+            }
         }
     }
 

@@ -3,16 +3,15 @@
 package com.example.tangogo.ui.screens.lessonHello
 
 import android.media.MediaPlayer
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.VolumeUp
+import androidx.compose.material.icons.automirrored.filled.VolumeOff
+import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.*
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,21 +33,41 @@ fun HelloL3Screen(
 ) {
     val context = LocalContext.current
 
-    // Shared MediaPlayer for dialog audio
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    var isAudioPlaying by remember { mutableStateOf(false) }
 
-    // Shared playAudio function to ensure only one audio plays at a time
-    val playAudio: (Int) -> Unit = { resId ->
-        mediaPlayer?.let {
-            if (it.isPlaying) it.stop()
-            it.release()
-        }
-        mediaPlayer = MediaPlayer.create(context, resId).apply {
-            setOnCompletionListener {
-                it.release()
-                mediaPlayer = null
+    /* ─── Stop & release audio automatically when user leaves this screen ─── */
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer?.apply {
+                if (isPlaying) stop()
+                release()
             }
-            start()
+            mediaPlayer = null
+            isAudioPlaying = false
+        }
+    }
+
+    /* ─── Single-icon Play / Mute toggle ─── */
+    val toggleAudio: (Int) -> Unit = { resId ->
+        if (isAudioPlaying) {                   // ► stop
+            mediaPlayer?.apply {
+                if (isPlaying) stop()
+                release()
+            }
+            mediaPlayer = null
+            isAudioPlaying = false
+        } else {                                // ► play
+            mediaPlayer?.release()
+            mediaPlayer = MediaPlayer.create(context, resId).apply {
+                setOnCompletionListener {
+                    it.release()
+                    mediaPlayer = null
+                    isAudioPlaying = false
+                }
+                start()
+            }
+            isAudioPlaying = true
         }
     }
 
@@ -61,12 +80,10 @@ fun HelloL3Screen(
                     titleContentColor = Color(0xFF3F3F3F)
                 ),
                 title = {
-                    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                         Text(
                             text = "こんにちは",
-                            style = MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.Bold
-                            )
+                            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                     }
                 },
@@ -100,102 +117,93 @@ fun HelloL3Screen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            // Lesson Heading
-            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
                 Text("Lesson 3", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("どうぞ よろしく", fontSize = 22.sp, fontWeight = FontWeight.SemiBold)
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(Modifier.height(20.dp))
 
                 Text("かいわと ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Conversation and Grammar", fontSize = 18.sp, color = Color.DarkGray)
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(Modifier.height(20.dp))
 
                 Text("ききましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Let's listen.", fontSize = 18.sp, color = Color.DarkGray)
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
-            // Dialog Card with shared playAudio passed
             DialogCard(
-                "キム: はじめまして。きむです。\n          どうぞよろしく。",
-                "Kimu: Hajimemashite. Kimu desu.\n            Doozo yoroshiku.",
-                "カーラ: カーラです。はじめまして。\n              どうぞよろしく。",
-                "Kaara: Kaara desu. Hajimemashite.\n             Doozo yoroshiku.",
-                "キム: カーラさん、おしごとはなんです\n          か？",
-                "Kimu: Kaara-san, oshigoto wa nandesuka?",
-                "カーラ: わたしは がくせいです。\n             あのう、きむさん は せんせい\n             ですか？",
-                "Kaara: Watashi wa gakusei desu.\n             Anoo, Kimu-san wa sensei desu ka.",
-                "カーラ: いいえ、せんせいじゃないです。\n             がくせいです。",
-                "Kimu: Iie, sensei janai desu.Gakusei desu.",
-
-                "Kimu: Nice to meet you. I'm Kimu.\n            Pleasure to meet you.",
-                "Kaara: I'm Kaara. Nice to meet you.\n            Pleasure to meet you.",
-                "Kimu: Kaara-san, what is your job?",
-                "Kaara: I am a student. By the way, is\n            Kimu-san a teacher?",
-                "Kimu: No, I am not a teacher. I am a\n            student.",
-                playAudio
+                sentence1 = "キム: はじめまして。きむです。\n          どうぞよろしく。",
+                romaji1   = "Kimu: Hajimemashite. Kimu desu.\n            Doozo yoroshiku.",
+                sentence2 = "カーラ: カーラです。はじめまして。\n              どうぞよろしく。",
+                romaji2   = "Kaara: Kaara desu. Hajimemashite.\n             Doozo yoroshiku.",
+                sentence3 = "キム: カーラさん、おしごとはなんです\n          か？",
+                romaji3   = "Kimu: Kaara-san, oshigoto wa nandesuka?",
+                sentence4 = "カーラ: わたしは がくせいです。\n             あのう、きむさん は せんせい\n             ですか？",
+                romaji4   = "Kaara: Watashi wa gakusei desu.\n             Anoo, Kimu-san wa sensei desu ka.",
+                sentence5 = "カーラ: いいえ、せんせいじゃないです。\n             がくせいです。",
+                romaji5   = "Kimu: Iie, sensei janai desu.Gakusei desu.",
+                translation1 = "Kimu: Nice to meet you. I'm Kimu.\n            Pleasure to meet you.",
+                translation2 = "Kaara: I'm Kaara. Nice to meet you.\n            Pleasure to meet you.",
+                translation3 = "Kimu: Kaara-san, what is your job?",
+                translation4 = "Kaara: I am a student. By the way, is\n            Kimu-san a teacher?",
+                translation5 = "Kimu: No, I am not a teacher. I am a\n            student.",
+                toggleAudio    = toggleAudio,
+                isAudioPlaying = isAudioPlaying
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(Modifier.height(32.dp))
 
-            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
                 Text("つかわれている ぶんぽう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Grammar used.", fontSize = 18.sp, color = Color.DarkGray)
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFDAE6FF)),
-                elevation = CardDefaults.cardElevation(4.dp),
+                //elevation = CardDefaults.cardElevation(4.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth(),
+                    modifier = Modifier.padding(20.dp).fillMaxWidth(),
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text("_____は______ です。", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
                     Text("_____wa______ desu.", fontSize = 16.sp, color = Color(0xFF757575))
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(Modifier.height(12.dp))
 
                     Text("_____は______ じゃない です。", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
                     Text("_____wa______ janai desu.", fontSize = 16.sp, color = Color(0xFF757575))
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(Modifier.height(12.dp))
 
                     Text("_____は______ です か。", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
                     Text("_____wa______ desu ka.", fontSize = 16.sp, color = Color(0xFF757575))
-                    Spacer(modifier = Modifier.height(16.dp))
+                    Spacer(Modifier.height(16.dp))
 
-                    HorizontalDivider(
-                        modifier = Modifier.padding(horizontal = 1.dp),
-                        thickness = 1.dp,
-                        color = Color.Gray
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
+                    HorizontalDivider(Modifier.padding(horizontal = 1.dp), thickness = 1.dp, color = Color.Gray)
+                    Spacer(Modifier.height(16.dp))
 
                     Text("_____は なん です か。", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
                     Text("_____wa nan desu ka.", fontSize = 16.sp, color = Color(0xFF757575))
                 }
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(Modifier.height(32.dp))
 
-            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
+            Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.Start) {
                 Text("えらびましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                 Text("Choose the correct answer based on the conversation.", fontSize = 18.sp, color = Color.DarkGray)
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
-            // Pass a separate MediaPlayer state for feedback sounds inside QnACard
             QnACard(
                 question = "キムさんは、がくせいですか？",
                 romaji = "Kimu-san wa gakusei desu ka?",
@@ -210,7 +218,7 @@ fun HelloL3Screen(
                 correctAnswer = "はい、がくせいです"
             )
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(Modifier.height(32.dp))
 
             Button(
                 onClick = navigateToNext,
@@ -224,11 +232,9 @@ fun HelloL3Screen(
                     .height(56.dp)
                     .align(Alignment.CenterHorizontally)
                     .shadow(10.dp, RoundedCornerShape(50))
-            ) {
-                Text("Continue", fontSize = 15.sp, fontWeight = FontWeight.Bold)
-            }
+            ) { Text("Continue", fontSize = 15.sp, fontWeight = FontWeight.Bold) }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(Modifier.height(32.dp))
         }
     }
 }
@@ -242,20 +248,18 @@ fun DialogCard(
     sentence5: String, romaji5: String,
     translation1: String, translation2: String,
     translation3: String, translation4: String, translation5: String,
-    playAudio: (Int) -> Unit
+    toggleAudio: (Int) -> Unit,
+    isAudioPlaying: Boolean
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .shadow(4.dp, RoundedCornerShape(12.dp))
-            .background(Color.White),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
+        //elevation = CardDefaults.cardElevation(4.dp),
+        shape = RoundedCornerShape(16.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp).fillMaxWidth()
-        ) {
+        Column(Modifier.padding(16.dp).fillMaxWidth()) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -263,51 +267,52 @@ fun DialogCard(
                 horizontalArrangement = Arrangement.End
             ) {
                 Icon(
-                    imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                    contentDescription = "Play Sound",
+                    imageVector = if (isAudioPlaying)
+                        Icons.Filled.VolumeUp
+                    else
+                        Icons.AutoMirrored.Filled.VolumeOff,
+                    contentDescription = if (isAudioPlaying) "Mute" else "Play",
+                    tint = Color.Black,
                     modifier = Modifier
-                        .size(22.dp)
-                        .clickable { playAudio(R.raw.kaiwa017) }
+                        .size(24.dp)
+                        .clickable { toggleAudio(R.raw.kaiwa017) }
                 )
             }
 
-            // Dialogue in Japanese with Romaji
+            /* Japanese dialogue + romaji */
             Text(sentence1, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
             Text(romaji1, fontSize = 16.sp, color = Color(0xFF757575))
-
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
             Text(sentence2, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
             Text(romaji2, fontSize = 16.sp, color = Color(0xFF757575))
-
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
             Text(sentence3, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
             Text(romaji3, fontSize = 16.sp, color = Color(0xFF757575))
-
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
             Text(sentence4, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
             Text(romaji4, fontSize = 16.sp, color = Color(0xFF757575))
-
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
             Text(sentence5, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
             Text(romaji5, fontSize = 16.sp, color = Color(0xFF757575))
 
-            Divider(modifier = Modifier.padding(vertical = 16.dp), color = Color.LightGray)
+            Divider(Modifier.padding(vertical = 16.dp), color = Color.LightGray)
 
-            // Translations
+            /* English translations */
             Text(translation1, fontSize = 16.sp, color = Color(0xFF3F3F3F))
             Text(translation2, fontSize = 16.sp, color = Color(0xFF3F3F3F))
             Text(translation3, fontSize = 16.sp, color = Color(0xFF3F3F3F))
             Text(translation4, fontSize = 16.sp, color = Color(0xFF3F3F3F))
             Text(translation5, fontSize = 16.sp, color = Color(0xFF3F3F3F))
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(Modifier.height(16.dp))
         }
     }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -318,23 +323,21 @@ fun QnACard(
     correctAnswer: String
 ) {
     val context = LocalContext.current
-
-    // MediaPlayer state to ensure only one feedback sound plays at a time
     var feedbackPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
 
     var selectedAnswer by remember { mutableStateOf("") }
     var isCorrect by remember { mutableStateOf<Boolean?>(null) }
     var expanded by remember { mutableStateOf(false) }
 
-    fun playFeedbackSound(correct: Boolean) {
+    fun playFeedback(correct: Boolean) {
         feedbackPlayer?.let {
             if (it.isPlaying) it.stop()
             it.release()
         }
-        val soundRes = if (correct) R.raw.ding else R.raw.error
-        feedbackPlayer = MediaPlayer.create(context, soundRes).apply {
-            setOnCompletionListener {
-                it.release()
+        val res = if (correct) R.raw.ding else R.raw.error
+        feedbackPlayer = MediaPlayer.create(context, res).apply {
+            setOnCompletionListener { mp ->
+                mp.release()
                 feedbackPlayer = null
             }
             start()
@@ -347,23 +350,19 @@ fun QnACard(
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
             containerColor = when (isCorrect) {
-                true -> Color(0xFFE0FAE9) // correct - light green
-                false -> Color(0xFFFFEBEE) // wrong - light red
-                else -> Color(0xFFFDFCFB)
+                true  -> Color(0xFFE0FAE9)
+                false -> Color(0xFFFFEBEE)
+                else  -> Color(0xFFFDFCFB)
             }
         ),
         elevation = CardDefaults.cardElevation(4.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth()
-        ) {
+        Column(Modifier.padding(16.dp).fillMaxWidth()) {
             Text(question, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = Color(0xFF3F3F3F))
             Text(romaji, fontSize = 16.sp, color = Color(0xFF757575))
 
-            Spacer(modifier = Modifier.height(10.dp))
+            Spacer(Modifier.height(10.dp))
 
             ExposedDropdownMenuBox(
                 expanded = expanded,
@@ -374,10 +373,8 @@ fun QnACard(
                     onValueChange = {},
                     label = { Text("Select answer") },
                     readOnly = true,
-                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .menuAnchor()
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded) },
+                    modifier = Modifier.fillMaxWidth().menuAnchor()
                 )
 
                 ExposedDropdownMenu(
@@ -391,7 +388,7 @@ fun QnACard(
                                 selectedAnswer = label
                                 val correct = label == correctAnswer
                                 isCorrect = correct
-                                playFeedbackSound(correct)
+                                playFeedback(correct)
                                 expanded = false
                             }
                         )
@@ -399,7 +396,7 @@ fun QnACard(
                 }
             }
 
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(Modifier.height(12.dp))
 
             isCorrect?.let {
                 Text(
@@ -412,12 +409,8 @@ fun QnACard(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun HelloL3ScreenPreview() {
-    HelloL3Screen(
-        navigateBack = {},
-        navigateToNext = {}
-    )
+    HelloL3Screen(navigateBack = {}, navigateToNext = {})
 }

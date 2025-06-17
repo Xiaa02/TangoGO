@@ -10,6 +10,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -18,9 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tangogo.R
-import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.ui.draw.shadow
+
 
 data class KanjiSection(
     val titleJP: String,
@@ -118,27 +117,23 @@ fun KanjiChartScreen(
                                 .fillMaxWidth()
                                 .padding(horizontal = 12.dp, vertical = 12.dp)
                         ) {
-                            Box(
+                            Column(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .background(section.color, RoundedCornerShape(6.dp))
-                                    .padding(vertical = 6.dp, horizontal = 12.dp),
-                                contentAlignment = Alignment.CenterStart
+                                    .padding(start = 1.dp, top = 8.dp, bottom = 4.dp)
                             ) {
-                                Column {
-                                    Text(
-                                        text = section.titleJP,
-                                        color = Color.White,
-                                        fontSize = 16.sp,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                    Text(
-                                        text = section.titleEN,
-                                        color = Color.White.copy(alpha = 0.9f),
-                                        fontSize = 13.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                }
+                                Text(
+                                    text = section.titleJP,
+                                    fontSize = 20.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = section.color
+                                )
+                                Text(
+                                    text = section.titleEN,
+                                    fontSize = 16.sp,
+                                    fontWeight = FontWeight.Medium,
+                                    color = Color.DarkGray
+                                )
                             }
 
                             Spacer(modifier = Modifier.height(8.dp))
@@ -153,7 +148,7 @@ fun KanjiChartScreen(
                                         modifier = Modifier
                                             .size(48.dp)
                                             .shadow(4.dp, RoundedCornerShape(8.dp))
-                                            .background(Color(0xFFF1F1F1), RoundedCornerShape(8.dp))
+                                            .background(Color(0xFFFFFFFF), RoundedCornerShape(8.dp))
                                             .clickable { onCharClick(kanji) },
                                         contentAlignment = Alignment.Center
                                     ) {

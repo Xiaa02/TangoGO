@@ -9,7 +9,7 @@ object Routes {
     const val PROFILE = "profile"
     const val ABOUT = "about"
     const val EDITNAME = "edit_name"
-    const val EDITPASSWORD = "edit_name"
+    const val EDITPASSWORD = "edit_password"
 
     const val LESSON_COMPLETE = "lesson_complete"
 

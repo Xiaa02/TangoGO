@@ -2,15 +2,15 @@
 
 package com.example.tangogo.ui.screens.lessonFood
 
+//import androidx.activity.compose.BackHandler
 import android.content.Context
 import android.media.MediaPlayer
-//import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.*
@@ -375,7 +375,7 @@ fun FoodTextCard(
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
-        elevation = CardDefaults.cardElevation(4.dp),
+        //elevation = CardDefaults.cardElevation(4.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(

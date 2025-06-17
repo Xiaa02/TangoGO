@@ -3,6 +3,7 @@ package com.example.tangogo.model.service.impl
 import com.example.tangogo.model.User
 import com.example.tangogo.model.service.AccountService
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -10,6 +11,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import kotlin.jvm.java
 
 class AccountServiceImpl @Inject constructor(
     private val auth: FirebaseAuth,
@@ -28,7 +30,7 @@ class AccountServiceImpl @Inject constructor(
                 val firebaseUser = auth.currentUser
                 if (firebaseUser != null) {
                     val userId = firebaseUser.uid
-                    launch {
+                    launch() {
                         val userDocument = firestore
                             .collection(USER_COLLECTION)
                             .document(userId)
@@ -49,7 +51,7 @@ class AccountServiceImpl @Inject constructor(
                 }
             }
         auth.addAuthStateListener(listener)
-        awaitClose { auth.removeAuthStateListener(listener) }
+        awaitClose() { auth.removeAuthStateListener(listener) }
     }
 
     override suspend fun authenticate(email: String, password: String) {
@@ -63,8 +65,11 @@ class AccountServiceImpl @Inject constructor(
         password: String
     ) {
         val result = auth.createUserWithEmailAndPassword(email, password).await()
+
         val userId = result.user?.uid ?: throw IllegalStateException("User ID cannot be null")
-        val user = User(userId = userId, firstName = firstName, lastName = lastName)
+
+        val user = User(userId = userId, firstName = firstName, lastName = lastName, email = email)
+
         firestore.collection(USER_COLLECTION).document(userId).set(user).await()
     }
 
@@ -84,23 +89,30 @@ class AccountServiceImpl @Inject constructor(
     }
 
     override suspend fun updateUserName(firstName: String, lastName: String) {
-        val uid = auth.currentUser?.uid ?: return
-        firestore.collection("users").document(uid).update(
+        val currentUser = auth.currentUser
+        currentUser?.updateProfile(
+            UserProfileChangeRequest.Builder()
+                .setDisplayName("$firstName $lastName")
+                .build()
+        )?.await()
+
+        val uid = currentUser?.uid ?: return
+        firestore.collection(USER_COLLECTION).document(uid).update(
             mapOf(
                 "firstName" to firstName,
                 "lastName" to lastName
             )
-        )
-    }
-
-    override suspend fun updateAvatarUrl(url: String) {
-        val uid = auth.currentUser?.uid ?: return
-        firestore.collection("users").document(uid)
-            .update("avatarUrl", url)
-            .await()
+        ).await()
     }
 
     companion object {
         private const val USER_COLLECTION = "users"
     }
 }
+
+//    override suspend fun updateAvatarUrl(url: String) {
+//        val uid = auth.currentUser?.uid ?: return
+//        firestore.collection("users").document(uid)
+//            .update("avatarUrl", url)
+//            .await()
+//    }

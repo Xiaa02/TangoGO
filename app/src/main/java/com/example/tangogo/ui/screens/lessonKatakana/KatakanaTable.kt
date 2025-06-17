@@ -165,7 +165,7 @@ fun KatakanaTableScreen(
                             modifier = Modifier
                                 .size(40.dp)
                                 .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
-                                .background(if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent, RoundedCornerShape(8.dp))
+                                .background(if (char.isNotEmpty()) Color(0xFFFFFFFF) else Color.Transparent, RoundedCornerShape(8.dp))
                                 .then(if (char.isNotEmpty()) Modifier.clickable { playSound(char); onCharClick(char) } else Modifier),
                             contentAlignment = Alignment.Center
                         ) {
@@ -191,7 +191,7 @@ fun KatakanaTableScreen(
                             modifier = Modifier
                                 .size(40.dp)
                                 .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
-                                .background(if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent, RoundedCornerShape(8.dp))
+                                .background(if (char.isNotEmpty()) Color(0xFFFFFFFF) else Color.Transparent, RoundedCornerShape(8.dp))
                                 .then(if (char.isNotEmpty()) Modifier.clickable { playSound(char); onCharClick(char) } else Modifier),
                             contentAlignment = Alignment.Center
                         ) {
@@ -217,7 +217,7 @@ fun KatakanaTableScreen(
                             modifier = Modifier
                                 .size(40.dp)
                                 .then(if (char.isNotEmpty()) Modifier.shadow(4.dp, RoundedCornerShape(8.dp)) else Modifier)
-                                .background(if (char.isNotEmpty()) Color(0xFFF1F1F1) else Color.Transparent, RoundedCornerShape(8.dp))
+                                .background(if (char.isNotEmpty()) Color(0xFFFFFFFF) else Color.Transparent, RoundedCornerShape(8.dp))
                                 .then(if (char.isNotEmpty()) Modifier.clickable { playSound(char); onCharClick(char) } else Modifier),
                             contentAlignment = Alignment.Center
                         ) {

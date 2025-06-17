@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -96,6 +97,7 @@ fun DashboardScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .background(
                 Brush.verticalGradient(
                     colors = listOf(Color(0xFFF9F9F9), Color(0xFFF9F9F9))
@@ -321,13 +323,10 @@ fun VocabularyWordCard(
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Column(modifier = Modifier.padding(20.dp)) {
-            Text("Word of the Day", fontSize = 16.sp, color = Color.Black)
+            Text("Did you know the Kanji?", fontSize = 16.sp, color = Color.Black)
             Spacer(modifier = Modifier.height(12.dp))
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-                Text(wordKanji, fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color(
-                    0xFF061428
-                )
-                )
+                Text(wordKanji, fontSize = 28.sp, fontWeight = FontWeight.Bold, color = Color(0xFF061428))
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
                     Text(wordKana, fontSize = 16.sp, color = Color(0xFF666666))

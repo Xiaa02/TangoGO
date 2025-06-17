@@ -266,7 +266,7 @@ fun DailyTextCard(
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
-        elevation = CardDefaults.cardElevation(4.dp),
+        //elevation = CardDefaults.cardElevation(4.dp),
         shape = RoundedCornerShape(16.dp)
     ) {
         Column(

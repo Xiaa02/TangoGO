@@ -4,12 +4,38 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,9 +44,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.tooling.preview.Preview
 import com.example.tangogo.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,13 +55,16 @@ fun HiraganaQ1Screen(
     navigateBack: () -> Unit,
     navigateToNext: () -> Unit
 ) {
+    // Define correct answers and options
     val correctAnswer = listOf("あ", "さ")
     val options = listOf("あ", "お", "さ", "き")
 
+    // States
     var selectedAnswers by remember { mutableStateOf<List<String>>(emptyList()) }
     var showCorrectPopup by remember { mutableStateOf(false) }
     var showWrongPopup by remember { mutableStateOf(false) }
 
+    // Modal bottom sheet states
     val correctSheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
         confirmValueChange = { false }
@@ -45,8 +74,10 @@ fun HiraganaQ1Screen(
         confirmValueChange = { false }
     )
 
+    // Audio context
     val context = LocalContext.current
 
+    // Scaffold: TopAppBar and layout (UI)
     Scaffold(
         topBar = {
             TopAppBar(
@@ -82,14 +113,17 @@ fun HiraganaQ1Screen(
             )
         }
     ) { padding ->
+        // Main quiz layout
         Column(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .padding(horizontal = 24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(10.dp))
+            // Heading
             Text(
                 text = "Quiz",
                 fontSize = 20.sp,
@@ -111,7 +145,7 @@ fun HiraganaQ1Screen(
             )
 
             Text(
-                text = "Choose the correct hiragana",
+                text = "Choose the correct Hiragana word.",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Normal,
                 modifier = Modifier
@@ -120,6 +154,7 @@ fun HiraganaQ1Screen(
                 textAlign = TextAlign.Start
             )
 
+            // Image and audio
             Box(
                 modifier = Modifier
                     .padding(top = 20.dp)
@@ -176,6 +211,7 @@ fun HiraganaQ1Screen(
 
             Spacer(modifier = Modifier.height(32.dp))
 
+            // Answer options
             Column {
                 for (row in options.chunked(2)) {
                     Row(
@@ -220,6 +256,8 @@ fun HiraganaQ1Screen(
 
             Spacer(modifier = Modifier.height(30.dp))
 
+
+            // Check answer button
             Button(
                 onClick = {
                     val allCorrect = correctAnswer.all { selectedAnswers.contains(it) }
@@ -248,6 +286,7 @@ fun HiraganaQ1Screen(
         }
     }
 
+    // Correct answer popup
     if (showCorrectPopup) {
         ModalBottomSheet(
             onDismissRequest = {},
@@ -281,7 +320,7 @@ fun HiraganaQ1Screen(
             }
         }
     }
-
+    // Wrong answer popup
     if (showWrongPopup) {
         ModalBottomSheet(
             onDismissRequest = {},

@@ -13,7 +13,6 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -35,7 +34,12 @@ import androidx.compose.ui.unit.*
 import com.example.tangogo.R
 import kotlinx.coroutines.delay
 
-data class VocabCard(val word: String, val audioRes: Int, val imageRes: Int)
+data class VocabCard(
+    val kana: String,
+    val romaji: String,
+    val audioRes: Int,
+    val imageRes: Int
+)
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
@@ -48,9 +52,9 @@ fun KatakanaSpeakScreen(
     val isInPreview = LocalInspectionMode.current
 
     val vocabList = listOf(
-        VocabCard("カメラ", R.raw.kamera, R.drawable.camera_img),
-        VocabCard("イギリス", R.raw.uk, R.drawable.uk_img),
-        VocabCard("フランス", R.raw.france, R.drawable.france_img)
+        VocabCard("カメラ",   "kamera",  R.raw.kamera,  R.drawable.camera_img),
+        VocabCard("イギリス", "igirisu", R.raw.uk,      R.drawable.uk_img),
+        VocabCard("フランス", "furansu", R.raw.france,  R.drawable.france_img)
     )
 
     var currentIndex by remember { mutableIntStateOf(0) }
@@ -194,7 +198,8 @@ fun KatakanaSpeakScreen(
                             )
                         }
 
-                        Text(currentCard.word, fontSize = 32.sp, fontWeight = FontWeight.Bold)
+                        Text(currentCard.kana,   fontSize = 32.sp, fontWeight = FontWeight.Bold)
+                        Text(currentCard.romaji, fontSize = 16.sp, color = Color.Gray)
 
                         Spacer(modifier = Modifier.height(24.dp))
 
@@ -217,7 +222,7 @@ fun KatakanaSpeakScreen(
                                         context = context,
                                         onResult = { result ->
                                             spokenText = result
-                                            isCorrect = result.contains(currentCard.word)
+                                            isCorrect = result.contains(currentCard.kana)
                                             if (isCorrect) dingPlayer?.start() else errorPlayer?.start()
                                             isListening = false
                                         },

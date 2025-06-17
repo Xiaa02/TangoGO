@@ -20,8 +20,9 @@ import com.example.tangogo.ui.screens.profile.ProfileViewModel
 
 @Composable
 fun EditPasswordScreen(
-    viewModel: ProfileViewModel?, // nullable for preview
-    navigateBack: () -> Unit
+    viewModel: ProfileViewModel?,
+    navigateBack: () -> Unit,
+    navigateToSettings: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -92,7 +93,7 @@ fun EditPasswordScreen(
             Button(
                 onClick = {
                     viewModel?.updatePassword(context, oldPassword, newPassword)
-                    navigateBack()
+                    navigateToSettings()
                 },
                 enabled = isValid,
                 modifier = Modifier
@@ -114,6 +115,10 @@ fun PasswordField(
     onValueChange: (String) -> Unit,
     onToggleVisibility: () -> Unit
 ) {
+    val icon =
+        if (showPassword) painterResource(R.drawable.ic_visibility_on)
+        else painterResource(R.drawable.ic_visibility_off)
+
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
@@ -127,7 +132,7 @@ fun PasswordField(
         trailingIcon = {
             IconButton(onClick = onToggleVisibility) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_visibility_off), // 👈 replace if needed
+                    painter = icon,
                     contentDescription = "Toggle visibility",
                     tint = Color(0xFF3F3F3F)
                 )
@@ -141,6 +146,7 @@ fun PasswordField(
 fun PreviewEditPasswordScreen() {
     EditPasswordScreen(
         viewModel = null,
-        navigateBack = {}
+        navigateBack = {},
+        navigateToSettings = {}
     )
 }

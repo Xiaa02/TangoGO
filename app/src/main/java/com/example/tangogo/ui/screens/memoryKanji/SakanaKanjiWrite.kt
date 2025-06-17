@@ -17,7 +17,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -26,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tangogo.R
+import com.example.tangogo.common.composable.ButtonWithIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -267,20 +267,6 @@ fun SakanaKanjiWriteScreen(
     }
 
     BackHandler(onBack = navigateBack)
-}
-
-@Composable
-fun ButtonWithIcon(text: String, icon: Painter, onClick: () -> Unit) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Box(
-            modifier = Modifier.size(64.dp).background(Color.White, RoundedCornerShape(16.dp)).clickable { onClick() },
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(painter = icon, contentDescription = text, modifier = Modifier.size(32.dp), tint = Color.Black)
-        }
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(text, fontSize = 12.sp, color = Color.Black)
-    }
 }
 
 @Preview(showBackground = true)

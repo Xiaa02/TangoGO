@@ -18,10 +18,14 @@ import com.example.tangogo.R
 fun EditNameScreen(
     currentName: String,
     onSave: (String) -> Unit,
-    navigateBack: () -> Unit
+    navigateBack: () -> Unit,
+    navigateToSettings: () -> Unit
 ) {
+    // Split currentName into first and last names. Handle cases where there might be only one name.
     val (initialFirst, initialLast) = currentName.split(" ").let {
-        it.getOrNull(0).orEmpty() to it.getOrNull(1).orEmpty()
+        val firstName = it.getOrNull(0).orEmpty()
+        val lastName = it.drop(1).joinToString(" ") // Join the rest of the parts as the last name
+        firstName to lastName
     }
 
     var firstName by remember { mutableStateOf(initialFirst) }
@@ -29,6 +33,17 @@ fun EditNameScreen(
 
     val fullName = "${firstName.trim()} ${lastName.trim()}".trim()
     val isValid = fullName.isNotBlank() && fullName != currentName
+
+    // Used for triggering navigation after save
+    var isSaved by remember { mutableStateOf(false) }
+
+    // Ensure navigation happens after the save
+    LaunchedEffect(isSaved) {
+        if (isSaved) {
+            // Navigate to profile screen after saving
+            navigateToSettings()
+        }
+    }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -42,7 +57,7 @@ fun EditNameScreen(
         ) {
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Top Bar
+            // Top Bar with Back Navigation
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -98,8 +113,8 @@ fun EditNameScreen(
             // Save Button
             Button(
                 onClick = {
-                    onSave(fullName)
-                    navigateBack()
+                    onSave(fullName)  // Pass the updated full name to the ViewModel
+                    isSaved = true     // Trigger navigation after saving
                 },
                 enabled = isValid,
                 modifier = Modifier
@@ -113,12 +128,15 @@ fun EditNameScreen(
     }
 }
 
+
+
 @Preview(showBackground = true)
 @Composable
 fun EditNameScreenPreview() {
     EditNameScreen(
         currentName = "Nurin Pishol",
         onSave = {},
-        navigateBack = {}
+        navigateBack = {},
+        navigateToSettings = {}
     )
 }

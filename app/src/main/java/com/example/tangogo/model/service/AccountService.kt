@@ -15,6 +15,6 @@ interface AccountService {
     suspend fun logOut()
 
     suspend fun updateUserName(firstName: String, lastName: String)
-    suspend fun updateAvatarUrl(url: String)
+    //suspend fun updateAvatarUrl(url: String)
 
 }

@@ -3,13 +3,13 @@
 package com.example.tangogo.ui.screens.lessonFood
 
 import android.media.MediaPlayer
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.VolumeOff
 import androidx.compose.material.icons.automirrored.filled.VolumeUp
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -36,20 +36,32 @@ fun FoodL2Screen(
 
     // Shared MediaPlayer state
     var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
+    var isAudioPlaying by remember { mutableStateOf(false) }
+
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer?.apply { if (isPlaying) stop(); release() }
+            mediaPlayer = null
+            isAudioPlaying = false
+        }
+    }
 
     val playAudio: (Int) -> Unit = { resId ->
-        mediaPlayer?.let {
-            if (it.isPlaying) {
-                it.stop()
+        if (isAudioPlaying) {                       // 🔇  stop
+            mediaPlayer?.apply { if (isPlaying) stop(); release() }
+            mediaPlayer = null
+            isAudioPlaying = false
+        } else {                                    // 🔊  play
+            mediaPlayer?.release()
+            mediaPlayer = MediaPlayer.create(context, resId).apply {
+                setOnCompletionListener {
+                    it.release()
+                    mediaPlayer  = null
+                    isAudioPlaying = false
+                }
+                start()
             }
-            it.release()
-        }
-        mediaPlayer = MediaPlayer.create(context, resId).apply {
-            setOnCompletionListener {
-                it.release()
-                mediaPlayer = null
-            }
-            start()
+            isAudioPlaying = true
         }
     }
 
@@ -172,7 +184,7 @@ fun FoodL2Screen(
                     .fillMaxWidth()
                     .padding(vertical = 8.dp),
                 colors = CardDefaults.cardColors(containerColor = Color(0xFFDAE6FF)),
-                elevation = CardDefaults.cardElevation(4.dp),
+                //elevation = CardDefaults.cardElevation(4.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
                 Column(
@@ -213,21 +225,23 @@ fun FoodL2Screen(
                 ) {
                     Text("ききましょう", fontSize = 20.sp, fontWeight = FontWeight.SemiBold)
                     Text(
-                        "Listen and choose: What drinks do the people like and dislike?",
+                        "Listen and choose:\nWhat drinks do the people like and dislike?",
                         fontSize = 16.sp,
                         color = Color.Gray
                     )
                 }
 
-                IconButton(
-                    onClick = { playAudio(R.raw.kaiwa059) }
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.VolumeUp,
-                        contentDescription = "Play Sound",
-                        tint = Color.Black
-                    )
-                }
+                Icon(
+                    imageVector = if (isAudioPlaying)
+                        Icons.AutoMirrored.Filled.VolumeUp
+                    else
+                        Icons.AutoMirrored.Filled.VolumeOff,
+                    contentDescription = if (isAudioPlaying) "Mute" else "Play",
+                    modifier = Modifier
+                        .size(22.dp)          // or 28 dp for the row version
+                        .clickable { playAudio(R.raw.kaiwa058) }   // or kaiwa059 for the row
+                )
+
             }
 
             Spacer(modifier = Modifier.height(12.dp))
@@ -280,11 +294,10 @@ fun DialogCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .shadow(4.dp, RoundedCornerShape(12.dp))
-            .background(Color.White),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFDFCFB)),
+        //elevation = CardDefaults.cardElevation(4.dp),
+        shape = RoundedCornerShape(16.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp).fillMaxWidth()
@@ -433,7 +446,7 @@ fun DrinkPreferenceTable(
                                                 expanded1 = false
 
                                                 val second = preferences[jpName]?.second
-                                                if (!option.isNullOrEmpty() && !second.isNullOrEmpty()) {
+                                                if (option.isNotEmpty() && !second.isNullOrEmpty()) {
                                                     val result = Pair(option, second) == correctAnswers[jpName]
                                                     correctnessMap[jpName] = result
                                                     playAudio(if(result) R.raw.ding else R.raw.error)
@@ -479,7 +492,7 @@ fun DrinkPreferenceTable(
                                                 expanded2 = false
 
                                                 val first = preferences[jpName]?.first
-                                                if (!first.isNullOrEmpty() && !option.isNullOrEmpty()) {
+                                                if (!first.isNullOrEmpty() && option.isNotEmpty()) {
                                                     val result = Pair(first, option) == correctAnswers[jpName]
                                                     correctnessMap[jpName] = result
                                                     playAudio(if(result) R.raw.ding else R.raw.error)
