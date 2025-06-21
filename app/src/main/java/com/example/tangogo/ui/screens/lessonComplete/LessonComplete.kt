@@ -47,10 +47,10 @@ fun LessonCompleteScreen(
                                 colors = listOf(Color(0xFF9DCEFF), Color(0xFFCC8FED))
                             ),
                             fontWeight = FontWeight.Bold,
-                            fontSize = 45.sp,
+                            fontSize = 44.sp,
                         )
                     ) {
-                        append("Lesson\nCompleted !")
+                        append("Lesson\nCompleted!")
                     }
                 },
                 lineHeight = 40.sp,
