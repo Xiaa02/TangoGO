@@ -1,12 +1,12 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
     id("com.google.devtools.ksp")
+    id("dagger.hilt.android.plugin")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("com.google.firebase.firebase-perf")
-    id("dagger.hilt.android.plugin")
-    id("com.ncorti.ktfmt.gradle") version "0.10.0"
 }
 
 android {

@@ -70,7 +70,7 @@ fun AboutDevScreen(
 
             // Avatar
             Image(
-                painter = painterResource(id = R.drawable.a194474),
+                painter = painterResource(id = R.drawable.catto),
                 contentDescription = "Developer Avatar",
                 modifier = Modifier
                     .size(120.dp)

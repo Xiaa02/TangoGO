@@ -15,20 +15,20 @@ class SettingsViewModel @Inject constructor(
         navigate()
     }
 
-    fun onNavigateToHowToUse(navigate: () -> Unit) {
-        logService.log("Navigating to How to Use")
-        navigate()
-    }
+//    fun onNavigateToHowToUse(navigate: () -> Unit) {
+//        logService.log("Navigating to How to Use")
+//        navigate()
+//    }
 
     fun onNavigateToAbout(navigate: () -> Unit) {
         logService.log("Navigating to About")
         navigate()
     }
 
-    fun onNavigateToTerms(navigate: () -> Unit) {
-        logService.log("Navigating to Terms and Policies")
-        navigate()
-    }
+//    fun onNavigateToTerms(navigate: () -> Unit) {
+//        logService.log("Navigating to Terms and Policies")
+//        navigate()
+//    }
 
     fun onBackClick(navigateBack: () -> Unit) {
         logService.log("Back from Settings")

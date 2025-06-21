@@ -181,12 +181,22 @@ fun ProfileField(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(12.dp))
-                .then(
-                    if (!enabled && onClick != null) Modifier.clickable { onClick() } else Modifier
-                ),
+                .then(if (!enabled && onClick != null) Modifier.clickable { onClick() } else Modifier),
             shape = RoundedCornerShape(12.dp),
             visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
             singleLine = true,
+            trailingIcon = {
+                if (!enabled && onClick != null) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_write),
+                        contentDescription = "Edit $label",
+                        tint = Color.Gray,
+                        modifier = Modifier
+                            .size(20.dp)
+                            .clickable { onClick() }
+                    )
+                }
+            },
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = Color.LightGray,
                 focusedBorderColor = Color(0xFF007AFF),

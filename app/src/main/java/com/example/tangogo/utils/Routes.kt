@@ -14,7 +14,7 @@ object Routes {
     const val LESSON_COMPLETE = "lesson_complete"
 
     const val LESSON_HIRAGANAWELCOME = "hiraganaWelcome"
-    const val LESSON_HIRAGANA101 = "hiragana101"
+    //const val LESSON_HIRAGANA101 = "hiragana101"
     const val HIRAGANA_TABLE = "hiraganatable"
     const val LESSON_HIRAGANAL1 = "hiraganaL1"
     const val LESSON_HIRAGANAL2 = "hiraganaL2"
@@ -23,7 +23,7 @@ object Routes {
     const val LESSON_HIRAGANASPEAK = "hiraganaSpeak"
 
     const val LESSON_KATAKANAWELCOME = "katakanaWelcome"
-    const val LESSON_KATAKANA101 = "katakana101"
+    //const val LESSON_KATAKANA101 = "katakana101"
     const val KATAKANA_TABLE = "katakanatable"
     const val LESSON_KATAKANAL1 = "katakanaL1"
     const val LESSON_KATAKANAL2 = "katakanaL2"

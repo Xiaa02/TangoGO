@@ -85,7 +85,7 @@ fun WelcomeScreenContent(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                        text = "Starter A1",
+                        text = "Starter A1 Level",
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Normal,
                         color = colorResource(R.color.black)
